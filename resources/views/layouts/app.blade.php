@@ -20,60 +20,63 @@
                 @auth
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         @if (auth()->user()->isAdmin())
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="managementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Gestión
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="managementDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Usuarios</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.hospital-services.index') }}">Servicios</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.staff.index') }}">Personal</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.service-managers.index') }}">Jefes</a></li>
+                                </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.hospital-services.index') }}">Servicios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.staff.index') }}">Personal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.shift-templates.index') }}">Turnos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.service-shift-templates.index') }}">Turnos por servicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.shift-assignments.index') }}">Asignaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.calendar.index') }}">Calendario</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.reports.index') }}">Reportes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.service-managers.index') }}">Jefes</a>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="shiftsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Turnos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="shiftsDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('admin.shift-templates.index') }}">Plantillas de turno</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.service-shift-templates.index') }}">Turnos por servicio</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.shift-assignments.index') }}">Asignaciones</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.calendar.index') }}">Calendario</a></li>
+                                </ul>
                             </li>
                         @endif
 
-                        @if (in_array(auth()->user()->role, ['admin', 'jefe_servicio'], true))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.shift-change-requests.index') }}">Revisión solicitudes</a>
-                            </li>
-                        @endif
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="operationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Operación
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="operationsDropdown">
+                                @if (auth()->user()->role === 'personal')
+                                    <li><a class="dropdown-item" href="{{ route('shift-change-requests.index') }}">Solicitudes</a></li>
+                                @endif
 
-                        @if (auth()->user()->role === 'personal')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('shift-change-requests.index') }}">Mis solicitudes</a>
-                            </li>
-                        @endif
+                                @if (in_array(auth()->user()->role, ['admin', 'jefe_servicio'], true))
+                                    <li><a class="dropdown-item" href="{{ route('admin.shift-change-requests.index') }}">Revisión solicitudes</a></li>
+                                @endif
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('notifications.index') }}">Notificaciones</a>
+                                <li><a class="dropdown-item" href="{{ route('notifications.index') }}">Notificaciones</a></li>
+                            </ul>
                         </li>
 
                         @if (auth()->user()->isAdmin())
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.audit-logs.index') }}">Auditoría</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="administrationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administración
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="administrationDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('admin.reports.index') }}">Reportes</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.audit-logs.index') }}">Auditoría</a></li>
+                                </ul>
                             </li>
                         @endif
                     </ul>
                 @endauth
 
-                <div class="ms-auto d-flex align-items-center gap-3">
+                <div class="ms-lg-auto d-flex flex-column flex-lg-row align-items-lg-center gap-2 gap-lg-3 pb-2 pb-lg-0">
                     @auth
                         <span class="badge text-bg-primary text-uppercase">{{ auth()->user()->role }}</span>
                         <span class="text-white-50 small">{{ auth()->user()->name }}</span>
