@@ -4,13 +4,24 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_SERVICE_MANAGER = 'jefe_servicio';
+    public const ROLE_STAFF = 'personal';
+
+    public const ROLES = [
+        self::ROLE_ADMIN,
+        self::ROLE_SERVICE_MANAGER,
+        self::ROLE_STAFF,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +60,10 @@ class User extends Authenticatable
     public function isActive(): bool
     {
         return (bool) $this->active;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 }

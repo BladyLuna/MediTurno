@@ -17,6 +17,19 @@
             </button>
 
             <div class="collapse navbar-collapse" id="mainNavbar">
+                @auth
+                    @if (auth()->user()->isAdmin())
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.audit-logs.index') }}">Auditoría</a>
+                            </li>
+                        </ul>
+                    @endif
+                @endauth
+
                 <div class="ms-auto d-flex align-items-center gap-3">
                     @auth
                         <span class="badge text-bg-primary text-uppercase">{{ auth()->user()->role }}</span>

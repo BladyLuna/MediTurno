@@ -123,3 +123,25 @@ Evitar estados ambiguos y facilitar validaciones, reportes y auditoría.
 
 Fecha:
 2026-06-06
+
+---
+
+DEC-009
+
+Reglas de proteccion para administradores:
+
+- No se permite desactivar el ultimo usuario `admin` activo.
+- No se permite eliminar logicamente el ultimo usuario `admin` activo.
+- No se permite que un administrador se desactive a si mismo.
+- No se permite que un administrador se elimine a si mismo.
+
+Motivo:
+Evitar que el sistema quede sin usuarios con capacidad de administracion y
+prevenir bloqueos accidentales de acceso durante la gestion de usuarios.
+
+Impacto:
+El CRUD de usuarios debe validar estas reglas antes de desactivar o eliminar
+logicamente cuentas con rol `admin`.
+
+Fecha:
+2026-06-07

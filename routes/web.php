@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuditLogController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserStatusController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 
@@ -32,4 +35,11 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->middleware('role:admin,jefe_servicio,personal')
         ->name('dashboard');
+
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::resource('users', UserController::class)->except(['show']);
+        Route::patch('users/{user}/activate', [UserStatusController::class, 'activate'])->name('users.activate');
+        Route::patch('users/{user}/deactivate', [UserStatusController::class, 'deactivate'])->name('users.deactivate');
+        Route::resource('audit-logs', AuditLogController::class)->only(['index', 'show']);
+    });
 });
