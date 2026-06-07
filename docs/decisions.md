@@ -168,3 +168,26 @@ rol `personal` y mantener la asociacion como opcional.
 
 Fecha:
 2026-06-07
+
+---
+
+DEC-011
+
+Horarios personalizados en turnos por servicio:
+
+En `service_shift_templates`, si se define `custom_start_time` o
+`custom_end_time`, ambos campos deben definirse juntos.
+
+Se permiten horarios donde la hora de inicio sea mayor que la hora de fin. Ese
+caso representa un turno nocturno que cruza al dia siguiente.
+
+Motivo:
+Evitar configuraciones incompletas de horario y mantener compatibilidad con
+turnos nocturnos como `21:00` a `07:00`.
+
+Impacto:
+Las validaciones de turnos por servicio no deben rechazar turnos nocturnos, pero
+si deben rechazar configuraciones con solo una hora personalizada.
+
+Fecha:
+2026-06-07
