@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\HospitalServiceController;
 use App\Http\Controllers\Admin\HospitalServiceStatusController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\StaffStatusController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserStatusController;
 use App\Http\Controllers\Auth\LoginController;
@@ -45,6 +47,9 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::resource('hospital-services', HospitalServiceController::class)->except(['show']);
         Route::patch('hospital-services/{hospital_service}/activate', [HospitalServiceStatusController::class, 'activate'])->name('hospital-services.activate');
         Route::patch('hospital-services/{hospital_service}/deactivate', [HospitalServiceStatusController::class, 'deactivate'])->name('hospital-services.deactivate');
+        Route::resource('staff', StaffController::class)->except(['show']);
+        Route::patch('staff/{staff}/activate', [StaffStatusController::class, 'activate'])->name('staff.activate');
+        Route::patch('staff/{staff}/deactivate', [StaffStatusController::class, 'deactivate'])->name('staff.deactivate');
         Route::resource('audit-logs', AuditLogController::class)->only(['index', 'show']);
     });
 });

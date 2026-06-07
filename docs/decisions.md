@@ -145,3 +145,26 @@ logicamente cuentas con rol `admin`.
 
 Fecha:
 2026-06-07
+
+---
+
+DEC-010
+
+Asociacion entre personal de salud y usuarios:
+
+Si un registro de `staff` se asocia con un `user`, ese usuario debe tener rol
+`personal`.
+
+No se permite asociar personal de salud a usuarios con rol `admin` o
+`jefe_servicio`.
+
+Motivo:
+Evitar mezclar cuentas administrativas o de jefatura con perfiles operativos de
+personal de salud.
+
+Impacto:
+Las validaciones del CRUD de personal deben restringir `user_id` a usuarios con
+rol `personal` y mantener la asociacion como opcional.
+
+Fecha:
+2026-06-07

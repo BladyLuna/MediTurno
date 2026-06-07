@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\HospitalService;
+use App\Models\Staff;
 use App\Models\User;
 use App\Policies\HospitalServicePolicy;
+use App\Policies\StaffPolicy;
 use App\Policies\UserPolicy;
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         HospitalService::class => HospitalServicePolicy::class,
+        Staff::class => StaffPolicy::class,
         User::class => UserPolicy::class,
     ];
 
