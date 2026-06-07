@@ -191,3 +191,26 @@ si deben rechazar configuraciones con solo una hora personalizada.
 
 Fecha:
 2026-06-07
+
+---
+
+DEC-012
+
+Cancelacion y eliminacion logica de asignaciones:
+
+Al eliminar una asignacion de turno se debe:
+
+- Establecer primero `shift_assignments.status = cancelled`.
+- Aplicar luego `SoftDeletes`.
+- Registrar auditoria con accion `cancelled/deleted`.
+
+Motivo:
+Conservar trazabilidad semantica de la cancelacion y mantener el historial tecnico
+mediante eliminacion logica.
+
+Impacto:
+El flujo de eliminacion de asignaciones debe ejecutarse en transaccion y registrar
+los valores anteriores y nuevos de la asignacion.
+
+Fecha:
+2026-06-07

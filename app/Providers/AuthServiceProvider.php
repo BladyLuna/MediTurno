@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Models\HospitalService;
 use App\Models\ServiceShiftTemplate;
+use App\Models\ShiftAssignment;
 use App\Models\ShiftTemplate;
 use App\Models\Staff;
 use App\Models\User;
 use App\Policies\HospitalServicePolicy;
 use App\Policies\ServiceShiftTemplatePolicy;
+use App\Policies\ShiftAssignmentPolicy;
 use App\Policies\ShiftTemplatePolicy;
 use App\Policies\StaffPolicy;
 use App\Policies\UserPolicy;
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         HospitalService::class => HospitalServicePolicy::class,
         ServiceShiftTemplate::class => ServiceShiftTemplatePolicy::class,
+        ShiftAssignment::class => ShiftAssignmentPolicy::class,
         ShiftTemplate::class => ShiftTemplatePolicy::class,
         Staff::class => StaffPolicy::class,
         User::class => UserPolicy::class,

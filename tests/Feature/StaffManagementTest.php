@@ -210,6 +210,31 @@ class StaffManagementTest extends TestCase
         ]);
     }
 
+    public function test_admin_can_open_staff_edit_form(): void
+    {
+        $admin = User::factory()->create(['role' => User::ROLE_ADMIN]);
+        $service = HospitalService::factory()->create(['name' => 'Emergencia']);
+        $personalUser = User::factory()->create([
+            'name' => 'Personal Asociado',
+            'email' => 'personal.asociado@example.com',
+            'role' => User::ROLE_STAFF,
+            'active' => true,
+        ]);
+        $staff = Staff::factory()->create([
+            'user_id' => $personalUser->id,
+            'hospital_service_id' => $service->id,
+            'full_name' => 'Personal en Edicion',
+        ]);
+
+        $response = $this->actingAs($admin)->get(route('admin.staff.edit', $staff));
+
+        $response->assertOk();
+        $response->assertSee('Editar personal de salud');
+        $response->assertSee('Personal en Edicion');
+        $response->assertSee('Emergencia');
+        $response->assertSee('personal.asociado@example.com');
+    }
+
     public function test_admin_can_deactivate_and_activate_staff_with_audit_logs(): void
     {
         $admin = User::factory()->create(['role' => User::ROLE_ADMIN]);

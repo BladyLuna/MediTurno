@@ -83,6 +83,8 @@ class StaffController extends Controller
     {
         $this->authorize('update', $staff);
 
+        $staff->loadMissing(['hospitalService', 'user']);
+
         return view('admin.staff.edit', [
             'staffMember' => $staff,
             'hospitalServices' => $this->hospitalServiceOptions(),
@@ -153,7 +155,7 @@ class StaffController extends Controller
             ->where('active', true)
             ->where(function ($query) use ($currentUserId): void {
                 $query->whereDoesntHave('staffProfile')
-                    ->when($currentUserId, fn ($query) => $query->orWhereKey($currentUserId));
+                    ->when($currentUserId, fn ($query) => $query->orWhere('id', $currentUserId));
             })
             ->orderBy('name')
             ->get(['id', 'name', 'email']);

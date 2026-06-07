@@ -36,6 +36,9 @@
                                 <a class="nav-link" href="{{ route('admin.service-shift-templates.index') }}">Turnos por servicio</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.shift-assignments.index') }}">Asignaciones</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.audit-logs.index') }}">Auditoría</a>
                             </li>
                         </ul>
