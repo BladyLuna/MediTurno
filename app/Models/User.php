@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -71,5 +72,32 @@ class User extends Authenticatable
     public function staffProfile(): HasOne
     {
         return $this->hasOne(Staff::class);
+    }
+
+    public function serviceManagers(): HasMany
+    {
+        return $this->hasMany(ServiceManager::class);
+    }
+
+    public function requestedShiftChanges(): HasMany
+    {
+        return $this->hasMany(ShiftChangeRequest::class, 'requested_by');
+    }
+
+    public function reviewedShiftChanges(): HasMany
+    {
+        return $this->hasMany(ShiftChangeRequest::class, 'reviewed_by');
+    }
+
+    public function internalNotifications(): HasMany
+    {
+        return $this->hasMany(InternalNotification::class);
+    }
+
+    public function managesHospitalService(int $hospitalServiceId): bool
+    {
+        return $this->serviceManagers()
+            ->where('hospital_service_id', $hospitalServiceId)
+            ->exists();
     }
 }

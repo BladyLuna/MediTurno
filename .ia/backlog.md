@@ -165,3 +165,17 @@ integridad de datos:
 - Transacciones desde operaciones que escriban más de una entidad.
 - Validación de conflictos desde el primer desarrollo de asignaciones.
 - Restricción por servicio desde que se implemente jefe de servicio.
+
+## Deuda técnica para Sprint 10
+
+### Revisión de dependencias Composer
+
+- Revisar advisory de Composer.
+- Ejecutar `composer audit`.
+- Evaluar actualización segura de dependencias.
+- No aplicar `composer update` masivo sin revisar impacto.
+- Verificar que `php artisan test` siga pasando después de cualquier actualización.
+
+Justificación:
+La revisión de dependencias debe hacerse en fase de cierre para reducir riesgos de
+seguridad sin introducir cambios masivos no controlados antes de estabilizar el MVP.

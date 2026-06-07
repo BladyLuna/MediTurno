@@ -35,4 +35,9 @@ class HospitalService extends Model
     {
         return $this->hasMany(ShiftAssignment::class);
     }
+
+    public function serviceManagers(): HasMany
+    {
+        return $this->hasMany(ServiceManager::class);
+    }
 }

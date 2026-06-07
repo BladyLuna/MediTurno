@@ -5,28 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Staff extends Model
+class ServiceManager extends Model
 {
     use HasFactory, SoftDeletes;
-
-    protected $table = 'staff';
 
     protected $fillable = [
         'user_id',
         'hospital_service_id',
-        'ci',
-        'full_name',
-        'position',
-        'phone',
-        'email',
-        'active',
-    ];
-
-    protected $casts = [
-        'active' => 'boolean',
     ];
 
     public function user(): BelongsTo
@@ -37,15 +24,5 @@ class Staff extends Model
     public function hospitalService(): BelongsTo
     {
         return $this->belongsTo(HospitalService::class);
-    }
-
-    public function shiftAssignments(): HasMany
-    {
-        return $this->hasMany(ShiftAssignment::class);
-    }
-
-    public function shiftChangeRequests(): HasMany
-    {
-        return $this->hasMany(ShiftChangeRequest::class, 'requested_by', 'user_id');
     }
 }

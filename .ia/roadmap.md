@@ -151,8 +151,17 @@ Mejora operativa sin comprometer el MVP principal.
 - Pruebas funcionales.
 - Revisión de permisos.
 - Revisión de auditoría.
+- Revisión de deuda técnica de dependencias.
 - Documentación final.
 - Deploy y landing page.
 
 Resultado esperado:
 Sistema listo para presentación, con documentación técnica y académica.
+
+Deuda técnica incluida:
+
+- Revisar advisory de Composer.
+- Ejecutar `composer audit`.
+- Evaluar actualización segura de dependencias.
+- No aplicar `composer update` masivo sin revisar impacto.
+- Verificar que `php artisan test` siga pasando después de cualquier actualización.

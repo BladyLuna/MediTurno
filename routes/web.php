@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\HospitalServiceStatusController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ServiceShiftTemplateController;
 use App\Http\Controllers\Admin\ServiceShiftTemplateStatusController;
+use App\Http\Controllers\Admin\ServiceManagerController;
 use App\Http\Controllers\Admin\ShiftAssignmentController;
 use App\Http\Controllers\Admin\ShiftCalendarController;
+use App\Http\Controllers\Admin\ShiftChangeRequestReviewController;
 use App\Http\Controllers\Admin\ShiftTemplateController;
 use App\Http\Controllers\Admin\ShiftTemplateStatusController;
 use App\Http\Controllers\Admin\StaffController;
@@ -17,6 +19,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserStatusController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ShiftChangeRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +51,22 @@ Route::middleware(['auth', 'active'])->group(function () {
         ->middleware('role:admin,jefe_servicio,personal')
         ->name('dashboard');
 
+    Route::middleware('role:personal')->group(function () {
+        Route::resource('shift-change-requests', ShiftChangeRequestController::class)->only(['index', 'create', 'store', 'show']);
+        Route::patch('shift-change-requests/{shift_change_request}/cancel', [ShiftChangeRequestController::class, 'cancel'])->name('shift-change-requests.cancel');
+    });
+
+    Route::middleware('role:admin,jefe_servicio')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('shift-change-requests', [ShiftChangeRequestReviewController::class, 'index'])->name('shift-change-requests.index');
+        Route::get('shift-change-requests/{shift_change_request}', [ShiftChangeRequestReviewController::class, 'show'])->name('shift-change-requests.show');
+        Route::patch('shift-change-requests/{shift_change_request}/approve', [ShiftChangeRequestReviewController::class, 'approve'])->name('shift-change-requests.approve');
+        Route::patch('shift-change-requests/{shift_change_request}/reject', [ShiftChangeRequestReviewController::class, 'reject'])->name('shift-change-requests.reject');
+    });
+
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::patch('notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
+    Route::patch('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
         Route::patch('users/{user}/activate', [UserStatusController::class, 'activate'])->name('users.activate');
@@ -69,6 +89,7 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
         Route::get('reports/export', [ReportController::class, 'export'])->name('reports.export');
         Route::get('reports/pdf', [ReportController::class, 'pdf'])->name('reports.pdf');
+        Route::resource('service-managers', ServiceManagerController::class)->only(['index', 'create', 'store', 'destroy']);
         Route::resource('audit-logs', AuditLogController::class)->only(['index', 'show']);
     });
 });

@@ -18,8 +18,8 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 @auth
-                    @if (auth()->user()->isAdmin())
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @if (auth()->user()->isAdmin())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
                             </li>
@@ -45,10 +45,32 @@
                                 <a class="nav-link" href="{{ route('admin.reports.index') }}">Reportes</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.service-managers.index') }}">Jefes</a>
+                            </li>
+                        @endif
+
+                        @if (in_array(auth()->user()->role, ['admin', 'jefe_servicio'], true))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.shift-change-requests.index') }}">Revisión solicitudes</a>
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->role === 'personal')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('shift-change-requests.index') }}">Mis solicitudes</a>
+                            </li>
+                        @endif
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('notifications.index') }}">Notificaciones</a>
+                        </li>
+
+                        @if (auth()->user()->isAdmin())
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.audit-logs.index') }}">Auditoría</a>
                             </li>
-                        </ul>
-                    @endif
+                        @endif
+                    </ul>
                 @endauth
 
                 <div class="ms-auto d-flex align-items-center gap-3">
