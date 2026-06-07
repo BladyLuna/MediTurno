@@ -11,12 +11,13 @@ class ReportService
 {
     /**
      * @param  array<string, mixed>  $filters
+     * @param  array<string, mixed>  $scope
      * @return array<string, mixed>
      */
-    public function build(array $filters): array
+    public function build(array $filters, array $scope = []): array
     {
         $filters = $this->normalizeFilters($filters);
-        $assignments = $this->assignments($filters);
+        $assignments = $this->assignments($filters, $scope);
         $details = $assignments
             ->map(fn (ShiftAssignment $assignment) => $this->detailRow($assignment))
             ->values();
@@ -54,9 +55,10 @@ class ReportService
 
     /**
      * @param  array<string, mixed>  $filters
+     * @param  array<string, mixed>  $scope
      * @return \Illuminate\Support\Collection<int, \App\Models\ShiftAssignment>
      */
-    public function assignments(array $filters): Collection
+    public function assignments(array $filters, array $scope = []): Collection
     {
         $filters = $this->normalizeFilters($filters);
         $startAt = CarbonImmutable::parse($filters['start_date'])->startOfDay();
@@ -70,6 +72,18 @@ class ReportService
             ])
             ->where('start_at', '<', $endExclusive)
             ->where('end_at', '>', $startAt)
+            ->when(array_key_exists('hospital_service_ids', $scope), function ($query) use ($scope): void {
+                $serviceIds = $scope['hospital_service_ids'];
+
+                if ($serviceIds === []) {
+                    $query->whereRaw('0 = 1');
+
+                    return;
+                }
+
+                $query->whereIn('hospital_service_id', $serviceIds);
+            })
+            ->when($scope['staff_id'] ?? null, fn ($query, $staffId) => $query->where('staff_id', $staffId))
             ->when($filters['hospital_service_id'], fn ($query, $serviceId) => $query->where('hospital_service_id', $serviceId))
             ->when($filters['staff_id'], fn ($query, $staffId) => $query->where('staff_id', $staffId))
             ->orderBy('start_at')

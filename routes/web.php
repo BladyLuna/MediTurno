@@ -20,6 +20,10 @@ use App\Http\Controllers\Admin\UserStatusController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Personal\MyScheduleController;
+use App\Http\Controllers\ServiceManager\ServiceCalendarController;
+use App\Http\Controllers\ServiceManager\ServiceReportController;
+use App\Http\Controllers\ServiceManager\ServiceStaffController;
 use App\Http\Controllers\ShiftChangeRequestController;
 
 /*
@@ -66,6 +70,20 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::patch('notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
     Route::patch('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+
+    Route::middleware('role:personal')->group(function () {
+        Route::get('my-schedule', [MyScheduleController::class, 'index'])->name('my-schedule.index');
+        Route::get('my-schedule/events', [MyScheduleController::class, 'events'])->name('my-schedule.events');
+    });
+
+    Route::middleware('role:jefe_servicio')->group(function () {
+        Route::get('service-calendar', [ServiceCalendarController::class, 'index'])->name('service-calendar.index');
+        Route::get('service-calendar/events', [ServiceCalendarController::class, 'events'])->name('service-calendar.events');
+        Route::get('service-staff', [ServiceStaffController::class, 'index'])->name('service-staff.index');
+        Route::get('service-reports', [ServiceReportController::class, 'index'])->name('service-reports.index');
+        Route::get('service-reports/export', [ServiceReportController::class, 'export'])->name('service-reports.export');
+        Route::get('service-reports/pdf', [ServiceReportController::class, 'pdf'])->name('service-reports.pdf');
+    });
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);

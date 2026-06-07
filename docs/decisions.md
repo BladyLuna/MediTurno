@@ -214,3 +214,29 @@ los valores anteriores y nuevos de la asignacion.
 
 Fecha:
 2026-06-07
+
+---
+
+DEC-013
+
+Vistas por rol en Version 2:
+
+- El administrador conserva calendario global y reportes globales.
+- El jefe de servicio ve calendario, personal, solicitudes y reportes solo de los
+  servicios asociados en `service_managers`.
+- El personal de salud ve sus turnos, calendario, solicitudes y notificaciones
+  solo cuando los datos corresponden a `staff.user_id = auth()->id()`.
+- Las vistas de calendario y reportes para jefe de servicio y personal son de
+  solo lectura.
+
+Motivo:
+Completar la separacion operativa por rol sin cambiar la logica de asignaciones
+ni ampliar el alcance del modelo de datos.
+
+Impacto:
+Las consultas de calendario, personal y reportes deben aplicar alcance obligatorio
+por rol desde backend. No se debe permitir que un jefe fuerce otros servicios
+mediante parametros de URL.
+
+Fecha:
+2026-06-07

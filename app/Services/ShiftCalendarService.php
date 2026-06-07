@@ -12,11 +12,12 @@ class ShiftCalendarService
 {
     /**
      * @param  array<string, mixed>  $filters
+     * @param  array<string, mixed>  $scope
      * @return array<int, array<string, mixed>>
      */
-    public function events(CarbonInterface $start, CarbonInterface $end, array $filters = []): array
+    public function events(CarbonInterface $start, CarbonInterface $end, array $filters = [], array $scope = []): array
     {
-        return $this->assignments($start, $end, $filters)
+        return $this->assignments($start, $end, $filters, $scope)
             ->map(fn (ShiftAssignment $assignment) => $this->toEvent($assignment))
             ->values()
             ->all();
@@ -24,9 +25,10 @@ class ShiftCalendarService
 
     /**
      * @param  array<string, mixed>  $filters
+     * @param  array<string, mixed>  $scope
      * @return \Illuminate\Support\Collection<int, \App\Models\ShiftAssignment>
      */
-    public function assignments(CarbonInterface $start, CarbonInterface $end, array $filters = []): Collection
+    public function assignments(CarbonInterface $start, CarbonInterface $end, array $filters = [], array $scope = []): Collection
     {
         return ShiftAssignment::query()
             ->with(['staff', 'hospitalService', 'serviceShiftTemplate.shiftTemplate'])
@@ -36,6 +38,18 @@ class ShiftCalendarService
             ])
             ->where('start_at', '<', $end)
             ->where('end_at', '>', $start)
+            ->when(array_key_exists('hospital_service_ids', $scope), function ($query) use ($scope): void {
+                $serviceIds = $scope['hospital_service_ids'];
+
+                if ($serviceIds === []) {
+                    $query->whereRaw('0 = 1');
+
+                    return;
+                }
+
+                $query->whereIn('hospital_service_id', $serviceIds);
+            })
+            ->when($scope['staff_id'] ?? null, fn ($query, $staffId) => $query->where('staff_id', $staffId))
             ->when($filters['hospital_service_id'] ?? null, fn ($query, $serviceId) => $query->where('hospital_service_id', $serviceId))
             ->when($filters['staff_id'] ?? null, fn ($query, $staffId) => $query->where('staff_id', $staffId))
             ->orderBy('start_at')

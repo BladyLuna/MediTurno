@@ -4,60 +4,81 @@
 
 @section('content')
     @php
-        $baseFilters = [
-            'hospital_service_id' => $filters['hospital_service_id'] ?? null,
-            'staff_id' => $filters['staff_id'] ?? null,
-        ];
+        $pageTitle = $pageTitle ?? 'Calendario mensual de turnos';
+        $pageSubtitle = $pageSubtitle ?? 'Visualización de asignaciones existentes por mes.';
+        $indexRoute = $indexRoute ?? 'admin.calendar.index';
+        $eventsRoute = $eventsRoute ?? 'admin.calendar.events';
+        $showServiceFilter = $showServiceFilter ?? true;
+        $showStaffFilter = $showStaffFilter ?? true;
+        $baseFilters = [];
+
+        if ($showServiceFilter) {
+            $baseFilters['hospital_service_id'] = $filters['hospital_service_id'] ?? null;
+        }
+
+        if ($showStaffFilter) {
+            $baseFilters['staff_id'] = $filters['staff_id'] ?? null;
+        }
     @endphp
 
     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
         <div>
-            <h1 class="h3 mb-1">Calendario mensual de turnos</h1>
-            <p class="text-muted mb-0">Visualización de asignaciones existentes por mes.</p>
+            <h1 class="h3 mb-1">{{ $pageTitle }}</h1>
+            <p class="text-muted mb-0">{{ $pageSubtitle }}</p>
         </div>
 
         <div class="d-flex flex-wrap gap-2">
-            <a href="{{ route('admin.calendar.index', array_filter([...$baseFilters, 'month' => $previousMonth])) }}" class="btn btn-outline-secondary">Mes anterior</a>
-            <a href="{{ route('admin.calendar.index', $baseFilters) }}" class="btn btn-outline-primary">Mes actual</a>
-            <a href="{{ route('admin.calendar.index', array_filter([...$baseFilters, 'month' => $nextMonth])) }}" class="btn btn-outline-secondary">Mes siguiente</a>
+            <a href="{{ route($indexRoute, array_filter([...$baseFilters, 'month' => $previousMonth])) }}" class="btn btn-outline-secondary">Mes anterior</a>
+            <a href="{{ route($indexRoute, $baseFilters) }}" class="btn btn-outline-primary">Mes actual</a>
+            <a href="{{ route($indexRoute, array_filter([...$baseFilters, 'month' => $nextMonth])) }}" class="btn btn-outline-secondary">Mes siguiente</a>
         </div>
     </div>
 
+    @if (! empty($notice))
+        <div class="alert alert-info" role="alert">
+            {{ $notice }}
+        </div>
+    @endif
+
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <form method="GET" action="{{ route('admin.calendar.index') }}" class="row g-3 align-items-end" data-calendar-filter-form>
+            <form method="GET" action="{{ route($indexRoute) }}" class="row g-3 align-items-end" data-calendar-filter-form>
                 <div class="col-12 col-md-3">
                     <label for="month" class="form-label">Mes</label>
                     <input type="month" name="month" id="month" value="{{ $currentMonth->format('Y-m') }}" class="form-control">
                 </div>
 
-                <div class="col-12 col-md-4">
-                    <label for="hospital_service_id" class="form-label">Servicio</label>
-                    <select name="hospital_service_id" id="hospital_service_id" class="form-select">
-                        <option value="">Todos</option>
-                        @foreach ($hospitalServices as $hospitalService)
-                            <option value="{{ $hospitalService->id }}" @selected(($filters['hospital_service_id'] ?? '') == $hospitalService->id)>
-                                {{ $hospitalService->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                @if ($showServiceFilter)
+                    <div class="col-12 col-md-4">
+                        <label for="hospital_service_id" class="form-label">Servicio</label>
+                        <select name="hospital_service_id" id="hospital_service_id" class="form-select">
+                            <option value="">Todos</option>
+                            @foreach ($hospitalServices as $hospitalService)
+                                <option value="{{ $hospitalService->id }}" @selected(($filters['hospital_service_id'] ?? '') == $hospitalService->id)>
+                                    {{ $hospitalService->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
 
-                <div class="col-12 col-md-3">
-                    <label for="staff_id" class="form-label">Personal</label>
-                    <select name="staff_id" id="staff_id" class="form-select">
-                        <option value="">Todos</option>
-                        @foreach ($staffOptions as $staffMember)
-                            <option value="{{ $staffMember->id }}" @selected(($filters['staff_id'] ?? '') == $staffMember->id)>
-                                {{ $staffMember->full_name }} - {{ $staffMember->ci }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                @if ($showStaffFilter)
+                    <div class="col-12 col-md-3">
+                        <label for="staff_id" class="form-label">Personal</label>
+                        <select name="staff_id" id="staff_id" class="form-select">
+                            <option value="">Todos</option>
+                            @foreach ($staffOptions as $staffMember)
+                                <option value="{{ $staffMember->id }}" @selected(($filters['staff_id'] ?? '') == $staffMember->id)>
+                                    {{ $staffMember->full_name }} - {{ $staffMember->ci }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
 
                 <div class="col-12 col-md-2 d-flex gap-2">
                     <button type="submit" class="btn btn-outline-primary w-100">Filtrar</button>
-                    <a href="{{ route('admin.calendar.index') }}" class="btn btn-outline-secondary">Limpiar</a>
+                    <a href="{{ route($indexRoute) }}" class="btn btn-outline-secondary">Limpiar</a>
                 </div>
             </form>
         </div>
@@ -67,7 +88,7 @@
         <div class="card-body">
             <div
                 id="shift-calendar"
-                data-events-url="{{ route('admin.calendar.events') }}"
+                data-events-url="{{ route($eventsRoute) }}"
                 data-initial-date="{{ $currentMonth->format('Y-m-d') }}"
             ></div>
         </div>

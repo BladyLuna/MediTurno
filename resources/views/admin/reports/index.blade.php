@@ -8,24 +8,35 @@
         $summary = $report['summary'];
         $grouped = $report['grouped'];
         $details = $report['details'];
+        $pageTitle = $pageTitle ?? 'Reportes básicos';
+        $pageSubtitle = $pageSubtitle ?? 'Resumen de turnos asignados y horas trabajadas.';
+        $indexRoute = $indexRoute ?? 'admin.reports.index';
+        $exportRoute = $exportRoute ?? 'admin.reports.export';
+        $pdfRoute = $pdfRoute ?? 'admin.reports.pdf';
         $exportParams = array_filter($filters, fn ($value) => $value !== null && $value !== '');
     @endphp
 
     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
         <div>
-            <h1 class="h3 mb-1">Reportes básicos</h1>
-            <p class="text-muted mb-0">Resumen de turnos asignados y horas trabajadas.</p>
+            <h1 class="h3 mb-1">{{ $pageTitle }}</h1>
+            <p class="text-muted mb-0">{{ $pageSubtitle }}</p>
         </div>
 
         <div class="d-flex flex-wrap gap-2">
-            <a href="{{ route('admin.reports.export', $exportParams) }}" class="btn btn-outline-success">Exportar CSV</a>
-            <a href="{{ route('admin.reports.pdf', $exportParams) }}" class="btn btn-outline-danger">Exportar PDF</a>
+            <a href="{{ route($exportRoute, $exportParams) }}" class="btn btn-outline-success">Exportar CSV</a>
+            <a href="{{ route($pdfRoute, $exportParams) }}" class="btn btn-outline-danger">Exportar PDF</a>
         </div>
     </div>
 
+    @if (! empty($notice))
+        <div class="alert alert-info" role="alert">
+            {{ $notice }}
+        </div>
+    @endif
+
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <form method="GET" action="{{ route('admin.reports.index') }}" class="row g-3 align-items-end">
+            <form method="GET" action="{{ route($indexRoute) }}" class="row g-3 align-items-end">
                 <div class="col-12 col-md-2">
                     <label for="start_date" class="form-label">Fecha inicial</label>
                     <input type="date" name="start_date" id="start_date" value="{{ $filters['start_date'] }}" class="form-control">
@@ -69,7 +80,7 @@
                 </div>
 
                 <div class="col-12 d-flex justify-content-end gap-2">
-                    <a href="{{ route('admin.reports.index') }}" class="btn btn-outline-secondary">Limpiar</a>
+                    <a href="{{ route($indexRoute) }}" class="btn btn-outline-secondary">Limpiar</a>
                     <button type="submit" class="btn btn-outline-primary">Filtrar</button>
                 </div>
             </form>

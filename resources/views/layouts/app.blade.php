@@ -45,12 +45,26 @@
                             </li>
                         @endif
 
+                        @if (auth()->user()->role === 'jefe_servicio')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="serviceManagerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Servicios
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="serviceManagerDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('service-calendar.index') }}">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('service-staff.index') }}">Personal</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('service-reports.index') }}">Reportes</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="operationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Operación
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="operationsDropdown">
                                 @if (auth()->user()->role === 'personal')
+                                    <li><a class="dropdown-item" href="{{ route('my-schedule.index') }}">Mis turnos</a></li>
                                     <li><a class="dropdown-item" href="{{ route('shift-change-requests.index') }}">Solicitudes</a></li>
                                 @endif
 

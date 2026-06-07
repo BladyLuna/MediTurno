@@ -45,10 +45,20 @@
                     <h2 class="h5 mb-3">Accesos del módulo</h2>
                     <div class="row g-3">
                         @foreach ($roleMeta['items'] as $item)
+                            @php
+                                $label = is_array($item) ? $item['label'] : $item;
+                                $routeName = is_array($item) ? ($item['route'] ?? null) : null;
+                            @endphp
                             <div class="col-12 col-md-6">
-                                <div class="border rounded-3 p-3 bg-light h-100">
-                                    {{ $item }}
-                                </div>
+                                @if ($routeName)
+                                    <a href="{{ route($routeName) }}" class="border rounded-3 p-3 bg-light h-100 d-block text-decoration-none text-dark">
+                                        {{ $label }}
+                                    </a>
+                                @else
+                                    <div class="border rounded-3 p-3 bg-light h-100">
+                                        {{ $label }}
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>
