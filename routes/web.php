@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\HospitalServiceController;
 use App\Http\Controllers\Admin\HospitalServiceStatusController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ServiceShiftTemplateController;
 use App\Http\Controllers\Admin\ServiceShiftTemplateStatusController;
 use App\Http\Controllers\Admin\ShiftAssignmentController;
@@ -65,6 +66,9 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::resource('shift-assignments', ShiftAssignmentController::class)->except(['show']);
         Route::get('calendar', [ShiftCalendarController::class, 'index'])->name('calendar.index');
         Route::get('calendar/events', [ShiftCalendarController::class, 'events'])->name('calendar.events');
+        Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+        Route::get('reports/export', [ReportController::class, 'export'])->name('reports.export');
+        Route::get('reports/pdf', [ReportController::class, 'pdf'])->name('reports.pdf');
         Route::resource('audit-logs', AuditLogController::class)->only(['index', 'show']);
     });
 });
