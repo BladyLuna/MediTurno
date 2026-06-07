@@ -6,7 +6,7 @@
     <div class="dashboard-hero rounded-4 p-4 p-md-5 mb-4">
         <div class="row align-items-center g-4">
             <div class="col-12 col-lg-8">
-                <span class="badge text-bg-light text-dark mb-3">Sprint 1</span>
+                <span class="badge text-bg-light text-dark mb-3">MVP cerrado</span>
                 <h1 class="display-6 fw-semibold mb-3">{{ $roleMeta['title'] }}</h1>
                 <p class="lead mb-0">{{ $roleMeta['subtitle'] }}</p>
             </div>

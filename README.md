@@ -1,277 +1,181 @@
-# 🏥 MediTurno — Sistema Web de Gestión de Turnos Hospitalarios
+# MediTurno
 
-> Sistema web integral para la gestión y asignación de turnos del personal de salud.  
-> Desarrollado por **Bladimir Luna Corrales** | Tutor: **Ing. Edson Flores Condori**  
-> Instituto Técnico Nacional de Comercio "Federico Álvarez Plata" Nocturno — 2025
+Sistema web de gestión de turnos hospitalarios desarrollado como proyecto de grado.
 
----
+MediTurno reemplaza la gestión manual en hojas de cálculo por una aplicación Laravel
+con control de roles, asignación de turnos, validación de traslapes, calendario,
+reportes, auditoría y flujo básico de solicitudes de cambio.
 
-## 📋 Descripción
-
-**MediTurno** reemplaza el uso de hojas de cálculo (Excel) para gestionar los turnos hospitalarios. Centraliza toda la información del personal, servicios y turnos en una sola plataforma web con roles diferenciados, calendario visual y reportes administrativos.
-
----
-
-## 🛠️ Stack Tecnológico
+## Stack
 
 | Capa | Tecnología |
-|------|-----------|
-| Backend | PHP 8.2 + Laravel 10 (MVC) |
-| Frontend | Blade Templates + Bootstrap 5 + JavaScript |
-| Base de datos | MySQL 8 + Eloquent ORM |
-| Entorno local | Docker + Docker Compose |
-| Control de versiones | Git + GitHub |
-| Editor recomendado | VS Code + Claude Code |
+| --- | --- |
+| Backend | PHP 8.2 + Laravel 10 |
+| Frontend | Blade + Bootstrap 5 + Vite |
+| Calendario | FullCalendar |
+| Base de datos | MySQL 8 |
+| Reportes | HTML, CSV y PDF básico |
+| Entorno local | Docker Compose |
 
----
-
-## 👥 Roles del Sistema
-
-| Rol | Permisos |
-|-----|---------|
-| **Administrador** | Acceso total: usuarios, personal, servicios, turnos, asignaciones, reportes, configuración |
-| **Jefe de Servicio** | Gestión de turnos y personal de los servicios que administra, ver calendario |
-| **Personal de Salud** | Ver sus propios turnos, consultar calendario mensual |
-
----
-
-## 📦 Módulos del Sistema
-
-### 🔐 Módulo 1 — Autenticación
-Controla el acceso seguro al sistema.
-- Iniciar sesión (correo + contraseña)
-- Cerrar sesión
-- Recuperar contraseña *(opcional)*
-- Redirección automática según rol
-
----
-
-### 👥 Módulo 2 — Usuarios
-Administra los usuarios del sistema y sus permisos.
-- Registrar usuario con rol asignado
-- Editar datos del usuario
-- Eliminar / desactivar usuario
-- Asignar roles: Administrador / Jefe de Servicio / Personal de Salud
-
----
-
-### 🏥 Módulo 3 — Servicios Hospitalarios
-Gestiona las áreas del hospital.
-- Registrar servicio (ej: Emergencia, Laboratorio, Neonatología)
-- Editar y eliminar servicio
-- Listar todos los servicios
-
----
-
-### 👨‍⚕️ Módulo 4 — Personal de Salud
-Gestiona los empleados del hospital.
-- Registrar personal (nombre, cargo, CI, contacto)
-- Editar datos del empleado
-- Asignar servicio hospitalario
-- Buscar por nombre o servicio
-
----
-
-### ⏰ Módulo 5 — Tipos de Turno
-Configura los tipos de turno disponibles.
-- Crear turno con nombre y horario
-  - Mañana: 07:00 – 14:00
-  - Tarde: 14:00 – 21:00
-  - Noche: 21:00 – 07:00
-- Editar nombre y horario
-- Definir color identificativo por turno
-- Configurar plantillas de turno por servicio
-
----
-
-### 📅 Módulo 6 — Asignación de Turnos
-Asigna turnos al personal por fecha y servicio.
-- Asignar turno por empleado y fecha
-- Editar asignación existente
-- Eliminar asignación
-- ⚠️ Validación automática de turnos traslapados
-
----
-
-### 📆 Módulo 7 — Calendario Mensual
-Visualiza los turnos del mes de forma gráfica.
-- Vista mensual de todos los turnos
-- Filtrar por servicio hospitalario
-- Filtrar por empleado
-- Colores diferenciados por tipo de turno (M/T/N)
-- Actualización mediante recarga de la vista o consulta de eventos
-
----
-
-### 📊 Módulo 8 — Reportes Administrativos
-Genera reportes para la toma de decisiones.
-- Reporte mensual por servicio
-- Reporte por empleado y periodo
-- Exportar en PDF *(opcional)*
-- Exportar en Excel *(opcional)*
-
----
-
-### ⚙️ Módulo 9 — Configuración
-Configura los parámetros generales del sistema.
-- Configurar tipos y nombres de turnos
-- Configurar horarios de inicio y fin
-- Configurar colores del calendario
-
----
-
-## 🗂️ Estructura del Proyecto
-
-```
-mediturno/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── AuthController.php
-│   │   │   ├── UserController.php
-│   │   │   ├── ServiceController.php
-│   │   │   ├── StaffController.php
-│   │   │   ├── ShiftController.php
-│   │   │   ├── AssignmentController.php
-│   │   │   ├── CalendarController.php
-│   │   │   ├── ReportController.php
-│   │   │   └── ConfigController.php
-│   │   └── Middleware/
-│   │       └── RoleMiddleware.php
-│   └── Models/
-│       ├── User.php
-│       ├── HospitalService.php
-│       ├── Staff.php
-│       ├── ShiftTemplate.php
-│       ├── ServiceShiftTemplate.php
-│       ├── ShiftAssignment.php
-│       └── Report.php
-├── database/
-│   └── migrations/
-│       ├── create_users_table.php
-│       ├── create_hospital_services_table.php
-│       ├── create_staff_table.php
-│       ├── create_shift_templates_table.php
-│       ├── create_service_shift_templates_table.php
-│       └── create_shift_assignments_table.php
-├── resources/
-│   └── views/
-│       ├── auth/
-│       ├── dashboard/
-│       ├── users/
-│       ├── services/
-│       ├── staff/
-│       ├── shifts/
-│       ├── assignments/
-│       ├── calendar/
-│       └── reports/
-├── routes/
-│   └── web.php
-├── public/
-├── CLAUDE.md          ← Contexto para Claude Code
-├── .claudeignore      ← Archivos ignorados por Claude Code
-├── .env.example
-└── README.md
-```
-
----
-
-## 🗄️ Base de Datos — Tablas Principales
-
-| Tabla | Descripción |
-|-------|------------|
-| `users` | Usuarios del sistema con roles |
-| `hospital_services` | Áreas/servicios del hospital |
-| `staff` | Personal de salud |
-| `shift_templates` | Tipos base de turno (M/T/N/Libre) |
-| `service_shift_templates` | Plantillas de turno configuradas por servicio |
-| `shift_assignments` | Asignaciones de turno por empleado y fecha |
-| `audit_logs` | Bitácora de cambios |
-
----
-
-## 🚀 Instalación
-
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/bladimir-luna/mediturno.git
-cd mediturno
-
-# 2. Levantar Docker
-docker compose up -d
-
-# 3. Configurar entorno
-cp .env.example .env
-docker compose exec app php artisan key:generate
-
-# 4. Ejecutar migraciones y seeders
-docker compose exec app php artisan migrate --seed
-
-# 5. Ejecutar pruebas
-docker compose exec app php artisan test
-
-# 6. Acceder al sistema
-# http://localhost:8080
-```
-
-## 🐳 Docker
-
-El proyecto incluye un entorno local con:
-
-- `app`: PHP 8.2 FPM con extensiones para Laravel y MySQL
-- `webserver`: Nginx
-- `db`: MySQL 8
-
-Comandos principales:
-
-```bash
-docker compose up -d
-docker compose exec app php artisan migrate --seed
-docker compose exec app php artisan test
-```
-
----
-
-## 🔄 Flujo del Sistema
-
-```
-Administrador inicia sesión
-        ↓
-Registra personal → Asigna servicio
-        ↓
-Crea tipos y plantillas de turno por servicio
-        ↓
-Asigna turno por empleado + fecha
-        ↓
-Sistema valida turnos traslapados ✅ / ❌
-        ↓
-Calendario actualizado mediante recarga
-        ↓
-Genera reporte mensual
-```
-
----
-
-## 📌 Estado del Proyecto
+## Estado del MVP
 
 | Módulo | Estado |
-|--------|--------|
-| Autenticación | 🔲 Pendiente |
-| Usuarios | 🔲 Pendiente |
-| Servicios | 🔲 Pendiente |
-| Personal | 🔲 Pendiente |
-| Turnos | 🔲 Pendiente |
-| Asignación | 🔲 Pendiente |
-| Calendario | 🔲 Pendiente |
-| Reportes | 🔲 Pendiente |
-| Configuración | 🔲 Pendiente |
+| --- | --- |
+| Login, logout y roles | Implementado |
+| Usuarios | Implementado |
+| Servicios hospitalarios | Implementado |
+| Jefes de servicio | Implementado |
+| Personal de salud | Implementado |
+| Plantillas de turno | Implementado |
+| Turnos por servicio | Implementado |
+| Asignación de turnos | Implementado |
+| Validación de traslapes | Implementado |
+| Calendario mensual | Implementado |
+| Reportes por servicio/empleado | Implementado |
+| Exportación CSV | Implementado |
+| Exportación PDF básica | Implementado |
+| Auditoría | Implementado |
+| Solicitudes de cambio de turno | Implementado como MVP opcional |
+| Notificaciones internas | Implementado como MVP opcional |
+| Ausencias y vacaciones | Post-MVP |
 
----
+## Roles
 
-## 👤 Autor
+| Rol | Alcance |
+| --- | --- |
+| `admin` | Administración completa del sistema. |
+| `jefe_servicio` | Revisión de solicitudes de servicios asociados. |
+| `personal` | Solicitudes de cambio y notificaciones propias. |
 
-**Bladimir Luna Corrales**  
-Instituto Técnico Nacional de Comercio "Federico Álvarez Plata" Nocturno  
-Carrera: Sistemas Informáticos  
-Tutor: Ing. Edson Flores Condori  
-Cochabamba – Bolivia, 2025
+## Reglas principales
+
+- Los roles se almacenan en `users.role`.
+- No se usan paquetes externos de permisos.
+- No se permiten turnos traslapados.
+- Se permiten turnos consecutivos cuando el fin de uno coincide con el inicio de otro.
+- Los turnos nocturnos guardan `start_at` en la fecha asignada y `end_at` al día siguiente.
+- Las operaciones críticas se auditan.
+- Los registros administrables usan SoftDeletes.
+- Las solicitudes de cambio se aprueban o rechazan administrativamente; no modifican automáticamente asignaciones.
+
+## Instalación con Docker
+
+```bash
+docker compose up -d
+docker compose exec app php artisan migrate --seed
+docker compose exec app php artisan test
+npm run build
+```
+
+URL local:
+
+```text
+http://localhost:8080
+```
+
+## Credenciales demo
+
+| Rol | Correo | Contraseña |
+| --- | --- | --- |
+| Administrador | `admin@mediturno.test` | `12345678` |
+| Jefe de servicio | `jefe@mediturno.test` | `12345678` |
+| Personal | `personal@mediturno.test` | `12345678` |
+
+## Datos demo
+
+`DatabaseSeeder` ejecuta:
+
+- `TestUsersSeeder`
+- `DemoDataSeeder`
+
+El sistema queda listo para defensa con:
+
+- servicios: Emergencia, UCI y Laboratorio;
+- turnos: Mañana, Tarde, Noche y Libre;
+- turnos por servicio;
+- personal demo asociado a servicios;
+- `jefe@mediturno.test` asociado a Emergencia;
+- asignaciones del mes actual, incluyendo turno nocturno;
+- solicitudes de cambio en estado pendiente, aprobada y rechazada;
+- notificaciones internas;
+- auditoría demo básica.
+
+Para reconstruir el entorno demo:
+
+```bash
+docker compose exec app php artisan migrate:fresh --seed
+```
+
+## Flujo de defensa recomendado
+
+1. Entrar como `admin@mediturno.test`.
+2. Revisar servicios, personal, turnos y turnos por servicio.
+3. Mostrar asignaciones y validación de traslapes.
+4. Mostrar calendario mensual con colores y turno nocturno.
+5. Mostrar reportes HTML, CSV y PDF.
+6. Mostrar auditoría.
+7. Entrar como `personal@mediturno.test`.
+8. Crear o revisar una solicitud de cambio.
+9. Entrar como `jefe@mediturno.test`.
+10. Aprobar o rechazar una solicitud del servicio Emergencia.
+11. Volver a personal y mostrar notificación interna.
+
+## Rutas principales
+
+| Módulo | Ruta |
+| --- | --- |
+| Dashboard | `/dashboard` |
+| Usuarios | `/admin/users` |
+| Servicios | `/admin/hospital-services` |
+| Personal | `/admin/staff` |
+| Jefes de servicio | `/admin/service-managers` |
+| Plantillas de turno | `/admin/shift-templates` |
+| Turnos por servicio | `/admin/service-shift-templates` |
+| Asignaciones | `/admin/shift-assignments` |
+| Calendario | `/admin/calendar` |
+| Reportes | `/admin/reports` |
+| Exportar CSV | `/admin/reports/export` |
+| Exportar PDF | `/admin/reports/pdf` |
+| Auditoría | `/admin/audit-logs` |
+| Solicitudes del personal | `/shift-change-requests` |
+| Revisión de solicitudes | `/admin/shift-change-requests` |
+| Notificaciones | `/notifications` |
+
+## Verificación final
+
+Comandos usados para cierre:
+
+```bash
+composer audit
+npm audit
+npm run build
+docker compose exec app php artisan migrate:fresh --seed
+docker compose exec app php artisan test
+```
+
+## Auditoría de dependencias
+
+Resultado Composer:
+
+- Advisory en `laravel/framework 10.50.2`.
+- CVE: `CVE-2026-48019`.
+- Título: Laravel CRLF injection in default email rule.
+- Acción recomendada: actualización dirigida de Laravel 10 cuando exista versión segura compatible, sin ejecutar `composer update` masivo, seguida de `php artisan test`.
+
+Resultado npm:
+
+- Vulnerabilidad moderada en `esbuild <=0.24.2` vía `vite`.
+- La corrección sugerida por npm requiere `npm audit fix --force` y salto mayor de Vite.
+- Acción recomendada: evaluar actualización controlada de Vite/esbuild en Sprint 10 o mantenimiento, sin aplicar `--force` sin revisión.
+
+## Despliegue
+
+Ver [docs/deploy.md](docs/deploy.md).
+
+## QA
+
+Ver [docs/qa-checklist.md](docs/qa-checklist.md).
+
+## Flujo demo
+
+Ver [docs/demo-flow.md](docs/demo-flow.md).

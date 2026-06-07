@@ -154,7 +154,7 @@ class AuthFlowTest extends TestCase
         $response->assertOk();
         $response->assertSee('Panel administrativo');
         $response->assertSee('Usuarios');
-        $response->assertSee('Configuración');
+        $response->assertSee('Auditoría');
     }
 
     public function test_role_middleware_blocks_unallowed_roles(): void
