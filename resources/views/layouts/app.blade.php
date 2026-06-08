@@ -51,6 +51,9 @@
                                     Servicios
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="serviceManagerDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('service-dashboard.index') }}">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('service-assignments.index') }}">Asignaciones</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('service-availability.index') }}">Disponibilidad</a></li>
                                     <li><a class="dropdown-item" href="{{ route('service-calendar.index') }}">Calendario</a></li>
                                     <li><a class="dropdown-item" href="{{ route('service-staff.index') }}">Personal</a></li>
                                     <li><a class="dropdown-item" href="{{ route('service-reports.index') }}">Reportes</a></li>

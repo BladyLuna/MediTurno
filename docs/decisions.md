@@ -240,3 +240,32 @@ mediante parametros de URL.
 
 Fecha:
 2026-06-07
+
+---
+
+DEC-014
+
+Gestion operativa por jefatura en Version 3:
+
+- El usuario con rol `jefe_servicio` puede crear, editar y cancelar asignaciones
+  de turno solo en los servicios asociados a su usuario mediante
+  `service_managers`.
+- El jefe de servicio puede editar observaciones operativas en asignaciones de
+  sus servicios usando `shift_assignments.notes`.
+- El jefe de servicio no puede operar servicios, personal ni turnos por servicio
+  fuera de su alcance, aunque intente forzar IDs por query string o payload.
+- El jefe de servicio no puede editar ni cancelar asignaciones con estado
+  `cancelled` ni asignaciones eliminadas logicamente.
+- Las operaciones criticas de jefatura sobre asignaciones deben ejecutarse en
+  transaccion y registrar auditoria.
+
+Motivo:
+Permitir operacion diaria por servicio sin convertir al jefe de servicio en
+administrador global.
+
+Impacto:
+Se agregan rutas operativas paralelas para jefatura. Las rutas administrativas
+globales se mantienen solo para `admin`.
+
+Fecha:
+2026-06-07

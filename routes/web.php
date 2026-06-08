@@ -21,7 +21,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Personal\MyScheduleController;
+use App\Http\Controllers\ServiceManager\ServiceAssignmentController;
+use App\Http\Controllers\ServiceManager\ServiceAvailabilityController;
 use App\Http\Controllers\ServiceManager\ServiceCalendarController;
+use App\Http\Controllers\ServiceManager\ServiceDashboardController;
 use App\Http\Controllers\ServiceManager\ServiceReportController;
 use App\Http\Controllers\ServiceManager\ServiceStaffController;
 use App\Http\Controllers\ShiftChangeRequestController;
@@ -77,6 +80,11 @@ Route::middleware(['auth', 'active'])->group(function () {
     });
 
     Route::middleware('role:jefe_servicio')->group(function () {
+        Route::get('service-dashboard', [ServiceDashboardController::class, 'index'])->name('service-dashboard.index');
+        Route::resource('service-assignments', ServiceAssignmentController::class)
+            ->except(['show'])
+            ->parameters(['service-assignments' => 'shift_assignment']);
+        Route::get('service-availability', [ServiceAvailabilityController::class, 'index'])->name('service-availability.index');
         Route::get('service-calendar', [ServiceCalendarController::class, 'index'])->name('service-calendar.index');
         Route::get('service-calendar/events', [ServiceCalendarController::class, 'events'])->name('service-calendar.events');
         Route::get('service-staff', [ServiceStaffController::class, 'index'])->name('service-staff.index');
