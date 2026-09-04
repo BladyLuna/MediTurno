@@ -17,3 +17,13 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Backups y binarios pesados (no van a GitHub)
+*.bundle
+*.pdf
+/.ai
+
+# Archivos de herramientas personales de IA
+CODEX
+tareas-zeuz
+revisa.md
