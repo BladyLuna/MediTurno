@@ -1,0 +1,37 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 180
+title Diagrama de Secuencia — Gestión de Plantillas de Turno
+
+actor Administrador as admin
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "ShiftTemplateController" as ctrl
+participant "ShiftTemplatePolicy\n(Gates)" as policy
+participant "AuditLogService" as audit
+database "Base de Datos" as db
+
+== ESCENARIO: Crear plantilla de turno (POST /admin/shift-templates) ==
+admin -> web : Llena formulario (código, nombre, horas, color)
+web -> ctrl : POST /admin/shift-templates
+ctrl -> policy : authorize create
+policy --> ctrl : Permitido (admin)
+ctrl -> db : ShiftTemplate::create (M/T/N, is_working_shift)
+db --> ctrl : Plantilla creada
+ctrl -> audit : record('created', plantilla, datos)
+audit -> db : Inserta en audit_logs
+ctrl --> admin : Redirige con mensaje de éxito
+
+== ESCENARIO: Editar plantilla de turno ==
+admin -> web : Modifica horario de una plantilla
+web -> ctrl : PUT /admin/shift-templates/{st}
+ctrl -> policy : authorize update
+policy --> ctrl : Permitido
+ctrl -> db : actualiza datos de la plantilla
+db --> ctrl : Plantilla actualizada
+ctrl -> audit : record('updated', plantilla, valores)
+audit -> db : Inserta en audit_logs
+ctrl --> admin : Redirige con mensaje de éxito
+
+@enduml

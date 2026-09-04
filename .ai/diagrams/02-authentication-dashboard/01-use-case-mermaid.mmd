@@ -1,0 +1,10 @@
+%% Evidence: routes/web.php, FEAT-001
+flowchart LR
+  Guest --> Login[Login]
+  Admin[admin] --> Dashboard[View dashboard]
+  Manager[jefe_servicio] --> Dashboard
+  Staff[personal] --> Dashboard
+  Admin --> Logout
+  Manager --> Logout
+  Staff --> Logout
+

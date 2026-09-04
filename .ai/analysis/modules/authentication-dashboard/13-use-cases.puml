@@ -1,0 +1,18 @@
+@startuml
+' Evidence: routes/web.php, FEAT-001
+actor Guest
+actor admin
+actor jefe_servicio
+actor personal
+usecase "Login" as Login
+usecase "View dashboard" as Dashboard
+usecase "Logout" as Logout
+Guest --> Login
+admin --> Dashboard
+jefe_servicio --> Dashboard
+personal --> Dashboard
+admin --> Logout
+jefe_servicio --> Logout
+personal --> Logout
+@enduml
+

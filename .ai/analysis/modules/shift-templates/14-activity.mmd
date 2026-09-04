@@ -1,0 +1,6 @@
+flowchart TD
+  A[Select global template and service] --> B{Custom times complete?}
+  B -- Yes --> C[Persist configuration]
+  C --> D[Audit]
+  B -- No --> E[Reject]
+

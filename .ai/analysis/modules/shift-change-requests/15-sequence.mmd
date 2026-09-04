@@ -1,0 +1,14 @@
+sequenceDiagram
+  actor Personal
+  actor Reviewer
+  participant Service
+  participant Request
+  participant Audit
+  participant Notification
+  Personal->>Service: create
+  Service->>Request: pending
+  Service->>Audit: record
+  Service->>Notification: notify reviewers
+  Reviewer->>Service: approve/reject
+  Service->>Request: update status
+  Service->>Notification: notify requester

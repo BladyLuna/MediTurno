@@ -1,0 +1,10 @@
+sequenceDiagram
+  actor Admin
+  participant Controller
+  participant ManagerLink
+  participant Audit
+  Admin->>Controller: assign user/service
+  Controller->>ManagerLink: create
+  Controller->>Audit: record
+  Controller-->>Admin: result
+

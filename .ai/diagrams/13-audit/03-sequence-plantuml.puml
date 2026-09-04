@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 200
+title Diagrama de Secuencia — Bitácora de Auditoría
+
+actor Administrador as admin
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "AuditLogController" as ctrl
+participant "UserPolicy\n(Gates)" as policy
+database "Base de Datos" as db
+
+== ESCENARIO: Consultar bitácora (GET /admin/audit-logs) ==
+admin -> web : Accede al módulo de auditoría
+web -> ctrl : GET /admin/audit-logs
+ctrl -> policy : authorize viewAny (User)
+policy --> ctrl : Permitido (solo admin)
+ctrl -> db : AuditLog::latest paginado con usuario
+db --> ctrl : Registros (acción, modelo, fechas)
+ctrl --> admin : Vista index de auditoría
+
+== ESCENARIO: Ver detalle de un registro ==
+admin -> web : Selecciona un registro
+web -> ctrl : GET /admin/audit-logs/{log}
+ctrl -> policy : authorize viewAny
+ctrl -> db : Carga registro con usuario
+db --> ctrl : Detalle (old/new_values JSON, IP)
+ctrl --> admin : Vista show del registro
+
+note over admin, db : Regla BR: cada creación/edición/cancelación de\nasignaciones o solicitudes se registra con usuario, fecha e IP.
+
+@enduml

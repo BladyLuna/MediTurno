@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 180
+title Diagrama de Secuencia — Gestión de Personal de Salud
+
+actor Administrador as admin
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "StaffController" as ctrl
+participant "StaffPolicy\n(Gates)" as policy
+participant "AuditLogService" as audit
+database "Base de Datos" as db
+
+== ESCENARIO: Registrar personal (POST /admin/staff) ==
+admin -> web : Llena formulario (CI, nombre, cargo, servicio, usuario)
+web -> ctrl : POST /admin/staff
+ctrl -> policy : authorize create
+policy --> ctrl : Permitido (admin)
+ctrl -> db : Staff::create (asocia servicio y usuario)
+db --> ctrl : Personal registrado
+ctrl -> audit : record('created', staff, datos)
+audit -> db : Inserta en audit_logs
+ctrl --> admin : Redirige con mensaje de éxito
+
+== ESCENARIO: Filtrar personal por servicio (GET /admin/staff) ==
+admin -> web : Selecciona filtro de servicio
+web -> ctrl : GET /admin/staff?hospital_service_id=X
+ctrl -> db : Consulta staff con servicio filtrado
+db --> ctrl : Lista de personal
+ctrl --> admin : Vista index con personal filtrado
+
+@enduml

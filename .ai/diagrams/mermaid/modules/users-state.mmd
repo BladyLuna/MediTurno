@@ -1,0 +1,7 @@
+stateDiagram-v2
+  [*] --> Active
+  Active --> Inactive: deactivate
+  Inactive --> Active: activate
+  Active --> SoftDeleted: delete if allowed
+  Inactive --> SoftDeleted: delete if allowed
+

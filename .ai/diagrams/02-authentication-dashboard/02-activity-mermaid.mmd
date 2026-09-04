@@ -1,0 +1,8 @@
+%% Evidence: LoginController, middleware auth/active
+flowchart TD
+  A[Open login] --> B[Submit credentials]
+  B --> C{Valid credentials and active?}
+  C -- Yes --> D[Create session]
+  D --> E[Dashboard]
+  C -- No --> F[Controlled error]
+

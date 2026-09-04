@@ -1,0 +1,9 @@
+@startuml
+start
+:Open month;
+:Derive role scope;
+:Request JSON events;
+:Filter status, interval and scope;
+:Render calendar;
+stop
+@enduml

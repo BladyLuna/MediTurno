@@ -1,0 +1,8 @@
+stateDiagram-v2
+  [*] --> assigned: create
+  assigned --> changed: edit
+  changed --> changed: edit
+  assigned --> cancelled: cancel
+  changed --> cancelled: cancel
+  cancelled --> SoftDeleted: delete
+

@@ -1,0 +1,47 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 210
+title Diagrama de Secuencia — Solicitudes de Cambio de Turno
+
+actor "Personal de salud" as personal
+actor "Admin / Jefe de servicio" as jefe
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "ShiftChangeRequestController" as ctrl
+participant "ShiftChangeRequestService" as srv
+participant "NotificationService" as notif
+participant "AuditLogService" as audit
+database "Base de Datos" as db
+
+== ESCENARIO: Personal solicita cambio de turno (POST /shift-change-requests) ==
+personal -> web : Selecciona asignación y escribe motivo
+web -> ctrl : POST /shift-change-requests
+ctrl -> ctrl : authorize create
+ctrl -> db : Valida asignación pertenece al personal
+db --> ctrl : Asignación válida
+ctrl -> srv : create(asignación, usuario, motivo)
+srv -> db : ShiftChangeRequest::create (estado pendiente, transacción)
+srv -> audit : record('created', solicitud, datos)
+audit -> db : Inserta en audit_logs
+srv -> notif : notifyMany(revisores, 'Nueva solicitud')
+notif -> db : Crea notificaciones para admin y jefes
+srv --> ctrl : Solicitud creada
+ctrl --> personal : Redirige "Solicitud registrada correctamente"
+
+== ESCENARIO: Jefe revisa y aprueba solicitud (PATCH approve) ==
+jefe -> web : Ve listado pendientes (alcance por servicio)
+jefe -> web : Aprueba la solicitud
+web -> ctrl : PATCH /admin/shift-change-requests/{r}/approve
+ctrl -> srv : approve(solicitud, jefe, notas)
+srv -> db : actualiza estado = aprobada + revisor (transacción)
+srv -> audit : record('approved', solicitud, valores)
+audit -> db : Inserta en audit_logs
+srv -> notif : notify(personal, 'Solicitud aprobada')
+notif -> db : Crea notificación para el personal
+srv --> ctrl : Solicitud aprobada
+ctrl --> jefe : Redirige "Solicitud aprobada correctamente"
+
+note over personal, db : La aprobación registra el cambio en la bitácora,\npero la asignación NO se modifica automáticamente.
+
+@enduml

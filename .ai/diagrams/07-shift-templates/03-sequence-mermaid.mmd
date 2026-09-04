@@ -1,0 +1,37 @@
+---
+title: Diagrama de Secuencia — Gestión de Plantillas de Turno
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as ShiftTemplateController
+    participant Policy as ShiftTemplatePolicy (Gates)
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Crear plantilla de turno (POST /admin/shift-templates)
+    Admin->>Web: Llena formulario (código, nombre, hora inicio/fin, color)
+    Web->>Ctrl: POST /admin/shift-templates
+    Ctrl->>Policy: authorize create
+    Policy-->>Ctrl: Permitido (admin)
+    Ctrl->>DB: ShiftTemplate::create (M/T/N, is_working_shift)
+    DB-->>Ctrl: Plantilla creada
+    Ctrl->>Audit: record('created', plantilla, datos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Editar plantilla de turno (establece horario)
+    Admin->>Web: Modifica horario de una plantilla
+    Web->>Ctrl: PUT /admin/shift-templates/{st}
+    Ctrl->>Policy: authorize update
+    Policy-->>Ctrl: Permitido
+    Ctrl->>DB: actualiza datos de la plantilla
+    DB-->>Ctrl: Plantilla actualizada
+    Ctrl->>Audit: record('updated', plantilla, valores previos/nuevos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end

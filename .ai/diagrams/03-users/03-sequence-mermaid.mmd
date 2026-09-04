@@ -1,0 +1,39 @@
+---
+title: Diagrama de Secuencia — Gestión de Usuarios
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as UserController
+    participant Policy as UserPolicy (Gates)
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Crear usuario (POST /admin/users)
+    Admin->>Web: Llena formulario (nombre, email, password, rol)
+    Web->>Ctrl: POST /admin/users
+    Ctrl->>Policy: authorize create
+    Policy-->>Ctrl: Permitido (admin)
+    Ctrl->>DB: User::create (hash de password)
+    DB-->>Ctrl: Usuario creado
+    Ctrl->>Audit: record('created', usuario, datos nuevos)
+    Audit->>DB: Inserta en audit_logs
+    DB-->>Ctrl: Bitácora registrada
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Eliminar usuario (DELETE /admin/users/{user})
+    Admin->>Web: Solicita eliminar usuario
+    Web->>Ctrl: DELETE /admin/users/{user}
+    Ctrl->>Policy: authorize delete
+    Policy-->>Ctrl: Permitido
+    Ctrl->>DB: Valida no es sí mismo ni último admin activo
+    DB-->>Ctrl: Reglas cumplidas
+    Ctrl->>DB: user->delete() (SoftDeletes)
+    Ctrl->>Audit: record('deleted', usuario, valores previos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end

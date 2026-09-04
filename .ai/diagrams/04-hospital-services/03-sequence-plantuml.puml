@@ -1,0 +1,35 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 180
+title Diagrama de Secuencia — Gestión de Servicios Hospitalarios
+
+actor Administrador as admin
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "HospitalServiceController" as ctrl
+participant "ServicePolicy\n(Gates)" as policy
+participant "AuditLogService" as audit
+database "Base de Datos" as db
+
+== ESCENARIO: Crear servicio (POST /admin/hospital-services) ==
+admin -> web : Llena formulario (nombre, descripción)
+web -> ctrl : POST /admin/hospital-services
+ctrl -> policy : authorize create
+policy --> ctrl : Permitido (admin)
+ctrl -> db : HospitalService::create (activo por defecto)
+db --> ctrl : Servicio creado
+ctrl -> audit : record('created', servicio, datos)
+audit -> db : Inserta en audit_logs
+ctrl --> admin : Redirige con mensaje de éxito
+
+== ESCENARIO: Desactivar servicio ==
+admin -> web : Solicita desactivar servicio
+web -> ctrl : PATCH /admin/hospital-services/{hs}/deactivate
+ctrl -> policy : authorize update
+ctrl -> db : actualiza active = false
+db --> ctrl : Servicio desactivado
+ctrl -> audit : record('updated', servicio, valores)
+ctrl --> admin : Redirige con mensaje de éxito
+
+@enduml

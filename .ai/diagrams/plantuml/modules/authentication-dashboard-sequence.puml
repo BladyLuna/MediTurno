@@ -1,0 +1,13 @@
+@startuml
+actor Guest as Guest
+participant View
+participant Controller
+participant Service
+participant Session
+Guest->>View: Submit credentials
+View->>Controller: POST /login
+Controller->>Service: attempt(credentials)
+Service->>Session: authenticate
+Session-->>Controller: result
+Controller-->>Guest: dashboard or error
+@enduml

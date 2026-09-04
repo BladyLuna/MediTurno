@@ -1,0 +1,11 @@
+@startuml
+actor admin
+actor jefe_servicio
+actor personal
+admin --> (List own notifications)
+jefe_servicio --> (List own notifications)
+personal --> (List own notifications)
+admin --> (Mark own notification read)
+jefe_servicio --> (Mark own notification read)
+personal --> (Mark own notification read)
+@enduml

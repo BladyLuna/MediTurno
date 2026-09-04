@@ -1,0 +1,30 @@
+---
+title: Diagrama de Secuencia — Notificaciones Internas
+---
+sequenceDiagram
+    autonumber
+    actor User as Usuario autenticado
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as NotificationController
+    participant Notif as NotificationService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over User,DB: ESCENARIO: Ver notificaciones (GET /notifications)
+    User->>Web: Accede al panel de notificaciones
+    Web->>Ctrl: GET /notifications
+    Ctrl->>Policy: authorize viewAny (InternalNotification)
+    Ctrl->>DB: Consulta notificaciones del usuario (user_id)
+    DB-->>Ctrl: Lista de notificaciones (leídas y no leídas)
+    Ctrl-->>User: Vista con notificaciones del usuario
+    end
+
+    rect rgb(245,245,245)
+    Note over User,DB: ESCENARIO: Marcar notificaciones como leídas (PATCH read-all)
+    User->>Web: Click "marcar todas como leídas"
+    Web->>Ctrl: PATCH /notifications/read-all
+    Ctrl->>Policy: authorize viewAny
+    Ctrl->>DB: actualiza read_at = now() donde null
+    DB-->>Ctrl: Notificaciones marcadas
+    Ctrl-->>User: Redirige "Notificaciones marcadas como leídas"
+    end

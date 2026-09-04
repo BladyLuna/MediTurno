@@ -1,0 +1,5 @@
+flowchart TD
+  A[Critical change] --> B[Capture old/new values]
+  B --> C[Transaction]
+  C --> D[Persist change]
+  D --> E[Persist audit event]

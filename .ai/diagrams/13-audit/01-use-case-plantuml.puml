@@ -1,0 +1,10 @@
+@startuml
+actor admin
+actor jefe_servicio
+actor personal
+admin --> (Generate audit event indirectly)
+jefe_servicio --> (Generate audit event indirectly)
+personal --> (Generate audit event indirectly)
+admin --> (List audit events)
+admin --> (View audit detail)
+@enduml

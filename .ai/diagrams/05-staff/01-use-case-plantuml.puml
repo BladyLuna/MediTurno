@@ -1,0 +1,8 @@
+@startuml
+actor admin
+actor jefe_servicio
+admin --> (Manage staff)
+admin --> (Activate or deactivate staff)
+jefe_servicio --> (View service staff)
+@enduml
+

@@ -1,0 +1,27 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 200
+title Diagrama de Secuencia — Calendario Mensual (FullCalendar)
+
+actor "Usuario autenticado\n(admin/jefe)" as user
+participant "Navegador\n(FullCalendar.js)" as web
+participant "ShiftCalendarController" as ctrl
+participant "ShiftCalendarService" as calSrv
+database "Base de Datos" as db
+
+== ESCENARIO: Ver calendario mensual (GET /admin/calendar) ==
+user -> web : Accede al calendario / cambia de mes
+web -> ctrl : GET /admin/calendar (o eventos por mes)
+ctrl -> ctrl : authorize viewAny (ShiftAssignment)
+ctrl -> calSrv : rangeFromFilters(mes)
+calSrv --> ctrl : rango [inicio, fin] del mes
+ctrl -> calSrv : events(start, end, filtros)
+calSrv -> db : Consulta asignaciones en rango (activo)
+db --> calSrv : Asignaciones con staff, servicio, plantilla
+calSrv --> ctrl : Eventos con color y título "Personal - Turno"
+ctrl --> web : JSON de eventos (FullCalendar)
+web --> user : Renderiza calendario con colores por turno
+
+@enduml

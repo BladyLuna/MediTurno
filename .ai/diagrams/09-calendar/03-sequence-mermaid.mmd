@@ -1,0 +1,25 @@
+---
+title: Diagrama de Secuencia — Calendario Mensual (FullCalendar)
+---
+sequenceDiagram
+    autonumber
+    actor User as Usuario autenticado (admin/jefe)
+    participant Web as Navegador (FullCalendar.js)
+    participant Ctrl as ShiftCalendarController
+    participant CalSrv as ShiftCalendarService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over User,DB: ESCENARIO: Ver calendario mensual (GET /admin/calendar)
+    User->>Web: Accede al calendario / cambia de mes
+    Web->>Ctrl: GET /admin/calendar (o eventos por mes)
+    Ctrl->>Policy: authorize viewAny (ShiftAssignment)
+    Ctrl->>CalSrv: rangeFromFilters(mes)
+    CalSrv-->>Ctrl: rango [inicio, fin] del mes
+    Ctrl->>CalSrv: events(start, end, filtros)
+    CalSrv->>DB: Consulta asignaciones en rango (estado activo)
+    DB-->>CalSrv: Asignaciones con staff, servicio, plantilla
+    CalSrv-->>Ctrl: Eventos con color efectivo y título "Personal - Turno"
+    Ctrl-->>Web: JSON de eventos (FullCalendar)
+    Web-->>User: Renderiza calendario mensual con colores por turno
+    end

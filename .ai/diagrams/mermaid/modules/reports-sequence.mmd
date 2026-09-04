@@ -1,0 +1,10 @@
+sequenceDiagram
+  actor User
+  participant Controller
+  participant ReportService
+  participant Assignment
+  User->>Controller: filters/format
+  Controller->>ReportService: build
+  ReportService->>Assignment: scoped query
+  Controller-->>User: HTML/CSV/PDF
+

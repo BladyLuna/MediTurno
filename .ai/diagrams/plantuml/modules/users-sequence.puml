@@ -1,0 +1,10 @@
+@startuml
+actor Admin as admin
+participant Controller
+participant User
+participant Audit
+Admin->>Controller: validated command
+Controller->>User: create/update/status/delete
+Controller->>Audit: record change
+Controller-->>Admin: result
+@enduml

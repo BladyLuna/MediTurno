@@ -1,0 +1,8 @@
+@startuml
+actor admin
+actor jefe_servicio
+actor personal
+admin --> (View global calendar)
+jefe_servicio --> (View managed-service calendar)
+personal --> (View own schedule)
+@enduml

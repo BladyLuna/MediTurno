@@ -1,0 +1,9 @@
+@startuml
+start
+:Critical change;
+:Capture old/new values;
+:Transaction;
+:Persist change;
+:Persist audit event;
+stop
+@enduml

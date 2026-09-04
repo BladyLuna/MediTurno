@@ -1,0 +1,36 @@
+---
+title: Diagrama de Secuencia — Asignación de Turnos (con validación de conflictos)
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as ShiftAssignmentController
+    participant Policy as AssignmentPolicy (Gates)
+    participant TimeSrv as ShiftTimeService
+    participant ConflictSrv as ShiftConflictService
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Crear asignación de turno (POST /admin/shift-assignments)
+    Admin->>Web: Selecciona personal, servicio, plantilla y fecha
+    Web->>Ctrl: POST /admin/shift-assignments
+    Ctrl->>Policy: authorize create
+    Policy-->>Ctrl: Permitido (admin)
+    Ctrl->>DB: Carga plantilla de turno (servicio)
+    DB-->>Ctrl: ServiceShiftTemplate + ShiftTemplate
+    Ctrl->>TimeSrv: calculateInterval(fecha, plantilla)
+    TimeSrv->>DB: Resuelve horarios efectivos (custom o base)
+    DB-->>TimeSrv: inicio/fin del turno
+    TimeSrv-->>Ctrl: start_at, end_at (turno nocturno cruza día)
+    Ctrl->>ConflictSrv: hasConflict(staff, start, end)
+    ConflictSrv->>DB: Busca asignaciones traslapadas del personal
+    DB-->>ConflictSrv: Sin traslapes encontrados
+    ConflictSrv-->>Ctrl: Sin conflicto (válido)
+    Note over Ctrl: Regla BR-006: no se permiten\nturnos traslapados
+    Ctrl->>DB: ShiftAssignment::create (transacción)
+    Ctrl->>Audit: record('created', asignación, valores nuevos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje "Asignación creada correctamente"
+    end

@@ -1,0 +1,4 @@
+@startuml
+[*] --> Associated: create
+Associated --> SoftDeleted: remove
+@enduml

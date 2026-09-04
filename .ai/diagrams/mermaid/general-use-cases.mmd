@@ -1,0 +1,62 @@
+%% Evidence: .ai/knowledge-base/features.md FEAT-001..FEAT-021; .ai/knowledge-base/decisions.md DEC-001..DEC-015; .ai/analysis/modules/*
+flowchart LR
+  Guest[Guest]
+  Admin[admin]
+  Manager[jefe_servicio]
+  Staff[personal]
+
+  Login((Open login))
+  Auth((Authenticate))
+  Logout((Logout))
+  Dashboard((View dashboard))
+
+  ManageUsers((Manage users))
+  ManageServices((Manage hospital services))
+  ManageManagers((Manage service managers))
+  ViewServiceStaff((View service staff))
+  ManageTemplates((Manage shift templates))
+  ManageAssignments((Manage shift assignments))
+  ViewGlobalCalendar((View global calendar))
+  ViewServiceCalendar((View service calendar))
+  ViewOwnSchedule((View own schedule))
+  ViewServiceReports((View service reports))
+  ManageRequests((Review change requests))
+  ManageNotifications((View notifications))
+  ManageAudit((View audit logs))
+  CheckAvailability((Check availability))
+  CreateRequest((Create own change request))
+  ViewOwnRequests((View own requests))
+
+  Guest --> Login
+  Guest --> Auth
+
+  Admin --> Dashboard
+  Admin --> ManageUsers
+  Admin --> ManageServices
+  Admin --> ManageManagers
+  Admin --> ManageStaff
+  Admin --> ManageTemplates
+  Admin --> ManageAssignments
+  Admin --> ViewGlobalCalendar
+  Admin --> ManageReports
+  Admin --> ManageRequests
+  Admin --> ManageNotifications
+  Admin --> ManageAudit
+  Admin --> Logout
+
+  Manager --> Dashboard
+  Manager --> ManageAssignments
+  Manager --> CheckAvailability
+  Manager --> ViewServiceCalendar
+  Manager --> ViewServiceStaff
+  Manager --> ViewServiceReports
+  Manager --> ManageRequests
+  Manager --> ManageNotifications
+  Manager --> Logout
+
+  Staff --> Dashboard
+  Staff --> ViewOwnSchedule
+  Staff --> CreateRequest
+  Staff --> ViewOwnRequests
+  Staff --> ManageNotifications
+  Staff --> Logout

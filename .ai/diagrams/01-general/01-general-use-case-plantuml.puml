@@ -1,0 +1,63 @@
+@startuml
+' Evidence: .ai/knowledge-base/features.md FEAT-001..FEAT-021; .ai/knowledge-base/decisions.md DEC-001..DEC-015; .ai/analysis/modules/*
+left to right direction
+actor Guest
+actor admin
+actor jefe_servicio
+actor personal
+
+usecase "Open login" as UCLogin
+usecase "Authenticate" as UCAuth
+usecase "Logout" as UCLogout
+usecase "View dashboard" as UCDashboard
+usecase "Manage users" as UCUsers
+usecase "Manage hospital services" as UCServices
+usecase "Manage service managers" as UCManagers
+usecase "View service staff" as UCStaff
+usecase "Manage shift templates" as UCTemplates
+usecase "Manage shift assignments" as UCAssignments
+usecase "View global calendar" as UCCalendar
+usecase "View service calendar" as UCServiceCalendar
+usecase "View own schedule" as UCOwnSchedule
+usecase "View service reports" as UCReports
+usecase "Review change requests" as UCRequests
+usecase "View notifications" as UCNotifications
+usecase "View audit logs" as UCAudit
+usecase "Check availability" as UCAvailability
+usecase "Create own change request" as UCCreateRequest
+usecase "View own requests" as UCOwnRequests
+
+Guest --> UCLogin
+Guest --> UCAuth
+
+admin --> UCDashboard
+admin --> UCUsers
+admin --> UCServices
+admin --> UCManagers
+admin --> UCStaff
+admin --> UCTemplates
+admin --> UCAssignments
+admin --> UCCalendar
+admin --> UCReports
+admin --> UCRequests
+admin --> UCNotifications
+admin --> UCAudit
+admin --> UCLogout
+
+jefe_servicio --> UCDashboard
+jefe_servicio --> UCAssignments
+jefe_servicio --> UCAvailability
+jefe_servicio --> UCServiceCalendar
+jefe_servicio --> UCStaff
+jefe_servicio --> UCReports
+jefe_servicio --> UCRequests
+jefe_servicio --> UCNotifications
+jefe_servicio --> UCLogout
+
+personal --> UCDashboard
+personal --> UCOwnSchedule
+personal --> UCCreateRequest
+personal --> UCOwnRequests
+personal --> UCNotifications
+personal --> UCLogout
+@enduml

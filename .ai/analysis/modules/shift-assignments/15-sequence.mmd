@@ -1,0 +1,14 @@
+sequenceDiagram
+  actor Admin
+  actor Manager as jefe_servicio
+  participant Controller
+  participant Time
+  participant Conflict
+  participant Assignment
+  participant Audit
+  Admin->>Controller: global assignment command
+  Manager->>Controller: scoped assignment command
+  Controller->>Time: calculate interval
+  Controller->>Conflict: check
+  Controller->>Assignment: persist
+  Controller->>Audit: record

@@ -1,0 +1,30 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 200
+title Diagrama de Secuencia — Notificaciones Internas
+
+actor "Usuario autenticado" as user
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "NotificationController" as ctrl
+participant "NotificationService" as notif
+database "Base de Datos" as db
+
+== ESCENARIO: Ver notificaciones (GET /notifications) ==
+user -> web : Accede al panel de notificaciones
+web -> ctrl : GET /notifications
+ctrl -> ctrl : authorize viewAny (InternalNotification)
+ctrl -> db : Consulta notificaciones del usuario
+db --> ctrl : Lista (leídas y no leídas)
+ctrl --> user : Vista con notificaciones del usuario
+
+== ESCENARIO: Marcar como leídas (PATCH read-all) ==
+user -> web : Click "marcar todas como leídas"
+web -> ctrl : PATCH /notifications/read-all
+ctrl -> ctrl : authorize viewAny
+ctrl -> db : actualiza read_at = now() donde null
+db --> ctrl : Notificaciones marcadas
+ctrl --> user : Redirige "Marcadas como leídas"
+
+@enduml

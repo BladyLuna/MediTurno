@@ -1,0 +1,11 @@
+@startuml
+start
+:Select user and service;
+if (Valid and not duplicate?) then (Yes)
+  :Persist association;
+  :Audit;
+else (No)
+  :Reject;
+endif
+stop
+@enduml

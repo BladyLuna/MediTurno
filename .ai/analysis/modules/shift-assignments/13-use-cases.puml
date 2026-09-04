@@ -1,0 +1,7 @@
+@startuml
+actor admin
+actor jefe_servicio
+admin --> (Manage assignments)
+jefe_servicio --> (Manage scoped assignments)
+jefe_servicio --> (Check availability)
+@enduml

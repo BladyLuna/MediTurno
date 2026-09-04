@@ -1,0 +1,8 @@
+%% Evidence: auth flow and active middleware
+stateDiagram-v2
+  [*] --> Guest
+  Guest --> Authenticated: valid login
+  Authenticated --> Dashboard: active user
+  Authenticated --> Denied: inactive user
+  Dashboard --> Guest: logout
+

@@ -1,0 +1,6 @@
+flowchart TD
+  A[Assignment data] --> B[Validate scope and active relations]
+  B --> C[Calculate interval]
+  C --> D{Overlap?}
+  D -- No --> E[Transaction: save and audit]
+  D -- Yes --> F[Reject]

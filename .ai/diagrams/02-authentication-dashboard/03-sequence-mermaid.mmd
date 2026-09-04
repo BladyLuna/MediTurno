@@ -1,0 +1,33 @@
+---
+title: Diagrama de Secuencia — Autenticación y Dashboard
+---
+sequenceDiagram
+    autonumber
+    actor User as Usuario
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Auth as AuthController (Login)
+    participant LoginSrv as LoginService
+    participant DB as Base de Datos
+    participant Dash as DashboardController
+
+    rect rgb(240,248,255)
+    Note over User,DB: ESCENARIO: Inicio de sesión (POST /login, throttle 5:1)
+    User->>Web: Envía formulario email + password
+    Web->>Auth: POST /login
+    Auth->>LoginSrv: attempt(credentials, remember)
+    LoginSrv->>DB: Consulta usuarios por email
+    DB-->>LoginSrv: Usuario encontrado
+    LoginSrv-->>Auth: Credenciales válidas
+    Auth->>DB: Verifica active == true
+    DB-->>Auth: Cuenta activa
+    Auth->>Web: Regenera sesión (session()->regenerate)
+    Web-->>User: Redirige a /dashboard
+    end
+
+    rect rgb(245,245,245)
+    Note over User,DB: ESCENARIO: Dashboard según rol (GET /dashboard)
+    User->>Dash: Solicita /dashboard
+    Dash->>DB: Obtiene usuario autenticado
+    DB-->>Dash: Usuario + rol (admin/jefe_servicio/personal)
+    Dash-->>User: Vista del panel con módulos según rol
+    end

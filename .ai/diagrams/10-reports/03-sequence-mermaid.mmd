@@ -1,0 +1,33 @@
+---
+title: Diagrama de Secuencia — Reportes de Turnos
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as ReportController
+    participant RepSrv as ReportService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Generar reporte por servicio/rango (GET /admin/reports)
+    Admin->>Web: Establece filtros (servicio, personal, rango de fechas)
+    Web->>Ctrl: GET /admin/reports?filtros
+    Ctrl->>Policy: authorize viewAny (ShiftAssignment)
+    Ctrl->>RepSrv: build(filtros)
+    RepSrv->>RepSrv: normalizeFilters (fecha inicio/fin)
+    RepSrv->>DB: Consulta asignaciones en rango (estado activo)
+    DB-->>RepSrv: Detalle de asignaciones
+    RepSrv-->>Ctrl: Summary + detalles + agrupación por servicio
+    Ctrl-->>Admin: Vista con resumen y detalle de reporte
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Exportar reporte a PDF (GET /admin/reports/pdf)
+    Admin->>Web: Solicita exportar a PDF
+    Web->>Ctrl: GET /admin/reports/pdf?filtros
+    Ctrl->>RepSrv: build(filtros)
+    RepSrv-->>Ctrl: Datos del reporte
+    Ctrl->>Web: DomPDF genera PDF (letter)
+    Web-->>Admin: Descarga mediturno-reporte-{fecha}-{fecha}.pdf
+    end

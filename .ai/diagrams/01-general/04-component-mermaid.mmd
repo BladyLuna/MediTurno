@@ -1,0 +1,35 @@
+%% Diagrama de Componentes — MediTurno
+%% Notación UML de componentes según consigna (Diagramas_de_Componentes.pptx).
+%% Componentes lógicos agrupados desde el diagrama de clases del dominio.
+flowchart LR
+  subgraph MEDI["<<component>> MediTurno"]
+    Web["«COMPONENT»\nInterfazWeb"]
+    Acceso["«COMPONENT»\nGestorAcceso"]
+    Turnos["«COMPONENT»\nGestorTurnos"]
+    Reportes["«COMPONENT»\nGestorReportes"]
+    DB[("«COMPONENT»\nBaseDatos")]
+  end
+
+  %% Interfaces provistas (círculo) y requeridas (socket) representadas como nodos
+  IU_Web(("IU_Web"))
+  Auth_API(("Autenticación"))
+  Turnos_API(("GestiónTurnos"))
+  Rep_API(("Reportes"))
+  DB_API(("AccesoDatos"))
+
+  Web --- IU_Web
+  Acceso --- Auth_API
+  Turnos --- Turnos_API
+  Reportes --- Rep_API
+  DB --- DB_API
+
+  %% Dependencias / ensamblaje
+  IU_Web -.-> Auth_API
+  IU_Web -.-> Turnos_API
+  IU_Web -.-> Rep_API
+
+  Auth_API -.-> DB_API
+  Turnos_API -.-> DB_API
+  Rep_API -.-> DB_API
+
+  Rep_API -.-> Turnos_API

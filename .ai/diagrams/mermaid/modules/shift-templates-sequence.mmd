@@ -1,0 +1,10 @@
+sequenceDiagram
+  actor Admin
+  participant Controller
+  participant ServiceTemplate
+  participant Audit
+  Admin->>Controller: configuration
+  Controller->>ServiceTemplate: persist
+  Controller->>Audit: record
+  Controller-->>Admin: result
+

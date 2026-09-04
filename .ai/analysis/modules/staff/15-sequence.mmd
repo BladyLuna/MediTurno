@@ -1,0 +1,11 @@
+sequenceDiagram
+  actor Admin
+  participant Request
+  participant Controller
+  participant Staff
+  participant Audit
+  Admin->>Request: staff data
+  Request->>Controller: validated
+  Controller->>Staff: persist
+  Controller->>Audit: record
+

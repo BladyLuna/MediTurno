@@ -1,0 +1,12 @@
+@startuml
+actor User
+participant View
+participant Controller
+participant CalendarService
+participant Assignment
+User->>View: open month
+View->>Controller: GET events
+Controller->>CalendarService: events(range, filters, scope)
+CalendarService->>Assignment: query
+Controller-->>View: JSON
+@enduml

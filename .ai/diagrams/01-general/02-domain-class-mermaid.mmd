@@ -1,0 +1,95 @@
+%% Evidence: .ai/analysis/modules/*/08-models.md; .ai/analysis/modules/*/09-database.md; .ai/knowledge-base/features.md; .ai/knowledge-base/decisions.md
+classDiagram
+  class User {
+    +name
+    +email
+    +role
+    +active
+    +deleted_at
+  }
+  class HospitalService {
+    +name
+    +description
+    +active
+    +deleted_at
+  }
+  class Staff {
+    +ci
+    +full_name
+    +position
+    +phone
+    +email
+    +active
+    +deleted_at
+  }
+  class ServiceManager {
+    +user_id
+    +hospital_service_id
+  }
+  class ShiftTemplate {
+    +code
+    +name
+    +start_time
+    +end_time
+    +color
+    +working
+    +active
+    +deleted_at
+  }
+  class ServiceShiftTemplate {
+    +hospital_service_id
+    +shift_template_id
+    +custom_start_time
+    +custom_end_time
+    +custom_color
+    +active
+    +deleted_at
+  }
+  class ShiftAssignment {
+    +assignment_date
+    +start_at
+    +end_at
+    +status
+    +notes
+    +deleted_at
+  }
+  class ShiftChangeRequest {
+    +reason
+    +status
+    +review_notes
+    +deleted_at
+  }
+  class InternalNotification {
+    +type
+    +title
+    +message
+    +read_at
+  }
+  class AuditLog {
+    +action
+    +model_type
+    +model_id
+    +old_values
+    +new_values
+    +created_at
+  }
+
+  User "1" -- "0..1" Staff : optional profile
+  User "1" -- "0..*" ServiceManager
+  User "1" -- "0..*" ShiftChangeRequest : requester
+  User "1" -- "0..*" ShiftChangeRequest : reviewer
+  User "1" -- "0..*" InternalNotification
+  User "1" -- "0..*" AuditLog : actor
+  User "1" -- "0..*" ShiftAssignment : created_by
+  User "1" -- "0..*" ShiftAssignment : updated_by
+
+  HospitalService "1" -- "0..*" Staff
+  HospitalService "1" -- "0..*" ServiceManager
+  HospitalService "1" -- "0..*" ServiceShiftTemplate
+  HospitalService "1" -- "0..*" ShiftAssignment
+
+  ShiftTemplate "1" -- "0..*" ServiceShiftTemplate
+  ServiceShiftTemplate "1" -- "0..*" ShiftAssignment
+  Staff "1" -- "0..*" ShiftAssignment
+  ShiftAssignment "1" -- "0..*" ShiftChangeRequest
+

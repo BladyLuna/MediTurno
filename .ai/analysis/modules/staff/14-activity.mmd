@@ -1,0 +1,6 @@
+flowchart TD
+  A[Submit staff] --> B{User role personal or null?}
+  B -- Yes --> C[Validate service and uniqueness]
+  C --> D[Transaction and audit]
+  B -- No --> E[Reject]
+

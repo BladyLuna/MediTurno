@@ -1,0 +1,14 @@
+@startuml
+start
+:Personal creates request;
+:Pending;
+if (Action?) then (Approve)
+  :Approved;
+elseif (Reject)
+  :Rejected;
+elseif (Cancel)
+  :Cancelled;
+endif
+:Audit and notify;
+stop
+@enduml

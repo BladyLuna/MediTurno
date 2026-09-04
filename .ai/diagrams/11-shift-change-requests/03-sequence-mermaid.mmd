@@ -1,0 +1,48 @@
+---
+title: Diagrama de Secuencia — Solicitudes de Cambio de Turno
+---
+sequenceDiagram
+    autonumber
+    actor Personal as Personal de salud
+    actor Jefe as Admin / Jefe de servicio
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as ShiftChangeRequestController
+    participant Srv as ShiftChangeRequestService
+    participant Notif as NotificationService
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Personal,Jefe: ESCENARIO: Personal solicita cambio de turno (POST /shift-change-requests)
+    Personal->>Web: Selecciona asignación y escribe motivo
+    Web->>Ctrl: POST /shift-change-requests
+    Ctrl->>Policy: authorize create
+    Ctrl->>DB: Valida asignación pertenece al personal
+    DB-->>Ctrl: Asignación válida
+    Ctrl->>Srv: create(asignación, usuario, motivo)
+    Srv->>DB: ShiftChangeRequest::create (estado pendiente, transacción)
+    Srv->>Audit: record('created', solicitud, datos)
+    Audit->>DB: Inserta en audit_logs
+    Srv->>Notif: notifyMany(revisores, 'Nueva solicitud de cambio')
+    Notif->>DB: Crea notificaciones para admin y jefes del servicio
+    Srv-->>Ctrl: Solicitud creada
+    Ctrl-->>Personal: Redirige "Solicitud registrada correctamente"
+    end
+
+    rect rgb(245,245,245)
+    Note over Personal,Jefe: ESCENARIO: Jefe revisa y aprueba solicitud (PATCH approve)
+    Jefe->>Web: Ve listado de solicitudes pendientes (alcance por servicio)
+    Web->>Jefe: Solicitud con detalle y motivo
+    Jefe->>Web: Aprueba la solicitud
+    Web->>Ctrl: PATCH /admin/shift-change-requests/{r}/approve
+    Ctrl->>Srv: approve(solicitud, jefe, notas)
+    Srv->>DB: actualiza estado = aprobada + revisor (transacción)
+    Srv->>Audit: record('approved', solicitud, valores)
+    Audit->>DB: Inserta en audit_logs
+    Srv->>Notif: notify(personal, 'Solicitud aprobada')
+    Notif->>DB: Crea notificación para el personal
+    Srv-->>Ctrl: Solicitud aprobada
+    Ctrl-->>Jefe: Redirige "Solicitud aprobada correctamente"
+    end
+
+    Note over Personal,Jefe: La aprobación registra el cambio en la bitácora,\npero la asignación NO se modifica automáticamente (CONFLICT-004 resuelto).

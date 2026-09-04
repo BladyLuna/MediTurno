@@ -1,0 +1,36 @@
+---
+title: Diagrama de Secuencia — Asociación de Jefes de Servicio
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as ServiceManagerController
+    participant Policy as ServiceManagerPolicy (Gates)
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Asociar jefe de servicio a un servicio (POST /admin/service-managers)
+    Admin->>Web: Selecciona usuario (admin/jefe) y servicio
+    Web->>Ctrl: POST /admin/service-managers
+    Ctrl->>Policy: authorize create
+    Policy-->>Ctrl: Permitido (admin)
+    Ctrl->>DB: ServiceManager::create (user_id + hospital_service_id)
+    DB-->>Ctrl: Asociación creada
+    Ctrl->>Audit: record('created', asociación, datos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Eliminar asociación de jefe de servicio
+    Admin->>Web: Solicita desasociar jefe de servicio
+    Web->>Ctrl: DELETE /admin/service-managers/{sm}
+    Ctrl->>Policy: authorize delete
+    Policy-->>Ctrl: Permitido
+    Ctrl->>DB: ServiceManager::delete
+    Ctrl->>Audit: record('deleted', asociación, valores)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end

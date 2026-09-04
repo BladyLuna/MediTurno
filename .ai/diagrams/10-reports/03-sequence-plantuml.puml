@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 200
+title Diagrama de Secuencia — Reportes de Turnos
+
+actor Administrador as admin
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "ReportController" as ctrl
+participant "ReportService" as repSrv
+database "Base de Datos" as db
+
+== ESCENARIO: Generar reporte (GET /admin/reports) ==
+admin -> web : Establece filtros (servicio, personal, fechas)
+web -> ctrl : GET /admin/reports?filtros
+ctrl -> ctrl : authorize viewAny (ShiftAssignment)
+ctrl -> repSrv : build(filtros)
+repSrv -> repSrv : normalizeFilters (fecha inicio/fin)
+repSrv -> db : Consulta asignaciones en rango (activo)
+db --> repSrv : Detalle de asignaciones
+repSrv --> ctrl : Summary + detalles + agrupación
+ctrl --> admin : Vista con resumen y detalle de reporte
+
+== ESCENARIO: Exportar reporte a PDF (GET /admin/reports/pdf) ==
+admin -> web : Solicita exportar a PDF
+web -> ctrl : GET /admin/reports/pdf?filtros
+ctrl -> repSrv : build(filtros)
+repSrv --> ctrl : Datos del reporte
+ctrl -> web : DomPDF genera PDF (letter)
+web --> admin : Descarga mediturno-reporte-{fechas}.pdf
+
+@enduml

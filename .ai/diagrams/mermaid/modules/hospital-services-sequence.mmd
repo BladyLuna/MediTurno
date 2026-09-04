@@ -1,0 +1,10 @@
+sequenceDiagram
+  actor Admin
+  participant Controller
+  participant ServiceModel
+  participant Audit
+  Admin->>Controller: CRUD/status request
+  Controller->>ServiceModel: persist
+  Controller->>Audit: record
+  Controller-->>Admin: redirect
+

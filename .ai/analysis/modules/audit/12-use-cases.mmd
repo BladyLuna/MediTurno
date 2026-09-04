@@ -1,0 +1,6 @@
+flowchart LR
+  Admin[admin] --> List[List audit]
+  Admin --> Detail[View audit detail]
+  Admin --> Generate[Generate audit event indirectly]
+  Manager[jefe_servicio] --> Generate
+  Staff[personal] --> Generate

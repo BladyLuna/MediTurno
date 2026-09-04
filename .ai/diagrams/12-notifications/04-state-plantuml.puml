@@ -1,0 +1,4 @@
+@startuml
+[*] --> Unread
+Unread --> Read: set read_at
+@enduml

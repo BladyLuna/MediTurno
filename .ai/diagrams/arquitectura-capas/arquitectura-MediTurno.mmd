@@ -1,0 +1,24 @@
+---
+title: Arquitectura del Sistema MediTurno
+---
+flowchart TB
+    Integrante["Integrante: Bladimir Luna Corrales"]
+
+    subgraph CLIENTE["CAPA CLIENTE - Web"]
+        nav["Navegador web<br/>Bootstrap 5 · JavaScript · Vite · FullCalendar"]
+    end
+
+    subgraph BACKEND["CAPA BACKEND - Servidor"]
+        nginx["Nginx + PHP-FPM<br/>PHP 8.2 · Laravel 10"]
+        control["Controladores MVC<br/>Form Requests · Policies · Middlewares"]
+        modelos["Modelos Eloquent<br/>Servicios de dominio · Auditoría"]
+    end
+
+    subgraph BD["CAPA BASE DE DATOS"]
+        mysql["MySQL 8<br/>Base de datos: mediturno"]
+    end
+
+    Integrante --> CLIENTE
+    CLIENTE -- "HTTP / HTTPS" --> BACKEND
+    BACKEND -- "MySQL (TCP:3306) · red Docker" --> BD
+    control -.-> modelos

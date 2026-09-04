@@ -1,0 +1,8 @@
+flowchart TD
+  A[Submit filters] --> B[Validate scope]
+  B --> C[Query real intervals]
+  C --> D[Build summary and detail]
+  D --> E{Format}
+  E --> HTML
+  E --> CSV
+  E --> PDF

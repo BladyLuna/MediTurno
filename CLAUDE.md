@@ -134,10 +134,10 @@ No tiene PHP ni Laravel, solo muestra información del sistema.
 
 ## Fuente de Verdad
 
-Los documentos dentro de `.ia/` son la fuente de verdad para arquitectura, reglas
+Los documentos dentro de `.ai/` (metodología BDS) son la fuente de verdad para arquitectura, reglas
 de negocio, roadmap, backlog y diseño de base de datos.
 
-`README.md` y `CLAUDE.md` deben mantenerse alineados con `.ia/*`.
+`README.md` y `CLAUDE.md` deben mantenerse alineados con `.ai/*`.
 
 ## 👥 Roles del Sistema
 

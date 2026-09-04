@@ -1,0 +1,10 @@
+@startuml
+actor Admin as admin
+participant Controller
+participant ManagerLink
+participant Audit
+Admin->>Controller: assign user/service
+Controller->>ManagerLink: create
+Controller->>Audit: record
+Controller-->>Admin: result
+@enduml

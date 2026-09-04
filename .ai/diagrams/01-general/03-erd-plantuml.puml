@@ -1,0 +1,130 @@
+@startuml
+' Physical ERD based on migrations and confirmed relations.
+entity USERS {
+  *id : bigint
+  --
+  name : string
+  email : string <<UK>>
+  password : string
+  role : string
+  active : boolean
+  deleted_at : datetime
+}
+entity AUDIT_LOGS {
+  *id : bigint
+  --
+  user_id : bigint <<FK>>
+  action : string
+  model_type : string
+  model_id : bigint
+  old_values : json
+  new_values : json
+  ip_address : string
+  user_agent : text
+  created_at : datetime
+}
+entity HOSPITAL_SERVICES {
+  *id : bigint
+  --
+  name : string
+  description : text
+  active : boolean
+  deleted_at : datetime
+}
+entity STAFF {
+  *id : bigint
+  --
+  user_id : bigint <<FK>>
+  hospital_service_id : bigint <<FK>>
+  ci : string
+  full_name : string
+  position : string
+  phone : string
+  email : string
+  active : boolean
+  deleted_at : datetime
+}
+entity SHIFT_TEMPLATES {
+  *id : bigint
+  --
+  code : string
+  name : string
+  start_time : time
+  end_time : time
+  color : string
+  is_working_shift : boolean
+  active : boolean
+  deleted_at : datetime
+}
+entity SERVICE_SHIFT_TEMPLATES {
+  *id : bigint
+  --
+  hospital_service_id : bigint <<FK>>
+  shift_template_id : bigint <<FK>>
+  custom_code : string
+  custom_name : string
+  custom_start_time : time
+  custom_end_time : time
+  custom_color : string
+  active : boolean
+  deleted_at : datetime
+}
+entity SHIFT_ASSIGNMENTS {
+  *id : bigint
+  --
+  staff_id : bigint <<FK>>
+  hospital_service_id : bigint <<FK>>
+  service_shift_template_id : bigint <<FK>>
+  assignment_date : date
+  start_at : datetime
+  end_at : datetime
+  status : string
+  notes : text
+  created_by : bigint <<FK>>
+  updated_by : bigint <<FK>>
+  deleted_at : datetime
+}
+entity SERVICE_MANAGERS {
+  *id : bigint
+  --
+  user_id : bigint <<FK>>
+  hospital_service_id : bigint <<FK>>
+  deleted_at : datetime
+}
+entity SHIFT_CHANGE_REQUESTS {
+  *id : bigint
+  --
+  shift_assignment_id : bigint <<FK>>
+  requested_by : bigint <<FK>>
+  reviewed_by : bigint <<FK>>
+  reason : text
+  status : string
+  review_notes : text
+  deleted_at : datetime
+}
+entity NOTIFICATIONS {
+  *id : bigint
+  --
+  user_id : bigint <<FK>>
+  type : string
+  title : string
+  message : text
+  data : json
+  read_at : datetime
+}
+
+USERS ||--o| STAFF
+USERS ||--o{ AUDIT_LOGS
+USERS ||--o{ SERVICE_MANAGERS
+USERS ||--o{ SHIFT_CHANGE_REQUESTS
+USERS ||--o{ NOTIFICATIONS
+USERS ||--o{ SHIFT_ASSIGNMENTS
+HOSPITAL_SERVICES ||--o{ STAFF
+HOSPITAL_SERVICES ||--o{ SERVICE_MANAGERS
+HOSPITAL_SERVICES ||--o{ SERVICE_SHIFT_TEMPLATES
+HOSPITAL_SERVICES ||--o{ SHIFT_ASSIGNMENTS
+SHIFT_TEMPLATES ||--o{ SERVICE_SHIFT_TEMPLATES
+SERVICE_SHIFT_TEMPLATES ||--o{ SHIFT_ASSIGNMENTS
+STAFF ||--o{ SHIFT_ASSIGNMENTS
+SHIFT_ASSIGNMENTS ||--o{ SHIFT_CHANGE_REQUESTS
+@enduml

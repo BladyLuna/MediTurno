@@ -1,0 +1,35 @@
+---
+title: Diagrama de Secuencia — Gestión de Servicios Hospitalarios
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as HospitalServiceController
+    participant Policy as ServicePolicy (Gates)
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Crear servicio hospitalario (POST /admin/hospital-services)
+    Admin->>Web: Llena formulario (nombre, descripción)
+    Web->>Ctrl: POST /admin/hospital-services
+    Ctrl->>Policy: authorize create
+    Policy-->>Ctrl: Permitido (admin)
+    Ctrl->>DB: HospitalService::create (activo por defecto)
+    DB-->>Ctrl: Servicio creado
+    Ctrl->>Audit: record('created', servicio, datos nuevos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Desactivar servicio
+    Admin->>Web: Solicita desactivar servicio
+    Web->>Ctrl: PATCH /admin/hospital-services/{hs}/deactivate
+    Ctrl->>Policy: authorize update
+    Ctrl->>DB: actualiza active = false
+    DB-->>Ctrl: Servicio desactivado
+    Ctrl->>Audit: record('updated', servicio, valores)
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end

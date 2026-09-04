@@ -1,0 +1,10 @@
+sequenceDiagram
+  actor Admin as admin
+  participant Module
+  participant Model
+  participant AuditService
+  participant AuditLog
+  Admin->>Module: critical command
+  Module->>Model: persist change
+  Module->>AuditService: record
+  AuditService->>AuditLog: create event

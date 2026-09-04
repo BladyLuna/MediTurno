@@ -1,0 +1,6 @@
+flowchart TD
+  A[Select user and service] --> B{Valid and not duplicate?}
+  B -- Yes --> C[Persist association]
+  C --> D[Audit]
+  B -- No --> E[Reject]
+

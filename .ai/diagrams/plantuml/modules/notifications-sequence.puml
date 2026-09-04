@@ -1,0 +1,11 @@
+@startuml
+actor Personal as personal
+participant Controller
+participant Policy
+participant Service
+participant Notification
+Personal->>Controller: mark own notification read
+Controller->>Policy: authorize ownership
+Controller->>Service: markAsRead
+Service->>Notification: set read_at
+@enduml

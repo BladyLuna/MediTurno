@@ -1,0 +1,6 @@
+stateDiagram-v2
+  [*] --> Active
+  Active --> Inactive: deactivate
+  Inactive --> Active: activate
+  Active --> SoftDeleted: delete
+  Inactive --> SoftDeleted: delete

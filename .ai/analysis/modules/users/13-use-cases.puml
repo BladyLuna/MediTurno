@@ -1,0 +1,9 @@
+@startuml
+actor admin
+admin --> (List users)
+admin --> (Create user)
+admin --> (Edit user)
+admin --> (Activate or deactivate user)
+admin --> (Logically delete user)
+@enduml
+

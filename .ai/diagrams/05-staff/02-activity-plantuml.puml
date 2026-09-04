@@ -1,0 +1,11 @@
+@startuml
+start
+:Submit staff;
+if (User role personal or null?) then (Yes)
+  :Validate service and uniqueness;
+  :Transaction and audit;
+else (No)
+  :Reject;
+endif
+stop
+@enduml

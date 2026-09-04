@@ -1,0 +1,9 @@
+@startuml
+actor personal
+actor admin
+actor jefe_servicio
+personal --> (Create change request)
+personal --> (Cancel pending request)
+admin --> (Review request)
+jefe_servicio --> (Review scoped request)
+@enduml

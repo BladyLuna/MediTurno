@@ -1,0 +1,11 @@
+@startuml
+start
+:Select global template and service;
+if (Custom times complete?) then (Yes)
+  :Persist configuration;
+  :Audit;
+else (No)
+  :Reject;
+endif
+stop
+@enduml

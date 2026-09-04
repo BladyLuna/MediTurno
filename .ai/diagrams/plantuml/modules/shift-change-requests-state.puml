@@ -1,0 +1,6 @@
+@startuml
+[*] --> pending
+pending --> approved: approve
+pending --> rejected: reject
+pending --> cancelled: cancel
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam linetype ortho
+title Arquitectura del Sistema MediTurno
+left to right direction
+top to bottom direction
+
+rectangle "Integrante: Bladimir Luna Corrales" as integrante
+
+package "CAPA CLIENTE - Web" {
+  rectangle "Navegador web\nBootstrap 5 · JavaScript · Vite · FullCalendar" as navegador
+}
+
+package "CAPA BACKEND - Servidor" {
+  rectangle "Nginx + PHP-FPM\nPHP 8.2 · Laravel 10" as nginx
+  rectangle "Controladores MVC\nForm Requests · Policies · Middlewares" as control
+  rectangle "Modelos Eloquent\nServicios de dominio · Auditoría" as modelos
+}
+
+package "CAPA BASE DE DATOS" {
+  database "MySQL 8\nBase de datos: mediturno" as mysql
+}
+
+integrante --> navegador
+navegador --> nginx : "HTTP / HTTPS"
+nginx --> mysql : "MySQL (TCP:3306) · red Docker"
+nginx --> control
+control --> modelos
+
+footer Elaboración propia · Bladimir Luna Corrales
+@enduml

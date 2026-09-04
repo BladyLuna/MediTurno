@@ -1,0 +1,12 @@
+@startuml
+start
+:Assignment data;
+:Validate scope and active relations;
+:Calculate interval;
+if (Overlap?) then (No)
+  :Transaction: save and audit;
+else (Yes)
+  :Reject;
+endif
+stop
+@enduml

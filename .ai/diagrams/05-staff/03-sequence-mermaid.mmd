@@ -1,0 +1,33 @@
+---
+title: Diagrama de Secuencia — Gestión de Personal de Salud
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as StaffController
+    participant Policy as StaffPolicy (Gates)
+    participant Audit as AuditLogService
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Registrar personal (POST /admin/staff)
+    Admin->>Web: Llena formulario (CI, nombre, cargo, servicio, usuario)
+    Web->>Ctrl: POST /admin/staff
+    Ctrl->>Policy: authorize create
+    Policy-->>Ctrl: Permitido (admin)
+    Ctrl->>DB: Staff::create (asocia a servicio y usuario)
+    DB-->>Ctrl: Personal registrado
+    Ctrl->>Audit: record('created', staff, datos nuevos)
+    Audit->>DB: Inserta en audit_logs
+    Ctrl-->>Admin: Redirige con mensaje de éxito
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Filtrar personal por servicio (GET /admin/staff)
+    Admin->>Web: Selecciona filtro de servicio
+    Web->>Ctrl: GET /admin/staff?hospital_service_id=X
+    Ctrl->>DB: Consulta staff con servicio filtrado
+    DB-->>Ctrl: Lista de personal
+    Ctrl-->>Admin: Vista index con personal filtrado
+    end

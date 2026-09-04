@@ -1,0 +1,11 @@
+@startuml
+start
+:Admin action;
+:Validate;
+if (DEC-009 permits?) then (Yes)
+  :Transaction: save and audit;
+else (No)
+  :Reject;
+endif
+stop
+@enduml

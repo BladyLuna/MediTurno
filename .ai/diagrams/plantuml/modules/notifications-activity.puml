@@ -1,0 +1,9 @@
+@startuml
+start
+:Event occurs;
+:Create notification;
+:Unread;
+:User opens notification;
+:Set read_at;
+stop
+@enduml

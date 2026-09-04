@@ -1,0 +1,52 @@
+@startuml
+' Evidence: .ai/analysis/system-overview/class-traceability.md; .ai/analysis/modules/*/08-models.md; .ai/knowledge-base/features.md; .ai/knowledge-base/decisions.md
+' Notación UML de componentes según consigna (Diagramas_de_Componentes.pptx, slide 7/8).
+' Componentes lógicos agrupados desde el diagrama de clases del dominio.
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam componentStyle uml2
+skinparam defaultFontName Helvetica
+skinparam componentArrowThickness 1
+title Diagrama de Componentes — MediTurno
+
+' ─────────────────────────────────────────────────────────
+' COMPONENTES LÓGICOS DEL DOMINIO
+' ─────────────────────────────────────────────────────────
+[InterfazWeb] as web
+[GestorAcceso] as acceso
+[GestorTurnos] as turnos
+[GestorReportes] as reportes
+[BaseDatos] as db
+
+' ─────────────────────────────────────────────────────────
+' INTERFACES PROVISTAS
+' ─────────────────────────────────────────────────────────
+() "IU_Web" as iu_web
+() "Autenticacion" as auth_api
+() "GestionTurnos" as turnos_api
+() "Reportes" as reportes_api
+() "AccesoDatos" as db_api
+
+' ─────────────────────────────────────────────────────────
+' CONEXIÓN COMPONENTE → INTERFAZ PROVISTA (línea sólida)
+' ─────────────────────────────────────────────────────────
+web -- iu_web
+acceso -- auth_api
+turnos -- turnos_api
+reportes -- reportes_api
+db -- db_api
+
+' ─────────────────────────────────────────────────────────
+' DEPENDENCIAS (línea punteada: componente requiere interfaz)
+' ─────────────────────────────────────────────────────────
+web ..> auth_api
+web ..> turnos_api
+web ..> reportes_api
+
+acceso ..> db_api
+turnos ..> db_api
+reportes ..> db_api
+
+reportes ..> turnos_api
+
+@enduml

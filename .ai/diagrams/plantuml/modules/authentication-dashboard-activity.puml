@@ -1,0 +1,12 @@
+@startuml
+start
+:Open login;
+:Submit credentials;
+if (Valid credentials and active?) then (Yes)
+  :Create session;
+  :Dashboard;
+else (No)
+  :Controlled error;
+endif
+stop
+@enduml

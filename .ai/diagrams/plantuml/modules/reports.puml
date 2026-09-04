@@ -1,0 +1,8 @@
+@startuml
+actor admin
+actor jefe_servicio
+admin --> (View global report)
+admin --> (Export CSV or PDF)
+jefe_servicio --> (View scoped report)
+jefe_servicio --> (Export scoped CSV or PDF)
+@enduml

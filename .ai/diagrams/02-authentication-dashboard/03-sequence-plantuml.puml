@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 180
+title Diagrama de Secuencia — Autenticación y Dashboard
+
+actor Usuario as user
+participant "Navegador\n(Blade + Bootstrap)" as web
+participant "AuthController\n(Login)" as auth
+participant "LoginService" as loginSrv
+database "Base de Datos" as db
+participant "DashboardController" as dash
+
+== ESCENARIO: Inicio de sesión (POST /login, throttle 5:1) ==
+user -> web : Envía email + password
+web -> auth : POST /login
+auth -> loginSrv : attempt(credentials, remember)
+loginSrv -> db : Consulta usuario por email
+db --> loginSrv : Usuario encontrado
+loginSrv --> auth : Credenciales válidas
+auth -> db : Verifica active == true
+db --> auth : Cuenta activa
+auth -> web : Regenera sesión
+web --> user : Redirige a /dashboard
+
+== ESCENARIO: Dashboard según rol (GET /dashboard) ==
+user -> dash : Solicita /dashboard
+dash -> db : Obtiene usuario autenticado
+db --> dash : Usuario + rol
+dash --> user : Vista del panel según rol
+
+@enduml

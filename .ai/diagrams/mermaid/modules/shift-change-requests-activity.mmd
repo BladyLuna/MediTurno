@@ -1,0 +1,9 @@
+flowchart TD
+  A[Personal creates request] --> B[Pending]
+  B --> C{Action}
+  C --> Approved
+  C --> Rejected
+  C --> Cancelled
+  Approved --> D[Audit and notify]
+  Rejected --> D
+  Cancelled --> D

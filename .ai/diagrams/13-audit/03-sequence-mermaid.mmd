@@ -1,0 +1,33 @@
+---
+title: Diagrama de Secuencia — Bitácora de Auditoría
+---
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Web as Navegador (Blade + Bootstrap)
+    participant Ctrl as AuditLogController
+    participant Policy as UserPolicy (Gates)
+    participant DB as Base de Datos
+
+    rect rgb(240,248,255)
+    Note over Admin,DB: ESCENARIO: Consultar bitácora de auditoría (GET /admin/audit-logs)
+    Admin->>Web: Accede al módulo de auditoría
+    Web->>Ctrl: GET /admin/audit-logs
+    Ctrl->>Policy: authorize viewAny (User)
+    Policy-->>Ctrl: Permitido (solo admin)
+    Ctrl->>DB: AuditLog::latest paginado con usuario
+    DB-->>Ctrl: Registros de auditoría (acción, modelo, fechas)
+    Ctrl-->>Admin: Vista index de auditoría
+    end
+
+    rect rgb(245,245,245)
+    Note over Admin,DB: ESCENARIO: Ver detalle de un registro de auditoría
+    Admin->>Web: Selecciona un registro
+    Web->>Ctrl: GET /admin/audit-logs/{log}
+    Ctrl->>Policy: authorize viewAny
+    Ctrl->>DB: Carga registro con usuario
+    DB-->>Ctrl: Detalle (old_values, new_values JSON, IP)
+    Ctrl-->>Admin: Vista show del registro
+    end
+
+    Note over Admin,DB: Regla BR: cada creación, edición o cancelación\nde asignaciones/solicitudes se registra con usuario, fecha e IP.

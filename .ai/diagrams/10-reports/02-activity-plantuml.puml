@@ -1,0 +1,15 @@
+@startuml
+start
+:Submit filters;
+:Validate scope;
+:Query real intervals;
+:Build summary and detail;
+if (Format?) then (HTML)
+  :Render HTML;
+elseif (CSV)
+  :Render CSV;
+else (PDF)
+  :Render PDF;
+endif
+stop
+@enduml

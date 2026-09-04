@@ -1,0 +1,9 @@
+@startuml
+actor admin
+actor jefe_servicio
+admin --> (Manage global shift templates)
+admin --> (Configure service shift templates)
+admin --> (Activate or deactivate templates)
+jefe_servicio --> (Use active service templates)
+@enduml
+

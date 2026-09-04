@@ -21,7 +21,7 @@ yarn-error.log
 # Backups y binarios pesados (no van a GitHub)
 *.bundle
 *.pdf
-/.ai
+
 
 # Archivos de herramientas personales de IA
 CODEX

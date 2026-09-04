@@ -1,0 +1,6 @@
+flowchart TD
+  A[Admin action] --> B[Validate]
+  B --> C{DEC-009 permits?}
+  C -- Yes --> D[Transaction: save and audit]
+  C -- No --> E[Reject]
+
