@@ -23,7 +23,7 @@ class TestUsersSeeder extends Seeder
             ],
             [
                 'name' => 'Jefe de Servicio MediTurno',
-                'email' => 'jefe@mediturno.test',
+                'email' => '-',
                 'password' => '12345678',
                 'role' => 'jefe_servicio',
                 'active' => true,

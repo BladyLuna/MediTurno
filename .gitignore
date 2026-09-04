@@ -27,3 +27,9 @@ yarn-error.log
 CODEX
 tareas-zeuz
 revisa.md
+/.commandcode
+
+# Borradores sueltos y fuentes con posibles datos personales
+/diagrama-componentes.html
+/docs/thesis-sources
+/docs/*.docx

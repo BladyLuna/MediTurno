@@ -24,24 +24,23 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->validated();
+        $credentials = $request->only('email', 'password');
+
+        if (! $this->loginService->attempt($credentials, $request->boolean('remember'))) {
+            return back()
+                ->withErrors(['email' => 'Las credenciales no son válidas.'])
+                ->onlyInput('email');
+        }
+
         $user = $this->loginService->findByEmail($credentials['email']);
 
-        if (! $user) {
-            return back()
-                ->withErrors(['email' => 'Las credenciales no son válidas.'])
-                ->onlyInput('email');
-        }
+        if ($user && ! $user->isActive()) {
+            $this->loginService->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        if (! $user->isActive()) {
             return back()
                 ->withErrors(['email' => 'Tu cuenta está desactivada.'])
-                ->onlyInput('email');
-        }
-
-        if (! $this->loginService->attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            return back()
-                ->withErrors(['email' => 'Las credenciales no son válidas.'])
                 ->onlyInput('email');
         }
 

@@ -269,3 +269,64 @@ globales se mantienen solo para `admin`.
 
 Fecha:
 2026-06-07
+
+---
+
+DEC-015
+
+Consolidacion del ecosistema de analisis en `.ai/`
+
+Contexto:
+
+La documentacion de analisis, reglas, prompts y workflows del proyecto se
+encontraba distribuida entre `.ia/`, archivos de raiz, `docs/` y directorios de
+herramientas. Se creo una estructura organizada en `.ai/` y se realizo una primera
+migracion por copia, conservando todos los archivos originales.
+
+Problema:
+
+La distribucion actual produce duplicaciones, referencias cruzadas y riesgo de
+divergencia. Tambien dificulta identificar donde deben mantenerse los analisis,
+plantillas, reportes, diagramas y documentos tecnicos en proceso.
+
+Decision:
+
+- `.ai/` sera la nueva fuente de verdad para analisis, prompts, reglas copiadas,
+  plantillas, reportes, diagramas y documentacion tecnica en proceso.
+- `.ia/` queda como carpeta heredada temporal.
+- No se eliminara `.ia/` hasta validar que todo su contenido fue migrado
+  correctamente y que no quedan referencias necesarias.
+- `docs/` seguira conteniendo la documentacion final entregable y el registro de
+  decisiones.
+- `.codex/` seguira destinado a configuracion de skills y workflows de Codex.
+- `.commandcode/` queda documentado como origen de skills externas o heredadas.
+- La migracion actual se considera parcialmente validada y no constituye una
+  limpieza definitiva.
+
+Consecuencias:
+
+- Todo nuevo analisis o documento tecnico en proceso debe crearse dentro de
+  `.ai/`.
+- Las reglas y copias existentes en `.ai/` deben revisarse antes de retirar sus
+  originales heredados.
+- Los conflictos documentales deben registrarse sin resolverse implicitamente.
+- La eliminacion, movimiento o archivo definitivo de `.ia/` requerira una fase
+  posterior, verificacion de integridad y aprobacion humana.
+- Las decisiones de alcance, arquitectura, modelo de datos o reglas de negocio
+  continuaran registrandose en `docs/decisions.md`.
+
+Archivos afectados:
+
+- `.ai/*`
+- `.ia/*`
+- `docs/decisions.md`
+- `docs/*`
+- `.codex/*`
+- `.commandcode/*`
+
+Estado:
+
+Aprobada. Migracion documental parcialmente validada y limpieza final pendiente.
+
+Fecha:
+2026-06-19

@@ -18,7 +18,7 @@ pero con separación clara de responsabilidades:
 - Modelos Eloquent para relaciones de datos.
 - Servicios de dominio para reglas críticas.
 - Auditoría centralizada para registrar operaciones importantes.
-
+++
 ## Capas Recomendadas
 
 ### Presentación

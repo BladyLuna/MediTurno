@@ -42,7 +42,7 @@ class ShiftCalendarService
                 $serviceIds = $scope['hospital_service_ids'];
 
                 if ($serviceIds === []) {
-                    $query->whereRaw('0 = 1');
+                    $query->whereKey(0);
 
                     return;
                 }

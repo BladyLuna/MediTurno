@@ -32,6 +32,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN groupadd -g ${GROUP_ID} appgroup \
     && useradd -u ${USER_ID} -g appgroup -m appuser
 
+COPY docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+RUN echo "max_execution_time = 30" > /usr/local/etc/php/conf.d/security.ini \
+    && echo "memory_limit = 128M" >> /usr/local/etc/php/conf.d/security.ini \
+    && echo "display_errors = Off" >> /usr/local/etc/php/conf.d/security.ini \
+    && echo "log_errors = On" >> /usr/local/etc/php/conf.d/security.ini
+
 WORKDIR /var/www/html
 
 USER appuser

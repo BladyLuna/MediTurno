@@ -16,4 +16,9 @@ class LoginService
     {
         return Auth::attempt($credentials, $remember);
     }
+
+    public function logout(): void
+    {
+        Auth::logout();
+    }
 }

@@ -30,7 +30,9 @@ class DashboardController extends Controller
                 'title' => 'Panel de jefatura',
                 'subtitle' => 'Consulta operativa de los servicios asignados.',
                 'items' => [
-                    ['label' => 'Dashboard operativo', 'route' => 'service-dashboard.index'],
+                    ['label' => 'Dashboard operativo', 
+                     'route' => 'service-dashboard.index'
+                    ],
                     ['label' => 'Asignaciones del servicio', 'route' => 'service-assignments.index'],
                     ['label' => 'Disponibilidad del personal', 'route' => 'service-availability.index'],
                     ['label' => 'Calendario de servicios', 'route' => 'service-calendar.index'],

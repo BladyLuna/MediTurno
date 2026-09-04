@@ -179,3 +179,7 @@ Ver [docs/qa-checklist.md](docs/qa-checklist.md).
 ## Flujo demo
 
 Ver [docs/demo-flow.md](docs/demo-flow.md).
+
+
+# solo el usuario debe saber su contrrasena
+validacion de correo electronuo
