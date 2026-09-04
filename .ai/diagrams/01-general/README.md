@@ -56,7 +56,9 @@ reemplazan los diagramas específicos de cada módulo.
 ### Figura 4. Diagrama de Componentes
 
 - **Archivos:** `04-component-mermaid.mmd` y `04-component-plantuml.puml`
-  (render: `04-component-plantuml.png`).
+  (render: `04-component-plantuml.png`). Formatos de presentación gráfica
+  (HTML interactivo, SVG, PNG 2400×1800 y PDF) en
+  [`../componentes/`](../componentes/README.md).
 - **Descripción:** representa la arquitectura modular de MediTurno en
   componentes lógicos con notación UML (estereotipo «component», interfaces
   provistas y requeridas, y dependencias), siguiendo el modelo de la consigna

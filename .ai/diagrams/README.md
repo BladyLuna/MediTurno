@@ -26,6 +26,7 @@ académica. Los originales permanecen en `general/`, `modules/`, `mermaid/` y
 | [`11-shift-change-requests/`](11-shift-change-requests/README.md) | Solicitudes de Cambio | 38-41 | Sí | Sí | Sí | Sí |
 | [`12-notifications/`](12-notifications/README.md) | Notificaciones | 42-45 | Sí | Sí | Sí | Sí |
 | [`13-audit/`](13-audit/README.md) | Auditoría | 46-48 | Sí | Sí | Sí | No aplica |
+| [`componentes/`](componentes/README.md) | Anexo Figura 4 (formatos de presentación del diagrama de componentes) | 4 | No aplica | No aplica | No aplica | No aplica |
 
 ## Cantidad de diagramas
 
@@ -34,7 +35,7 @@ académica. Los originales permanecen en `general/`, `modules/`, `mermaid/` y
 | Casos de uso generales | 1 | Mermaid y PlantUML | 2 |
 | Clases del dominio | 1 | Mermaid y PlantUML | 2 |
 | Entidad-relación | 1 | Mermaid y PlantUML | 2 |
-| Componentes | 1 | Mermaid y PlantUML | 2 |
+| Componentes | 1 | Mermaid, PlantUML, HTML, SVG, PNG, PDF | 6 |
 | Casos de uso por módulo | 12 | Mermaid y PlantUML | 24 |
 | Actividad por módulo | 12 | Mermaid y PlantUML | 24 |
 | Secuencia por módulo | 12 | Mermaid y PlantUML | 24 |

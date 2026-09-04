@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediTurno — Diagrama de Componentes</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #020617;
+      min-height: 100vh;
+      padding: 2rem;
+      color: white;
+    }
+    .container { max-width: 1300px; margin: 0 auto; }
+    .header { margin-bottom: 2rem; }
+    .header-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+    .pulse-dot {
+      width: 12px; height: 12px;
+      background: #22d3ee;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.025em; }
+    .subtitle { color: #94a3b8; font-size: 0.875rem; margin-left: 1.75rem; }
+    .diagram-container {
+      background: rgba(15,23,42,0.5);
+      border-radius: 1rem;
+      border: 1px solid #1e293b;
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+    svg { width: 100%; min-width: 1100px; display: block; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: rgba(15,23,42,0.5);
+      border-radius: 0.75rem;
+      border: 1px solid #1e293b;
+      padding: 1.25rem;
+    }
+    .card-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .card-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .card-dot.cyan { background: #22d3ee; }
+    .card-dot.emerald { background: #34d399; }
+    .card-dot.violet { background: #a78bfa; }
+    .card-dot.amber { background: #fbbf24; }
+    .card-dot.rose { background: #fb7185; }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { list-style: none; color: #94a3b8; font-size: 0.75rem; }
+    .card li { margin-bottom: 0.375rem; }
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #475569;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-row">
+        <div class="pulse-dot"></div>
+        <h1>MediTurno — Diagrama de Componentes</h1>
+      </div>
+      <p class="subtitle">Sistema de Gestión de Turnos del Personal de Salud — UML Component Diagram</p>
+    </div>
+
+    <!-- Main Diagram -->
+    <div class="diagram-container">
+      <svg viewBox="0 0 1200 920" xmlns="http://www.w3.org/2000/svg">
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+          </marker>
+          <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+          </marker>
+          <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+          </marker>
+          <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+          </marker>
+          <marker id="arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/>
+          </marker>
+          <marker id="arrow-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+
+        <!-- ================================================================
+             LAYER BOUNDARIES
+             ================================================================ -->
+
+        <!-- Docker Environment Boundary -->
+        <rect x="20" y="130" width="1160" height="740" rx="14" fill="rgba(251,191,36,0.03)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4"/>
+        <text x="36" y="150" fill="#fbbf24" font-size="11" font-weight="600">🐳 Docker Environment</text>
+
+        <!-- Nginx Boundary -->
+        <rect x="40" y="165" width="1120" height="95" rx="10" fill="rgba(30,41,59,0.3)" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="56" y="182" fill="#94a3b8" font-size="9" font-weight="500">Nginx Container (Reverse Proxy :80 → :9000)</text>
+
+        <!-- Laravel Application Boundary -->
+        <rect x="40" y="280" width="820" height="440" rx="10" fill="rgba(6,78,59,0.08)" stroke="#34d399" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="56" y="298" fill="#34d399" font-size="10" font-weight="600">Laravel 10 Application (PHP 8.2-FPM)</text>
+
+        <!-- MySQL Boundary -->
+        <rect x="890" y="280" width="270" height="440" rx="10" fill="rgba(76,29,149,0.08)" stroke="#a78bfa" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="906" y="298" fill="#a78bfa" font-size="10" font-weight="600">MySQL 8 Database</text>
+
+        <!-- ================================================================
+             LAYER 1: CLIENTE (BROWSER)
+             ================================================================ -->
+
+        <!-- Blade Templates -->
+        <rect x="60" y="40" width="150" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <rect x="60" y="40" width="150" height="70" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="40" width="150" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="135" y="65" fill="white" font-size="11" font-weight="600" text-anchor="middle">Blade Templates</text>
+        <text x="135" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">+ Bootstrap 5</text>
+        <text x="135" y="95" fill="#22d3ee" font-size="8" text-anchor="middle">Vistas HTML/Blade</text>
+
+        <!-- FullCalendar.js -->
+        <rect x="240" y="40" width="140" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <rect x="240" y="40" width="140" height="70" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="240" y="40" width="140" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="310" y="65" fill="white" font-size="11" font-weight="600" text-anchor="middle">FullCalendar.js</text>
+        <text x="310" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">Calendario visual</text>
+        <text x="310" y="95" fill="#22d3ee" font-size="8" text-anchor="middle">CDN Externo</text>
+
+        <!-- JavaScript -->
+        <rect x="410" y="40" width="140" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <rect x="410" y="40" width="140" height="70" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="410" y="40" width="140" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="480" y="65" fill="white" font-size="11" font-weight="600" text-anchor="middle">JavaScript</text>
+        <text x="480" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">Alertas, Confirmaciones</text>
+        <text x="480" y="95" fill="#22d3ee" font-size="8" text-anchor="middle">Interactividad mínima</text>
+
+        <!-- ================================================================
+             LAYER 2: NGINX
+             ================================================================ -->
+
+        <!-- Nginx Component -->
+        <rect x="460" y="188" width="160" height="55" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <rect x="460" y="188" width="160" height="55" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="460" y="188" width="160" height="55" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="540" y="212" fill="white" font-size="11" font-weight="600" text-anchor="middle">Nginx</text>
+        <text x="540" y="228" fill="#94a3b8" font-size="9" text-anchor="middle">Reverse Proxy :80 → PHP-FPM:9000</text>
+
+        <!-- Arrows: Cliente → Nginx -->
+        <line x1="135" y1="110" x2="540" y2="186" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        <line x1="310" y1="110" x2="540" y2="186" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)"/>
+        <line x1="480" y1="110" x2="540" y2="186" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)"/>
+        <text x="340" y="145" fill="#22d3ee" font-size="9" text-anchor="middle">HTTP/HTTPS</text>
+
+        <!-- ================================================================
+             LAYER 3a: LARAVEL APPLICATION
+             ================================================================ -->
+
+        <!-- ── Middleware Row ── -->
+        <!-- CheckRole -->
+        <rect x="60" y="320" width="150" height="60" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <rect x="60" y="320" width="150" height="60" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="320" width="150" height="60" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="135" y="345" fill="white" font-size="11" font-weight="600" text-anchor="middle">CheckRole</text>
+        <text x="135" y="361" fill="#fb7185" font-size="8" text-anchor="middle">Middleware</text>
+        <text x="135" y="373" fill="#94a3b8" font-size="8" text-anchor="middle">admin|jefe|personal</text>
+
+        <!-- Throttle -->
+        <rect x="230" y="320" width="120" height="60" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <rect x="230" y="320" width="120" height="60" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="230" y="320" width="120" height="60" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="290" y="345" fill="white" font-size="11" font-weight="600" text-anchor="middle">Throttle</text>
+        <text x="290" y="361" fill="#fb7185" font-size="8" text-anchor="middle">Middleware</text>
+        <text x="290" y="373" fill="#94a3b8" font-size="8" text-anchor="middle">5 intentos/min</text>
+
+        <!-- ── Controllers Row ── -->
+        <!-- Auth Controller -->
+        <rect x="60" y="410" width="130" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="60" y="410" width="130" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="410" width="130" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="125" y="433" fill="white" font-size="10" font-weight="600" text-anchor="middle">AuthController</text>
+        <text x="125" y="447" fill="#94a3b8" font-size="8" text-anchor="middle">Login / Logout</text>
+        <text x="125" y="459" fill="#94a3b8" font-size="8" text-anchor="middle">Forgot Password</text>
+        <text x="125" y="471" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- UserController -->
+        <rect x="205" y="410" width="115" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="205" y="410" width="115" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="205" y="410" width="115" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="262" y="433" fill="white" font-size="10" font-weight="600" text-anchor="middle">UserController</text>
+        <text x="262" y="447" fill="#94a3b8" font-size="8" text-anchor="middle">CRUD Usuarios</text>
+        <text x="262" y="459" fill="#94a3b8" font-size="8" text-anchor="middle">Roles</text>
+        <text x="262" y="471" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- ServiceController -->
+        <rect x="335" y="410" width="115" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="335" y="410" width="115" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="335" y="410" width="115" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="392" y="433" fill="white" font-size="10" font-weight="600" text-anchor="middle">ServiceController</text>
+        <text x="392" y="447" fill="#94a3b8" font-size="8" text-anchor="middle">CRUD Servicios</text>
+        <text x="392" y="459" fill="#94a3b8" font-size="8" text-anchor="middle">Hospitales</text>
+        <text x="392" y="471" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- StaffController -->
+        <rect x="465" y="410" width="115" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="465" y="410" width="115" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="465" y="410" width="115" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="522" y="433" fill="white" font-size="10" font-weight="600" text-anchor="middle">StaffController</text>
+        <text x="522" y="447" fill="#94a3b8" font-size="8" text-anchor="middle">CRUD Personal</text>
+        <text x="522" y="459" fill="#94a3b8" font-size="8" text-anchor="middle">Asignar servicio</text>
+        <text x="522" y="471" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- ShiftController -->
+        <rect x="60" y="500" width="130" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="60" y="500" width="130" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="500" width="130" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="125" y="523" fill="white" font-size="10" font-weight="600" text-anchor="middle">ShiftController</text>
+        <text x="125" y="537" fill="#94a3b8" font-size="8" text-anchor="middle">CRUD Turnos</text>
+        <text x="125" y="549" fill="#94a3b8" font-size="8" text-anchor="middle">Plantillas M/T/N</text>
+        <text x="125" y="561" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- AssignmentController -->
+        <rect x="205" y="500" width="130" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="205" y="500" width="130" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="205" y="500" width="130" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="270" y="523" fill="white" font-size="10" font-weight="600" text-anchor="middle">AssignmentCtrl</text>
+        <text x="270" y="537" fill="#94a3b8" font-size="8" text-anchor="middle">Asignar turnos</text>
+        <text x="270" y="549" fill="#94a3b8" font-size="8" text-anchor="middle">Validar traslapes</text>
+        <text x="270" y="561" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- CalendarController -->
+        <rect x="350" y="500" width="120" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="350" y="500" width="120" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="350" y="500" width="120" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="410" y="523" fill="white" font-size="10" font-weight="600" text-anchor="middle">CalendarCtrl</text>
+        <text x="410" y="537" fill="#94a3b8" font-size="8" text-anchor="middle">Vista calendario</text>
+        <text x="410" y="549" fill="#94a3b8" font-size="8" text-anchor="middle">API JSON eventos</text>
+        <text x="410" y="561" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- ReportController -->
+        <rect x="485" y="500" width="120" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <rect x="485" y="500" width="120" height="65" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="485" y="500" width="120" height="65" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="545" y="523" fill="white" font-size="10" font-weight="600" text-anchor="middle">ReportCtrl</text>
+        <text x="545" y="537" fill="#94a3b8" font-size="8" text-anchor="middle">PDF (DomPDF)</text>
+        <text x="545" y="549" fill="#94a3b8" font-size="8" text-anchor="middle">Excel (Maatwebsite)</text>
+        <text x="545" y="561" fill="#34d399" font-size="7" text-anchor="middle">Controller</text>
+
+        <!-- ── Authorization Row ── -->
+        <!-- Gates & Policies -->
+        <rect x="60" y="590" width="200" height="55" rx="6" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1.5"/>
+        <rect x="60" y="590" width="200" height="55" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="590" width="200" height="55" rx="6" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="160" y="614" fill="white" font-size="10" font-weight="600" text-anchor="middle">Gates & Policies</text>
+        <text x="160" y="630" fill="#fb7185" font-size="8" text-anchor="middle">Autorización por rol</text>
+        <text x="160" y="640" fill="#94a3b8" font-size="7" text-anchor="middle">Sin paquetes externos</text>
+
+        <!-- Form Requests -->
+        <rect x="280" y="590" width="200" height="55" rx="6" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1.5"/>
+        <rect x="280" y="590" width="200" height="55" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="280" y="590" width="200" height="55" rx="6" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="380" y="614" fill="white" font-size="10" font-weight="600" text-anchor="middle">Form Requests</text>
+        <text x="380" y="630" fill="#fb7185" font-size="8" text-anchor="middle">Validación de formularios</text>
+        <text x="380" y="640" fill="#94a3b8" font-size="7" text-anchor="middle">Request classes</text>
+
+        <!-- ── Models Row ── -->
+        <!-- User Model -->
+        <rect x="60" y="665" width="95" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="60" y="665" width="95" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="665" width="95" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="107" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">User</text>
+        <text x="107" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- HospitalService Model -->
+        <rect x="165" y="665" width="100" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="165" y="665" width="100" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="165" y="665" width="100" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="215" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">HospitalSvc</text>
+        <text x="215" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- Staff Model -->
+        <rect x="275" y="665" width="80" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="275" y="665" width="80" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="275" y="665" width="80" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="315" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">Staff</text>
+        <text x="315" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- ShiftTemplate Model -->
+        <rect x="365" y="665" width="105" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="365" y="665" width="105" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="365" y="665" width="105" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="417" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">ShiftTemplate</text>
+        <text x="417" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- ServiceShiftTemplate Model -->
+        <rect x="480" y="665" width="110" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="480" y="665" width="110" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="480" y="665" width="110" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="535" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">SvcShiftTpl</text>
+        <text x="535" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- ShiftAssignment Model -->
+        <rect x="600" y="665" width="110" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="600" y="665" width="110" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="600" y="665" width="110" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="655" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">ShiftAssignment</text>
+        <text x="655" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- AuditLog Model -->
+        <rect x="720" y="665" width="90" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="720" y="665" width="90" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="720" y="665" width="90" height="45" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="765" y="685" fill="white" font-size="9" font-weight="600" text-anchor="middle">AuditLog</text>
+        <text x="765" y="698" fill="#a78bfa" font-size="7" text-anchor="middle">Model</text>
+
+        <!-- ── Eloquent ORM ── -->
+        <rect x="60" y="730" width="200" height="40" rx="6" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1"/>
+        <rect x="60" y="730" width="200" height="40" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="60" y="730" width="200" height="40" rx="6" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1"/>
+        <text x="160" y="755" fill="#34d399" font-size="9" font-weight="500" text-anchor="middle">Eloquent ORM (Queries Parametrizadas)</text>
+
+        <!-- ================================================================
+             LAYER 3b: EXTERNAL SERVICES (inside Laravel boundary)
+             ================================================================ -->
+
+        <!-- DomPDF -->
+        <rect x="600" y="410" width="120" height="55" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <rect x="600" y="410" width="120" height="55" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="600" y="410" width="120" height="55" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="660" y="433" fill="white" font-size="10" font-weight="600" text-anchor="middle">DomPDF</text>
+        <text x="660" y="448" fill="#94a3b8" font-size="8" text-anchor="middle">Generación PDF</text>
+        <text x="660" y="458" fill="#94a3b8" font-size="7" text-anchor="middle">barryvdh/laravel-dompdf</text>
+
+        <!-- Maatwebsite Excel -->
+        <rect x="735" y="410" width="105" height="55" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <rect x="735" y="410" width="105" height="55" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="735" y="410" width="105" height="55" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="787" y="433" fill="white" font-size="10" font-weight="600" text-anchor="middle">Maatwebsite</text>
+        <text x="787" y="448" fill="#94a3b8" font-size="8" text-anchor="middle">Generación Excel</text>
+        <text x="787" y="458" fill="#94a3b8" font-size="7" text-anchor="middle">maatwebsite/excel</text>
+
+        <!-- ================================================================
+             LAYER 3c: MYSQL DATABASE
+             ================================================================ -->
+
+        <!-- users table -->
+        <rect x="910" y="320" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="320" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="320" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="343" fill="white" font-size="9" font-weight="600" text-anchor="middle">users</text>
+
+        <!-- hospital_services table -->
+        <rect x="910" y="368" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="368" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="368" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="391" fill="white" font-size="9" font-weight="600" text-anchor="middle">hospital_services</text>
+
+        <!-- staff table -->
+        <rect x="910" y="416" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="416" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="416" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="439" fill="white" font-size="9" font-weight="600" text-anchor="middle">staff</text>
+
+        <!-- shift_templates table -->
+        <rect x="910" y="464" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="464" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="464" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="487" fill="white" font-size="9" font-weight="600" text-anchor="middle">shift_templates</text>
+
+        <!-- service_shift_templates table -->
+        <rect x="910" y="512" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="512" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="512" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="535" fill="white" font-size="9" font-weight="600" text-anchor="middle">svc_shift_tpls</text>
+
+        <!-- shift_assignments table -->
+        <rect x="910" y="560" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="560" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="560" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="583" fill="white" font-size="9" font-weight="600" text-anchor="middle">shift_assignments</text>
+
+        <!-- audit_logs table -->
+        <rect x="910" y="608" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="910" y="608" width="110" height="38" rx="5" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="608" width="110" height="38" rx="5" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="965" y="631" fill="white" font-size="9" font-weight="600" text-anchor="middle">audit_logs</text>
+
+        <!-- MySQL label -->
+        <rect x="910" y="660" width="230" height="45" rx="6" fill="rgba(76,29,149,0.25)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="910" y="660" width="230" height="45" rx="6" fill="#0f172a" stroke="none"/>
+        <rect x="910" y="660" width="230" height="45" rx="6" fill="rgba(76,29,149,0.25)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="1025" y="682" fill="white" font-size="11" font-weight="600" text-anchor="middle">MySQL 8.0</text>
+        <text x="1025" y="696" fill="#a78bfa" font-size="8" text-anchor="middle">Base de datos · 7 tablas · softDeletes()</text>
+
+        <!-- ================================================================
+             ARROWS: Nginx → Laravel
+             ================================================================ -->
+        <line x1="540" y1="243" x2="540" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="555" y="265" fill="#94a3b8" font-size="8">FastCGI :9000</text>
+
+        <!-- ================================================================
+             ARROWS: Controllers → Models
+             ================================================================ -->
+        <path d="M 125 475 L 125 490 L 107 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 262 475 L 262 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 392 475 L 392 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 522 475 L 522 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 125 565 L 125 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 270 565 L 270 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 410 565 L 417 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 545 565 L 535 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 545 565 L 655 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+        <path d="M 545 565 L 765 663" fill="none" stroke="#a78bfa" stroke-width="1" marker-end="url(#arrow-violet)"/>
+
+        <!-- ================================================================
+             ARROWS: ReportController → External Libs
+             ================================================================ -->
+        <line x1="545" y1="510" x2="600" y2="440" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+        <line x1="545" y1="515" x2="735" y2="440" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)"/>
+
+        <!-- ================================================================
+             ARROWS: Eloquent ORM → MySQL
+             ================================================================ -->
+        <line x1="260" y1="750" x2="908" y2="500" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-violet)"/>
+        <text x="580" y="610" fill="#a78bfa" font-size="9" font-weight="500" text-anchor="middle">MySQL TCP:3306</text>
+
+        <!-- ================================================================
+             ARROWS: Middleware → Controllers
+             ================================================================ -->
+        <line x1="135" y1="380" x2="135" y2="408" stroke="#fb7185" stroke-width="1" marker-end="url(#arrow-rose)"/>
+        <line x1="290" y1="380" x2="290" y2="408" stroke="#fb7185" stroke-width="1" marker-end="url(#arrow-rose)"/>
+
+        <!-- ================================================================
+             ARROWS: Gates → Controllers
+             ================================================================ -->
+        <path d="M 160 590 L 160 565" fill="none" stroke="#fb7185" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-rose)"/>
+        <path d="M 160 590 L 270 565" fill="none" stroke="#fb7185" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-rose)"/>
+
+        <!-- ================================================================
+             ARROWS: CalendarController → FullCalendar.js
+             ================================================================ -->
+        <path d="M 410 500 L 410 490 L 310 110" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-cyan)"/>
+        <text x="345" y="310" fill="#22d3ee" font-size="8" text-anchor="middle">GET /calendar/events</text>
+        <text x="345" y="322" fill="#22d3ee" font-size="7" text-anchor="middle">JSON Response</text>
+
+        <!-- ================================================================
+             LEGEND
+             ================================================================ -->
+        <text x="60" y="810" fill="white" font-size="11" font-weight="600">Leyenda</text>
+
+        <rect x="60" y="822" width="16" height="10" rx="2" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="82" y="830" fill="#94a3b8" font-size="8">Frontend (Blade + Bootstrap + JS)</text>
+
+        <rect x="60" y="840" width="16" height="10" rx="2" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1"/>
+        <text x="82" y="848" fill="#94a3b8" font-size="8">Backend (Controllers Laravel)</text>
+
+        <rect x="60" y="858" width="16" height="10" rx="2" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="82" y="866" fill="#94a3b8" font-size="8">Base de datos (Models + MySQL)</text>
+
+        <rect x="370" y="822" width="16" height="10" rx="2" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="392" y="830" fill="#94a3b8" font-size="8">Seguridad (Middleware + Gates)</text>
+
+        <rect x="370" y="840" width="16" height="10" rx="2" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1"/>
+        <text x="392" y="848" fill="#94a3b8" font-size="8">Externo (DomPDF, Maatwebsite, Nginx)</text>
+
+        <rect x="370" y="858" width="16" height="10" rx="2" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1"/>
+        <text x="392" y="866" fill="#94a3b8" font-size="8">Infraestructura (Docker)</text>
+
+        <line x1="680" y1="828" x2="710" y2="828" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="718" y="831" fill="#94a3b8" font-size="8">Dependencia / Uso</text>
+
+        <line x1="680" y1="848" x2="710" y2="848" stroke="#fb7185" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-rose)"/>
+        <text x="718" y="851" fill="#94a3b8" font-size="8">Autorización / Seguridad</text>
+
+      </svg>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot cyan"></div>
+          <h3>Cliente (Frontend)</h3>
+        </div>
+        <ul>
+          <li>• Blade Templates + Bootstrap 5 — Vistas HTML responsive</li>
+          <li>• FullCalendar.js (CDN) — Calendario mensual con colores</li>
+          <li>• JavaScript mínimo — Alertas y confirmaciones</li>
+          <li>• Roles: Admin, Jefe de Servicio, Personal</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot emerald"></div>
+          <h3>Backend (Laravel 10)</h3>
+        </div>
+        <ul>
+          <li>• 8 Controllers (Auth, Admin, Calendar)</li>
+          <li>• 7 Models Eloquent con softDeletes()</li>
+          <li>• Middleware: CheckRole + Throttle (5/min)</li>
+          <li>• Gates & Policies (sin paquetes externos)</li>
+          <li>• Form Requests para validación</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot violet"></div>
+          <h3>Base de Datos (MySQL 8)</h3>
+        </div>
+        <ul>
+          <li>• 7 tablas: users, hospital_services, staff</li>
+          <li>• shift_templates, service_shift_templates</li>
+          <li>• shift_assignments (sin turnos traslapados)</li>
+          <li>• audit_logs (bitácora de auditoría)</li>
+          <li>• Soft deletes en todas las tablas</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot rose"></div>
+          <h3>Seguridad</h3>
+        </div>
+        <ul>
+          <li>• CheckRole Middleware — control por rol</li>
+          <li>• Throttle:5,1 — anti brute-force login</li>
+          <li>• Gates & Policies — autorización nativa</li>
+          <li>• CSRF (@csrf) + XSS (Blade escape)</li>
+          <li>• Hash bcrypt + Audit Logs + HTTPS</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot amber"></div>
+          <h3>Infraestructura</h3>
+        </div>
+        <ul>
+          <li>• Docker: PHP 8.2-FPM + Nginx + MySQL 8</li>
+          <li>• Render — Hosting producción</li>
+          <li>• GitHub Actions — CI/CD + Tests</li>
+          <li>• GitHub Pages — Landing page estática</li>
+          <li>• DomPDF + Maatwebsite (PDF/Excel)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot emerald"></div>
+          <h3>Reglas de Negocio Clave</h3>
+        </div>
+        <ul>
+          <li>• ❌ No se permiten turnos traslapados</li>
+          <li>• 🔒 Solo admin crea/edita usuarios</li>
+          <li>• 👁️ Jefe ve solo sus servicios</li>
+          <li>• 👤 Personal ve solo sus turnos</li>
+          <li>• 📝 Todo cambio registrado en audit_logs</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <p class="footer">
+      MediTurno — Diagrama de Componentes UML · Bladimir Luna Corrales · ITNC "Federico Álvarez Plata" · 2025
+    </p>
+  </div>
+</body>
+</html>
