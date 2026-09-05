@@ -35,7 +35,7 @@ académica. Los originales permanecen en `general/`, `modules/`, `mermaid/` y
 | Casos de uso generales | 1 | Mermaid y PlantUML | 2 |
 | Clases del dominio | 1 | Mermaid y PlantUML | 2 |
 | Entidad-relación | 1 | Mermaid y PlantUML | 2 |
-| Componentes | 1 | Mermaid, PlantUML, HTML, SVG, PNG, PDF | 6 |
+| Componentes | 1 | Mermaid, PlantUML (+render PNG/SVG), HTML, SVG, PNG, PDF | 8 |
 | Casos de uso por módulo | 12 | Mermaid y PlantUML | 24 |
 | Actividad por módulo | 12 | Mermaid y PlantUML | 24 |
 | Secuencia por módulo | 12 | Mermaid y PlantUML | 24 |

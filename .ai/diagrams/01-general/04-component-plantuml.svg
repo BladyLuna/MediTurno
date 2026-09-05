@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1306px" preserveAspectRatio="none" style="width:2092px;height:1306px;" version="1.1" viewBox="0 0 2092 1306" width="2092px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="Helvetica" font-size="18" lengthAdjust="spacing" textLength="353" x="863" y="19.2419">Diagrama de Componentes — MediTurno</text><!--MD5=[23cbaadc18b1780d966e07254adaec4d]
+cluster frontend--><polygon fill="#FFFFFF" points="1384,31.1178,1516,31.1178,1523,56.1857,2075,56.1857,2075,169.2578,1384,169.2578,1384,31.1178" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1384" x2="1523" y1="56.1857" y2="56.1857"/><text fill="#000000" font-family="Helvetica" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="126" x="1388" y="48.0838">Cliente (Frontend)</text><!--MD5=[1ec425358c16496e099a26e1461de3b2]
+cluster docker_env--><polygon fill="#FFFFFF" points="16,228.2578,131,228.2578,138,253.3257,1643,253.3257,1643,1299.1378,16,1299.1378,16,228.2578" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="138" y1="253.3257" y2="253.3257"/><text fill="#000000" font-family="Helvetica" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="109" x="20" y="245.2238">Entorno Docker</text><!--MD5=[975968c22cb13ae27f8cff5454a4d17d]
+cluster laravel--><polygon fill="#FFFFFF" points="48,426.4578,300,426.4578,307,451.5257,1611,451.5257,1611,841.9378,48,841.9378,48,426.4578" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="48" x2="307" y1="451.5257" y2="451.5257"/><text fill="#000000" font-family="Helvetica" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="246" x="52" y="443.4238">Aplicación Laravel 10 (PHP 8.2-FPM)</text><!--MD5=[40f389b860e50d90baaf5de832b1264d]
+cluster mysql--><polygon fill="#FFFFFF" points="134,908.9378,301,908.9378,308,953.0737,760,953.0737,760,1267.1378,134,1267.1378,134,908.9378" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="134" x2="308" y1="953.0737" y2="953.0737"/><text fill="#000000" font-family="Helvetica" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="161" x="138" y="925.9038">Base de Datos MySQL 8</text><text fill="#000000" font-family="Helvetica" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="154" x="141.5" y="944.9717">7 tablas · softDeletes()</text><!--MD5=[ec3633cd05e41f29c4b51f0ab8ff1d93]
+entity blade--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="152" x="1427" y="77.1178"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1559" y="82.1178"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1557" y="84.1178"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1557" y="88.1178"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="112" x="1442" y="112.0838">Blade Templates</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="89" x="1442" y="131.1517">+ Bootstrap 5</text><!--MD5=[25fea7d7421f19229cdce88783ffcd89]
+entity fullcalendar--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="198" x="1614" y="77.1178"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1792" y="82.1178"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1790" y="84.1178"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1790" y="88.1178"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="100" x="1629" y="112.0838">FullCalendar.js</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="158" x="1629" y="131.1517">Calendario visual (CDN)</text><!--MD5=[e2abac825dedb3f17b65348391e6f31a]
+entity js--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="205" x="1846.5" y="77.1178"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="2031.5" y="82.1178"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="2029.5" y="84.1178"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="2029.5" y="88.1178"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="66" x="1861.5" y="112.0838">JavaScript</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="165" x="1861.5" y="131.1517">Alertas y confirmaciones</text><!--MD5=[8824c66cba45be527cf3dd56bcd70cd2]
+entity nginx--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="179" x="1413.5" y="266.2578"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1572.5" y="271.2578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1570.5" y="273.2578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1570.5" y="277.2578"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="40" x="1428.5" y="301.2238">Nginx</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="93" x="1428.5" y="320.2917">Reverse Proxy</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="139" x="1428.5" y="339.3596">:80 → PHP-FPM :9000</text><!--MD5=[ff6f43b56d9c83edd71ebbbfc0f39649]
+entity auth_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="151" x="1428.5" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1559.5" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1557.5" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1557.5" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="99" x="1443.5" y="636.5638">AuthController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="96" x="1443.5" y="655.6317">Login / Logout</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="111" x="1443.5" y="674.6996">Forgot Password</text><!--MD5=[2811d276a389e86d17201482478b0df0]
+entity user_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="141" x="293.5" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="414.5" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="412.5" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="412.5" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="98" x="308.5" y="636.5638">UserController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="101" x="308.5" y="655.6317">CRUD Usuarios</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="36" x="308.5" y="674.6996">Roles</text><!--MD5=[6cbfed42b59bdf2c7f69e7bed4711b18]
+entity svc_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="155" x="833.5" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="968.5" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="966.5" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="966.5" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="115" x="848.5" y="636.5638">ServiceController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="101" x="848.5" y="655.6317">CRUD Servicios</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="55" x="848.5" y="674.6996">Hospital</text><!--MD5=[8838a8d60675f145adc875506af40c72]
+entity staff_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="147" x="651.5" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="778.5" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="776.5" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="776.5" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="98" x="666.5" y="636.5638">StaffController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="100" x="666.5" y="655.6317">CRUD Personal</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="107" x="666.5" y="674.6996">Asignar servicio</text><!--MD5=[3af885e73bff6fd243450ccdf643ae7e]
+entity shift_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="147" x="469.5" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="596.5" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="594.5" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="594.5" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="98" x="484.5" y="636.5638">ShiftController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="89" x="484.5" y="655.6317">CRUD Turnos</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="107" x="484.5" y="674.6996">Plantillas M/T/N</text><!--MD5=[6be27cedab5f279983c0e0a0f8f85d23]
+entity assign_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="187" x="71.5" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="238.5" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="236.5" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="236.5" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="147" x="86.5" y="636.5638">AssignmentController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="100" x="86.5" y="655.6317">Asignar turnos</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="113" x="86.5" y="674.6996">Validar traslapes</text><!--MD5=[799ca603bf648f64eb92e50b3fc1aa29]
+entity cal_ctrl--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="168" x="1226" y="611.1278"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1374" y="616.1278"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1372" y="618.1278"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1372" y="622.1278"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="128" x="1241" y="646.0938">CalendarController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="116" x="1241" y="665.1617">API JSON eventos</text><!--MD5=[283e57dad713258996b10e62a09384ca]
+entity rep_ctrl--><rect fill="#FEFECE" height="87.2038" style="stroke:#A80036;stroke-width:1.5;" width="168" x="1023" y="601.5978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1171" y="606.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1169" y="608.5978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1169" y="612.5978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="112" x="1038" y="636.5638">ReportController</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="128" x="1038" y="655.6317">Reportes PDF/Excel</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="41" x="1038" y="674.6996">Filtros</text><!--MD5=[f2a8b0c369bd4c8ee0251f79ff669ceb]
+entity dompdf--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="129" x="1173.5" y="749.7978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1282.5" y="754.7978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1280.5" y="756.7978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1280.5" y="760.7978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="56" x="1188.5" y="784.7638">DomPDF</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="89" x="1188.5" y="803.8317">Reportes PDF</text><!--MD5=[16779555610a870233af455ff745c4b2]
+entity maat--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="138" x="1000" y="749.7978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1118" y="754.7978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1116" y="756.7978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1116" y="760.7978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="86" x="1015" y="784.7638">Maatwebsite</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="98" x="1015" y="803.8317">Reportes Excel</text><!--MD5=[4bc754fecb1d46606e532c92140a5f11]
+entity checkrole--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="275" x="706.5" y="472.4578"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="961.5" y="477.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="959.5" y="479.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="959.5" y="483.4578"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="69" x="721.5" y="507.4238">CheckRole</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="235" x="721.5" y="526.4917">Middleware · admin|jefe|personal</text><!--MD5=[7e2ed410f3f992c5d62f719f208ce8af]
+entity throttle--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="171" x="1396.5" y="472.4578"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="1547.5" y="477.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1545.5" y="479.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="1545.5" y="483.4578"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="53" x="1411.5" y="507.4238">Throttle</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="131" x="1411.5" y="526.4917">Middleware · 5/min</text><!--MD5=[a0390acad77d8547816f8b22efbf4a22]
+entity gates--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="173" x="170.5" y="472.4578"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="323.5" y="477.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="321.5" y="479.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="321.5" y="483.4578"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="106" x="185.5" y="507.4238">Gates &amp; Policies</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="133" x="185.5" y="526.4917">Autorización por rol</text><!--MD5=[7493857aa651961389ba1d95034ab2ac]
+entity formreq--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="212" x="437" y="472.4578"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="629" y="477.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="627" y="479.4578"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="627" y="483.4578"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="100" x="452" y="507.4238">Form Requests</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="172" x="452" y="526.4917">Validación de formularios</text><!--MD5=[aa3b458352135463a5a0f2d2a48ef4d9]
+entity models--><rect fill="#FEFECE" height="68.1358" style="stroke:#A80036;stroke-width:1.5;" width="311" x="596.5" y="749.7978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="887.5" y="754.7978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="885.5" y="756.7978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="885.5" y="760.7978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="121" x="611.5" y="784.7638">Modelos Eloquent</text><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="271" x="611.5" y="803.8317">Eloquent ORM · Queries Parametrizadas</text><!--MD5=[837b0831b9ed373a324b53e31ef768f0]
+entity t_users--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="77" x="190.5" y="973.9378"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="247.5" y="978.9378"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="245.5" y="980.9378"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="245.5" y="984.9378"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="37" x="205.5" y="1008.9038">users</text><!--MD5=[f623fcd1f5d43fcfb0c878d34cb993b0]
+entity t_services--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="154" x="302" y="973.9378"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="436" y="978.9378"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="434" y="980.9378"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="434" y="984.9378"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="114" x="317" y="1008.9038">hospital_services</text><!--MD5=[55e13076215b1b28e598ccb80171600c]
+entity t_staff--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="70" x="491" y="973.9378"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="541" y="978.9378"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="539" y="980.9378"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="539" y="984.9378"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="30" x="506" y="1008.9038">staff</text><!--MD5=[a9b50a94b107a14079f6433f244199d0]
+entity t_shift_tpl--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="143" x="157.5" y="1083.9978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="280.5" y="1088.9978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="278.5" y="1090.9978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="278.5" y="1094.9978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="103" x="172.5" y="1118.9638">shift_templates</text><!--MD5=[8511d872f9491d5910f149a1f2cd228c]
+entity t_svc_shift_tpl--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="196" x="335" y="1083.9978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="511" y="1088.9978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="509" y="1090.9978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="509" y="1094.9978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="156" x="350" y="1118.9638">service_shift_templates</text><!--MD5=[3d0b1a4217a55e9679dc8c11fa6c6812]
+entity t_shift_assign--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="162" x="566" y="1083.9978"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="708" y="1088.9978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="706" y="1090.9978"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="706" y="1094.9978"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="122" x="581" y="1118.9638">shift_assignments</text><!--MD5=[7439178161b3db95b4499a2264b51c19]
+entity t_audit--><rect fill="#FEFECE" height="49.0679" style="stroke:#A80036;stroke-width:1.5;" width="109" x="174.5" y="1194.0678"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="263.5" y="1199.0678"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="261.5" y="1201.0678"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="261.5" y="1205.0678"/><text fill="#000000" font-family="Helvetica" font-size="14" lengthAdjust="spacing" textLength="69" x="189.5" y="1229.0338">audit_logs</text><!--MD5=[9a313c058274951751cec3a2ca303c6e]
+link frontend to nginx--><path d="M1404.5622,169.3556 C1404.7336,169.8537 1404.9071,170.351 1405.0827,170.8473 C1405.4339,171.84 1405.7935,172.8288 1406.1616,173.8123 C1407.6342,177.7461 1409.2438,181.5941 1411,185.2578 C1423.9,212.1678 1443.03,239.0978 1460.51,260.9178 " fill="none" id="frontend-to-nginx" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1463.49,264.5978,1460.9191,255.0904,1460.337,260.7173,1454.7102,260.1352,1463.49,264.5978" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="Helvetica" font-size="13" lengthAdjust="spacing" textLength="82" x="1426.1" y="208.1548">HTTP / HTTPS</text><!--MD5=[a8a890c7c47d996ce9e69f4d2c191ab2]
+link nginx to laravel--><path d="M1523.42,353.8378 C1533.67,371.2378 1547.63,390.1078 1565,402.4578 C1576.25,410.4578 1586.14,399.8778 1595,410.4578 C1598.35,414.4578 1600.9967,418.9128 1603.0625,423.6503 C1603.3207,424.2425 1603.5699,424.8391 1603.8102,425.4397 C1603.9303,425.7401 1604.0483,426.0414 1604.164,426.3438 " fill="none" id="nginx-to-laravel" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1604.164,426.3438,1604.6813,416.5085,1602.3761,421.6744,1597.2102,419.3692,1604.164,426.3438" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="Helvetica" font-size="13" lengthAdjust="spacing" textLength="80" x="1566" y="398.3548">FastCGI :9000</text><!--MD5=[418eafe9936f5d181c1df2e281a06e22]
+link fullcalendar to cal_ctrl--><path d="M1716.18,145.7278 C1721.78,225.4178 1724.19,427.8478 1619,540.5978 C1553.28,611.0378 1501.75,569.2678 1411,601.5978 C1404.96,603.7478 1398.76,606.0678 1392.55,608.4778 " fill="none" id="fullcalendar-to-cal_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1388.26,610.1678,1398.0993,610.6018,1392.9141,608.3404,1395.1755,603.1553,1388.26,610.1678" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="Helvetica" font-size="13" lengthAdjust="spacing" textLength="127" x="1698.95" y="398.3548">GET /calendar/events</text><!--MD5=[3f817163ffa9cb2c3a454903d501f26a]
+link auth_ctrl to models--><path d="M1428.04,683.0978 C1422.34,685.2178 1416.62,687.1478 1411,688.7978 C1226.21,743.0178 1172.65,722.5378 982,749.7978 C960.1,752.9278 937.02,756.2378 914.29,759.4978 " fill="none" id="auth_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="909.38,760.2078,918.8596,762.8795,914.3286,759.4927,917.7154,754.9617,909.38,760.2078" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[86b9ec2ff8086a32551256376f7ef14f]
+link user_ctrl to models--><path d="M434.68,681.5178 C440.5,684.0878 446.32,686.5478 452,688.7978 C507.7,710.8778 570.79,731.3178 624.69,747.4578 " fill="none" id="user_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="629.43,748.8778,621.9449,742.4767,624.6377,747.4516,619.6629,750.1444,629.43,748.8778" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0f9622ff9a70c3f4685360d33a2b98f6]
+link svc_ctrl to models--><path d="M861.13,689.0678 C840.13,707.1078 815.92,727.9178 795.65,745.3478 " fill="none" id="svc_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="792,748.4878,801.4365,745.6677,795.7963,745.2339,796.2301,739.5937,792,748.4878" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a6c0686423d263050b23c75e029a4bbd]
+link staff_ctrl to models--><path d="M733.47,689.0678 C736.91,706.4978 740.87,726.5078 744.23,743.5578 " fill="none" id="staff_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="745.15,748.2078,747.3234,738.6018,744.1777,743.3033,739.4762,740.1575,745.15,748.2078" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9d1f53329f88297ff07de54566d18e36]
+link shift_ctrl to models--><path d="M608.84,689.2478 C636.66,707.4478 668.74,728.4178 695.46,745.8978 " fill="none" id="shift_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="699.47,748.5178,694.1278,740.2437,695.2857,745.7808,689.7486,746.9387,699.47,748.5178" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8849b255670a778d345667e9861ebccb]
+link assign_ctrl to models--><path d="M258.79,683.4678 C264.58,685.3678 270.35,687.1678 276,688.7978 C378.86,718.4578 496.89,741.8578 589.69,757.8978 " fill="none" id="assign_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="594.55,758.7278,586.3531,753.268,589.6215,757.885,585.0045,761.1535,594.55,758.7278" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0c589191f92d6afe3d18c12d2cbf2640]
+link cal_ctrl to models--><path d="M1234.28,679.6978 C1225.51,683.0178 1216.62,686.1378 1208,688.7978 C1112.21,718.3778 1002.21,741.3778 914.25,757.2278 " fill="none" id="cal_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="909.44,758.0878,919.0068,760.428,914.3607,757.201,917.5878,752.5549,909.44,758.0878" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9b8cff65e0c01a4287664fc08339c3d3]
+link rep_ctrl to models--><path d="M1022.52,682.1578 C1016.94,684.4278 1011.4,686.6578 1006,688.7978 C955.37,708.8378 898.57,729.9978 851.55,747.1578 " fill="none" id="rep_ctrl-to-models" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="846.99,748.8178,856.8158,749.4917,851.6873,747.1045,854.0745,741.9761,846.99,748.8178" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[49963b0e305541e11faebc7123204b83]
+link rep_ctrl to dompdf--><path d="M1148.09,689.0678 C1165.38,707.1078 1185.33,727.9078 1202.03,745.3378 " fill="none" id="rep_ctrl-to-dompdf" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1205.15,748.5978,1201.8196,739.3292,1201.6939,744.9846,1196.0384,744.8589,1205.15,748.5978" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[01d2d3002bd84b820bd244d9102d8ec3]
+link rep_ctrl to maat--><path d="M1095.08,689.0678 C1090.23,706.4978 1084.67,726.5078 1079.93,743.5578 " fill="none" id="rep_ctrl-to-maat" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1078.63,748.2278,1084.8952,740.6287,1079.9697,743.4106,1077.1877,738.4852,1078.63,748.2278" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4775ab07356bd3a07a095a2ea7362718]
+link models to mysql--><path d="M752,818.0878 C752,832.8028 752,851.1391 752,870.423 C752,880.0649 752,889.9438 752,899.7254 C752,902.1708 752,904.6101 752,907.0381 C752,907.6451 752,908.2514 752,908.8569 " fill="none" id="models-to-mysql" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="752,908.8569,756,899.8569,752,903.8569,748,899.8569,752,908.8569" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="Helvetica" font-size="13" lengthAdjust="spacing" textLength="196" x="753" y="880.8348">Eloquent ORM · MySQL TCP:3306</text><!--MD5=[812dc46e92595b89e62bac3edcc2a1b6]
+link checkrole to auth_ctrl--><path d="M981.81,520.0578 C1098.1,533.0678 1268,557.8278 1411,601.5978 C1414.73,602.7378 1418.51,603.9978 1422.3,605.3478 " fill="none" id="checkrole-to-auth_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1426.83,607.0178,1419.7522,600.1691,1422.1344,605.2999,1417.0036,607.6821,1426.83,607.0178" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[129904b6f22ec17a93a120cf6add5bdb]
+link checkrole to user_ctrl--><path d="M770.68,540.9678 C743.34,552.2378 711.72,563.9078 682,571.5978 C582.2,597.4178 550.78,572.0878 452,601.5978 C448.26,602.7078 444.49,603.9678 440.72,605.3378 " fill="none" id="checkrole-to-user_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="436.2,607.0378,446.032,607.6132,440.8799,605.2775,443.2155,600.1253,436.2,607.0378" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d94b3eebe1f8cf930580784f985dab37]
+link checkrole to svc_ctrl--><path d="M860.39,540.9578 C868.47,557.4278 878.35,577.5978 887.24,595.7278 " fill="none" id="checkrole-to-svc_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="889.3,599.9278,888.9406,590.0855,887.1039,595.4359,881.7536,593.5992,889.3,599.9278" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a9c730d7a3a76d8f02a1870e76f0e5e1]
+link checkrole to staff_ctrl--><path d="M814.89,540.9578 C800.3,557.7178 782.38,578.2978 766.39,596.6678 " fill="none" id="checkrole-to-staff_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="763.36,600.1378,772.2879,595.9795,766.6444,596.3679,766.256,590.7244,763.36,600.1378" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ff75fd7bb4fdaf26c5c7ab5eb2cf09ef]
+link checkrole to shift_ctrl--><path d="M773.33,540.9978 C751.8,551.0178 728,561.9078 706,571.5978 C674.27,585.5678 665.71,587.5778 634,601.5978 C630.25,603.2578 626.42,604.9678 622.56,606.7078 " fill="none" id="checkrole-to-shift_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="618.26,608.6578,628.1087,608.6007,622.8172,606.6007,624.8172,601.3092,618.26,608.6578" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3d24de17bd165fa7b3c868aad2581b97]
+link checkrole to assign_ctrl--><path d="M706.08,533.5478 C692.55,535.9878 679.01,538.3678 666,540.5978 C493.07,570.1778 445.51,556.3578 276,601.5978 C272.27,602.5878 268.49,603.6678 264.69,604.8078 " fill="none" id="checkrole-to-assign_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="260.16,606.2078,269.9381,607.3862,264.9392,604.7384,267.587,599.7395,260.16,606.2078" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[87be40f572ea4c6822ec84a55433df0a]
+link checkrole to cal_ctrl--><path d="M981.91,538.2478 C1050.55,554.7778 1134.38,576.8478 1208,601.5978 C1214.27,603.6978 1220.7,606.0078 1227.13,608.4378 " fill="none" id="checkrole-to-cal_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1231.62,610.1478,1224.6415,603.1979,1226.9496,608.3625,1221.785,610.6706,1231.62,610.1478" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[aa1e754569092af5a6fed6ba58e8ec8a]
+link checkrole to rep_ctrl--><path d="M908.34,540.9578 C941.54,558.2078 982.55,579.5178 1018.67,598.2978 " fill="none" id="checkrole-to-rep_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1023.08,600.5878,1016.9561,592.8743,1018.6486,598.2721,1013.2509,599.9646,1023.08,600.5878" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[64c2dc120913068bfd32620768916432]
+link throttle to auth_ctrl--><path d="M1487.38,540.9578 C1490.01,557.2878 1493.22,577.2578 1496.12,595.2578 " fill="none" id="throttle-to-auth_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1496.85,599.7878,1499.3832,590.2703,1496.0628,594.8502,1491.483,591.5298,1496.85,599.7878" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c518d357ae75cc7ff8f0bbc878ea0809]
+link gates to user_ctrl--><path d="M283.18,540.9578 C296.18,557.5778 312.13,577.9478 326.42,596.1978 " fill="none" id="gates-to-user_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="329.47,600.0878,327.0732,590.5351,326.3885,596.1503,320.7732,595.4655,329.47,600.0878" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6e9a413a2bb40b5ca48a668d1668ed09]
+link gates to assign_ctrl--><path d="M234.49,540.9578 C223.31,557.5778 209.59,577.9478 197.31,596.1978 " fill="none" id="gates-to-assign_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="194.73,600.0278,203.0754,594.7977,197.5232,595.8808,196.4401,590.3286,194.73,600.0278" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[00f604e739247a19fb5264395fd9913e]
+link formreq to user_ctrl--><path d="M499.21,540.9578 C476.99,557.9278 449.62,578.8178 425.34,597.3678 " fill="none" id="formreq-to-user_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="421.41,600.3678,430.9921,598.091,425.3858,597.3359,426.141,591.7297,421.41,600.3678" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[252078ea95380b5d7092e9e25a3dbe73]
+link formreq to svc_ctrl--><path d="M647.51,541.0878 C698.69,558.1478 760.99,579.8378 816,601.5978 C819.7,603.0578 823.46,604.5778 827.24,606.1478 " fill="none" id="formreq-to-svc_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="831.82,608.0578,825.0586,600.8965,827.2067,606.1297,821.9736,608.2778,831.82,608.0578" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7d7d0239b1e42f03bbc700ba88c8675f]
+link formreq to staff_ctrl--><path d="M583.18,540.9778 C595.5,550.9978 609.19,561.8978 622,571.5978 C633.3,580.1378 645.47,589.0078 657.35,597.4878 " fill="none" id="formreq-to-staff_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="661.19,600.2178,656.1801,591.7384,657.1175,597.317,651.5388,598.2544,661.19,600.2178" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2bc9a8afdee664410c9942259a364e40]
+link formreq to shift_ctrl--><path d="M543,540.9578 C543,557.1478 543,576.9078 543,594.7878 " fill="none" id="formreq-to-shift_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="543,599.7678,547,590.7678,543,594.7678,539,590.7678,543,599.7678" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c0e3a0ccf827c08f8366012a834369ff]
+link formreq to assign_ctrl--><path d="M445.75,541.0678 C395.03,558.7378 332.04,580.9778 276,601.5978 C272.31,602.9478 268.56,604.3378 264.77,605.7578 " fill="none" id="formreq-to-assign_ctrl" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="260.22,607.4578,270.0499,608.0693,264.9063,605.7147,267.2609,600.5712,260.22,607.4578" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[88a0ffb0034a06c5caedded29a4aa580]
+link t_users to t_services--><!--MD5=[094061ec88e70dcd6a07c5afaa5725c1]
+link t_services to t_staff--><!--MD5=[8bd6575788248f29bc9bb93865a43827]
+link t_users to t_shift_tpl--><!--MD5=[9002d9502bea6fa706704f452ac12921]
+link t_shift_tpl to t_svc_shift_tpl--><!--MD5=[a9782949be6e566e8bc76052693843d8]
+link t_svc_shift_tpl to t_shift_assign--><!--MD5=[0057b729182a4980b0091ff9550fb208]
+link t_shift_tpl to t_audit--><!--MD5=[864d09932dfa17e35a72e82a7c45e8bf]
+@startuml
+' Evidence: .ai/diagrams/componentes/04-component-MediTurno.{html,svg,png,pdf} (versión gráfica detallada);
+'           .ai/analysis/system-overview/class-traceability.md; .ai/knowledge-base/features.md
+' Notación UML de componentes según consigna (Diagramas_de_Componentes.pptx).
+' Representación detallada de implementación: frontend, middleware, controladores, modelos y tablas.
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam componentStyle uml2
+skinparam defaultFontName Helvetica
+skinparam componentArrowThickness 1
+title Diagrama de Componentes — MediTurno
+
+' ─────────────────────────────────────────────────────────
+' CLIENTE (FRONTEND) — componente lógico InterfazWeb
+' ─────────────────────────────────────────────────────────
+package "Cliente (Frontend)" as frontend {
+  component "Blade Templates\n+ Bootstrap 5" as blade
+  component "FullCalendar.js\nCalendario visual (CDN)" as fullcalendar
+  component "JavaScript\nAlertas y confirmaciones" as js
+}
+
+' ─────────────────────────────────────────────────────────
+' INFRAESTRUCTURA DOCKER
+' ─────────────────────────────────────────────────────────
+package "Entorno Docker" as docker_env {
+
+  ' - - - Reverse proxy - - -
+  component "Nginx\nReverse Proxy\n:80 → PHP-FPM :9000" as nginx
+
+  ' - - - Aplicación Laravel - - -
+  package "Aplicación Laravel 10 (PHP 8.2-FPM)" as laravel {
+
+    ' Controladores (lógica HTTP)
+    component "AuthController\nLogin / Logout\nForgot Password" as auth_ctrl
+    component "UserController\nCRUD Usuarios\nRoles" as user_ctrl
+    component "ServiceController\nCRUD Servicios\nHospital" as svc_ctrl
+    component "StaffController\nCRUD Personal\nAsignar servicio" as staff_ctrl
+    component "ShiftController\nCRUD Turnos\nPlantillas M/T/N" as shift_ctrl
+    component "AssignmentController\nAsignar turnos\nValidar traslapes" as assign_ctrl
+    component "CalendarController\nAPI JSON eventos" as cal_ctrl
+    component "ReportController\nReportes PDF/Excel\nFiltros" as rep_ctrl
+
+    ' Librerías externas
+    component "DomPDF\nReportes PDF" as dompdf
+    component "Maatwebsite\nReportes Excel" as maat
+
+    ' Seguridad transversal
+    component "CheckRole\nMiddleware · admin|jefe|personal" as checkrole
+    component "Throttle\nMiddleware · 5/min" as throttle
+    component "Gates & Policies\nAutorización por rol" as gates
+    component "Form Requests\nValidación de formularios" as formreq
+
+    ' Acceso a datos
+    component "Modelos Eloquent\nEloquent ORM · Queries Parametrizadas" as models
+  }
+
+  ' - - - Base de datos - - -
+  package "Base de Datos MySQL 8\n7 tablas · softDeletes()" as mysql {
+    component "users" as t_users
+    component "hospital_services" as t_services
+    component "staff" as t_staff
+    component "shift_templates" as t_shift_tpl
+    component "service_shift_templates" as t_svc_shift_tpl
+    component "shift_assignments" as t_shift_assign
+    component "audit_logs" as t_audit
+  }
+}
+
+' ─────────────────────────────────────────────────────────
+' CONEXIONES
+' ─────────────────────────────────────────────────────────
+
+' Comunicación HTTP/HTTPS: cliente → Nginx
+frontend - -> nginx : HTTP / HTTPS
+
+' Nginx → Laravel por FastCGI
+nginx - -> laravel : FastCGI :9000
+
+' Endpoint JSON del calendario
+fullcalendar ..> cal_ctrl : GET /calendar/events
+
+' Controladores → Modelos (Eloquent ORM)
+auth_ctrl - -> models
+user_ctrl - -> models
+svc_ctrl - -> models
+staff_ctrl - -> models
+shift_ctrl - -> models
+assign_ctrl - -> models
+cal_ctrl - -> models
+rep_ctrl - -> models
+
+' Reportes → librerías externas
+rep_ctrl ..> dompdf
+rep_ctrl ..> maat
+
+' Modelos → Base de datos
+models - -> mysql : Eloquent ORM · MySQL TCP:3306
+
+' Seguridad transversal (dependencias punteadas)
+checkrole ..> auth_ctrl
+checkrole ..> user_ctrl
+checkrole ..> svc_ctrl
+checkrole ..> staff_ctrl
+checkrole ..> shift_ctrl
+checkrole ..> assign_ctrl
+checkrole ..> cal_ctrl
+checkrole ..> rep_ctrl
+throttle ..> auth_ctrl
+gates ..> user_ctrl
+gates ..> assign_ctrl
+formreq ..> user_ctrl
+formreq ..> svc_ctrl
+formreq ..> staff_ctrl
+formreq ..> shift_ctrl
+formreq ..> assign_ctrl
+
+@enduml
+
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam componentStyle uml2
+skinparam defaultFontName Helvetica
+skinparam componentArrowThickness 1
+title Diagrama de Componentes — MediTurno
+
+package "Cliente (Frontend)" as frontend {
+  component "Blade Templates\n+ Bootstrap 5" as blade
+  component "FullCalendar.js\nCalendario visual (CDN)" as fullcalendar
+  component "JavaScript\nAlertas y confirmaciones" as js
+}
+
+package "Entorno Docker" as docker_env {
+
+  component "Nginx\nReverse Proxy\n:80 → PHP-FPM :9000" as nginx
+
+  package "Aplicación Laravel 10 (PHP 8.2-FPM)" as laravel {
+
+    component "AuthController\nLogin / Logout\nForgot Password" as auth_ctrl
+    component "UserController\nCRUD Usuarios\nRoles" as user_ctrl
+    component "ServiceController\nCRUD Servicios\nHospital" as svc_ctrl
+    component "StaffController\nCRUD Personal\nAsignar servicio" as staff_ctrl
+    component "ShiftController\nCRUD Turnos\nPlantillas M/T/N" as shift_ctrl
+    component "AssignmentController\nAsignar turnos\nValidar traslapes" as assign_ctrl
+    component "CalendarController\nAPI JSON eventos" as cal_ctrl
+    component "ReportController\nReportes PDF/Excel\nFiltros" as rep_ctrl
+
+    component "DomPDF\nReportes PDF" as dompdf
+    component "Maatwebsite\nReportes Excel" as maat
+
+    component "CheckRole\nMiddleware · admin|jefe|personal" as checkrole
+    component "Throttle\nMiddleware · 5/min" as throttle
+    component "Gates & Policies\nAutorización por rol" as gates
+    component "Form Requests\nValidación de formularios" as formreq
+
+    component "Modelos Eloquent\nEloquent ORM · Queries Parametrizadas" as models
+  }
+
+  package "Base de Datos MySQL 8\n7 tablas · softDeletes()" as mysql {
+    component "users" as t_users
+    component "hospital_services" as t_services
+    component "staff" as t_staff
+    component "shift_templates" as t_shift_tpl
+    component "service_shift_templates" as t_svc_shift_tpl
+    component "shift_assignments" as t_shift_assign
+    component "audit_logs" as t_audit
+  }
+}
+
+
+frontend - -> nginx : HTTP / HTTPS
+
+nginx - -> laravel : FastCGI :9000
+
+fullcalendar ..> cal_ctrl : GET /calendar/events
+
+auth_ctrl - -> models
+user_ctrl - -> models
+svc_ctrl - -> models
+staff_ctrl - -> models
+shift_ctrl - -> models
+assign_ctrl - -> models
+cal_ctrl - -> models
+rep_ctrl - -> models
+
+rep_ctrl ..> dompdf
+rep_ctrl ..> maat
+
+models - -> mysql : Eloquent ORM · MySQL TCP:3306
+
+checkrole ..> auth_ctrl
+checkrole ..> user_ctrl
+checkrole ..> svc_ctrl
+checkrole ..> staff_ctrl
+checkrole ..> shift_ctrl
+checkrole ..> assign_ctrl
+checkrole ..> cal_ctrl
+checkrole ..> rep_ctrl
+throttle ..> auth_ctrl
+gates ..> user_ctrl
+gates ..> assign_ctrl
+formreq ..> user_ctrl
+formreq ..> svc_ctrl
+formreq ..> staff_ctrl
+formreq ..> shift_ctrl
+formreq ..> assign_ctrl
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 06:25:05 GMT-04:00 2021)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

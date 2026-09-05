@@ -1,7 +1,8 @@
 @startuml
-' Evidence: .ai/analysis/system-overview/class-traceability.md; .ai/analysis/modules/*/08-models.md; .ai/knowledge-base/features.md; .ai/knowledge-base/decisions.md
-' Notación UML de componentes según consigna (Diagramas_de_Componentes.pptx, slide 7/8).
-' Componentes lógicos agrupados desde el diagrama de clases del dominio.
+' Evidence: .ai/diagrams/componentes/04-component-MediTurno.{html,svg,png,pdf} (versión gráfica detallada);
+'           .ai/analysis/system-overview/class-traceability.md; .ai/knowledge-base/features.md
+' Notación UML de componentes según consigna (Diagramas_de_Componentes.pptx).
+' Representación detallada de implementación: frontend, middleware, controladores, modelos y tablas.
 skinparam backgroundColor #FFFFFF
 skinparam shadowing false
 skinparam componentStyle uml2
@@ -10,43 +11,107 @@ skinparam componentArrowThickness 1
 title Diagrama de Componentes — MediTurno
 
 ' ─────────────────────────────────────────────────────────
-' COMPONENTES LÓGICOS DEL DOMINIO
+' CLIENTE (FRONTEND) — componente lógico InterfazWeb
 ' ─────────────────────────────────────────────────────────
-[InterfazWeb] as web
-[GestorAcceso] as acceso
-[GestorTurnos] as turnos
-[GestorReportes] as reportes
-[BaseDatos] as db
+package "Cliente (Frontend)" as frontend {
+  component "Blade Templates\n+ Bootstrap 5" as blade
+  component "FullCalendar.js\nCalendario visual (CDN)" as fullcalendar
+  component "JavaScript\nAlertas y confirmaciones" as js
+}
 
 ' ─────────────────────────────────────────────────────────
-' INTERFACES PROVISTAS
+' INFRAESTRUCTURA DOCKER
 ' ─────────────────────────────────────────────────────────
-() "IU_Web" as iu_web
-() "Autenticacion" as auth_api
-() "GestionTurnos" as turnos_api
-() "Reportes" as reportes_api
-() "AccesoDatos" as db_api
+package "Entorno Docker" as docker_env {
+
+  ' --- Reverse proxy ---
+  component "Nginx\nReverse Proxy\n:80 → PHP-FPM :9000" as nginx
+
+  ' --- Aplicación Laravel ---
+  package "Aplicación Laravel 10 (PHP 8.2-FPM)" as laravel {
+
+    ' Controladores (lógica HTTP)
+    component "AuthController\nLogin / Logout\nForgot Password" as auth_ctrl
+    component "UserController\nCRUD Usuarios\nRoles" as user_ctrl
+    component "ServiceController\nCRUD Servicios\nHospital" as svc_ctrl
+    component "StaffController\nCRUD Personal\nAsignar servicio" as staff_ctrl
+    component "ShiftController\nCRUD Turnos\nPlantillas M/T/N" as shift_ctrl
+    component "AssignmentController\nAsignar turnos\nValidar traslapes" as assign_ctrl
+    component "CalendarController\nAPI JSON eventos" as cal_ctrl
+    component "ReportController\nReportes PDF/Excel\nFiltros" as rep_ctrl
+
+    ' Librerías externas
+    component "DomPDF\nReportes PDF" as dompdf
+    component "Maatwebsite\nReportes Excel" as maat
+
+    ' Seguridad transversal
+    component "CheckRole\nMiddleware · admin|jefe|personal" as checkrole
+    component "Throttle\nMiddleware · 5/min" as throttle
+    component "Gates & Policies\nAutorización por rol" as gates
+    component "Form Requests\nValidación de formularios" as formreq
+
+    ' Acceso a datos
+    component "Modelos Eloquent\nEloquent ORM · Queries Parametrizadas" as models
+  }
+
+  ' --- Base de datos ---
+  package "Base de Datos MySQL 8\n7 tablas · softDeletes()" as mysql {
+    component "users" as t_users
+    component "hospital_services" as t_services
+    component "staff" as t_staff
+    component "shift_templates" as t_shift_tpl
+    component "service_shift_templates" as t_svc_shift_tpl
+    component "shift_assignments" as t_shift_assign
+    component "audit_logs" as t_audit
+  }
+}
 
 ' ─────────────────────────────────────────────────────────
-' CONEXIÓN COMPONENTE → INTERFAZ PROVISTA (línea sólida)
+' CONEXIONES
 ' ─────────────────────────────────────────────────────────
-web -- iu_web
-acceso -- auth_api
-turnos -- turnos_api
-reportes -- reportes_api
-db -- db_api
 
-' ─────────────────────────────────────────────────────────
-' DEPENDENCIAS (línea punteada: componente requiere interfaz)
-' ─────────────────────────────────────────────────────────
-web ..> auth_api
-web ..> turnos_api
-web ..> reportes_api
+' Comunicación HTTP/HTTPS: cliente → Nginx
+frontend --> nginx : HTTP / HTTPS
 
-acceso ..> db_api
-turnos ..> db_api
-reportes ..> db_api
+' Nginx → Laravel por FastCGI
+nginx --> laravel : FastCGI :9000
 
-reportes ..> turnos_api
+' Endpoint JSON del calendario
+fullcalendar ..> cal_ctrl : GET /calendar/events
+
+' Controladores → Modelos (Eloquent ORM)
+auth_ctrl --> models
+user_ctrl --> models
+svc_ctrl --> models
+staff_ctrl --> models
+shift_ctrl --> models
+assign_ctrl --> models
+cal_ctrl --> models
+rep_ctrl --> models
+
+' Reportes → librerías externas
+rep_ctrl ..> dompdf
+rep_ctrl ..> maat
+
+' Modelos → Base de datos
+models --> mysql : Eloquent ORM · MySQL TCP:3306
+
+' Seguridad transversal (dependencias punteadas)
+checkrole ..> auth_ctrl
+checkrole ..> user_ctrl
+checkrole ..> svc_ctrl
+checkrole ..> staff_ctrl
+checkrole ..> shift_ctrl
+checkrole ..> assign_ctrl
+checkrole ..> cal_ctrl
+checkrole ..> rep_ctrl
+throttle ..> auth_ctrl
+gates ..> user_ctrl
+gates ..> assign_ctrl
+formreq ..> user_ctrl
+formreq ..> svc_ctrl
+formreq ..> staff_ctrl
+formreq ..> shift_ctrl
+formreq ..> assign_ctrl
 
 @enduml

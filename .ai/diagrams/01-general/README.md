@@ -56,16 +56,24 @@ reemplazan los diagramas específicos de cada módulo.
 ### Figura 4. Diagrama de Componentes
 
 - **Archivos:** `04-component-mermaid.mmd` y `04-component-plantuml.puml`
-  (render: `04-component-plantuml.png`). Formatos de presentación gráfica
-  (HTML interactivo, SVG, PNG 2400×1800 y PDF) en
-  [`../componentes/`](../componentes/README.md).
-- **Descripción:** representa la arquitectura modular de MediTurno en
-  componentes lógicos con notación UML (estereotipo «component», interfaces
-  provistas y requeridas, y dependencias), siguiendo el modelo de la consigna
-  `Diagramas_de_Componentes.pptx` (slides 6-8).
-- **Componentes lógicos:** InterfazWeb, GestorAcceso, GestorTurnos,
-  GestorReportes y BaseDatos. Agrupados a partir del diagrama de clases del
-  dominio (`class-traceability.md`).
+  (renders: `04-component-plantuml.png` y `04-component-plantuml.svg`).
+  Formatos de presentación gráfica (HTML interactivo, SVG, PNG 2400×1800 y
+  PDF) en [`../componentes/`](../componentes/README.md).
+- **Descripción:** representa la arquitectura modular de MediTurno con
+  notación UML de componentes (estereotipo «component», interfaces provistas y
+  requeridas, y dependencias), siguiendo el modelo de la consigna
+  `Diagramas_de_Componentes.pptx` (slides 6-8). La figura muestra la vista
+  detallada de implementación: frontend (Blade + Bootstrap 5 + FullCalendar),
+  Nginx como reverse proxy (FastCGI :9000), la aplicación Laravel 10 con sus
+  8 controladores, middlewares CheckRole y Throttle, Gates & Policies, Form
+  Requests, modelos Eloquent y las librerías DomPDF/Maatwebsite; la base de
+  datos MySQL 8 con las 7 tablas (softDeletes); la seguridad transversal y el
+  entorno Docker que agrupa Nginx, Laravel y MySQL. Incluye el flujo del
+  calendario (`GET /calendar/events`) y la regla de no traslapes.
+- **Componentes lógicos (consigna 3-5):** InterfazWeb, GestorAcceso,
+  GestorTurnos, GestorReportes y BaseDatos. Agrupados a partir del diagrama de
+  clases del dominio (`class-traceability.md`); la vista detallada desglosa
+  los elementos de implementación que los componen.
 - **Propósito:** mostrar cómo se agrupan las clases en módulos reemplazables
   con interfaces bien definidas y sus dependencias, como puente entre el
   diseño lógico (clases) y el despliegue físico.

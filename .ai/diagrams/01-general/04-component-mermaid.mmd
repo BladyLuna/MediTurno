@@ -1,35 +1,89 @@
 %% Diagrama de Componentes — MediTurno
 %% Notación UML de componentes según consigna (Diagramas_de_Componentes.pptx).
-%% Componentes lógicos agrupados desde el diagrama de clases del dominio.
+%% Representación detallada de implementación: frontend, middleware, controladores,
+%% modelos y tablas (alineada con 04-component-MediTurno.{html,svg,png,pdf}).
 flowchart LR
-  subgraph MEDI["<<component>> MediTurno"]
-    Web["«COMPONENT»\nInterfazWeb"]
-    Acceso["«COMPONENT»\nGestorAcceso"]
-    Turnos["«COMPONENT»\nGestorTurnos"]
-    Reportes["«COMPONENT»\nGestorReportes"]
-    DB[("«COMPONENT»\nBaseDatos")]
+  subgraph DOCKER["«component» Entorno Docker"]
+    subgraph FRONT["«component» Cliente (Frontend)"]
+      Blade["Blade Templates<br/>+ Bootstrap 5"]
+      FC["FullCalendar.js<br/>Calendario visual (CDN)"]
+      JS["JavaScript<br/>Alertas y confirmaciones"]
+    end
+
+    NGINX["«component»<br/>Nginx — Reverse Proxy<br/>:80 → PHP-FPM :9000"]
+
+    subgraph LARAVEL["«component» Aplicación Laravel 10 (PHP 8.2-FPM)"]
+      AuthCtrl["AuthController<br/>Login / Logout · Forgot Password"]
+      UserCtrl["UserController<br/>CRUD Usuarios · Roles"]
+      SvcCtrl["ServiceController<br/>CRUD Servicios · Hospital"]
+      StaffCtrl["StaffController<br/>CRUD Personal · Asignar servicio"]
+      ShiftCtrl["ShiftController<br/>CRUD Turnos · Plantillas M/T/N"]
+      AssignCtrl["AssignmentController<br/>Asignar turnos · Validar traslapes"]
+      CalCtrl["CalendarController<br/>API JSON eventos"]
+      RepCtrl["ReportController<br/>Reportes PDF/Excel · Filtros"]
+
+      DomPDF["DomPDF<br/>Reportes PDF"]
+      Maat["Maatwebsite<br/>Reportes Excel"]
+
+      CheckRole["CheckRole<br/>Middleware · admin|jefe|personal"]
+      Throttle["Throttle<br/>Middleware · 5/min"]
+      Gates["Gates &amp; Policies<br/>Autorización por rol"]
+      FormReq["Form Requests<br/>Validación de formularios"]
+
+      Models["Modelos Eloquent<br/>Eloquent ORM · Queries Parametrizadas"]
+    end
+
+    subgraph DB["«component» Base de Datos MySQL 8<br/>7 tablas · softDeletes()"]
+      TUsers["users"]
+      TSvc["hospital_services"]
+      TStaff["staff"]
+      TShiftTpl["shift_templates"]
+      TSvcShiftTpl["service_shift_templates"]
+      TAssign["shift_assignments"]
+      TAudit["audit_logs"]
+    end
   end
 
-  %% Interfaces provistas (círculo) y requeridas (socket) representadas como nodos
-  IU_Web(("IU_Web"))
-  Auth_API(("Autenticación"))
-  Turnos_API(("GestiónTurnos"))
-  Rep_API(("Reportes"))
-  DB_API(("AccesoDatos"))
+  %% Comunicación HTTP/HTTPS: cliente → Nginx
+  FRONT -->|"HTTP / HTTPS"| NGINX
 
-  Web --- IU_Web
-  Acceso --- Auth_API
-  Turnos --- Turnos_API
-  Reportes --- Rep_API
-  DB --- DB_API
+  %% Nginx → Laravel por FastCGI
+  NGINX -->|"FastCGI :9000"| LARAVEL
 
-  %% Dependencias / ensamblaje
-  IU_Web -.-> Auth_API
-  IU_Web -.-> Turnos_API
-  IU_Web -.-> Rep_API
+  %% Endpoint JSON del calendario
+  FC -.->|"GET /calendar/events"| CalCtrl
 
-  Auth_API -.-> DB_API
-  Turnos_API -.-> DB_API
-  Rep_API -.-> DB_API
+  %% Controladores → Modelos (Eloquent ORM)
+  AuthCtrl --> Models
+  UserCtrl --> Models
+  SvcCtrl --> Models
+  StaffCtrl --> Models
+  ShiftCtrl --> Models
+  AssignCtrl --> Models
+  CalCtrl --> Models
+  RepCtrl --> Models
 
-  Rep_API -.-> Turnos_API
+  %% Reportes → librerías externas
+  RepCtrl -.-> DomPDF
+  RepCtrl -.-> Maat
+
+  %% Modelos → Base de datos
+  Models -->|"Eloquent ORM · MySQL TCP:3306"| DB
+
+  %% Seguridad transversal (dependencias punteadas)
+  CheckRole -.-> AuthCtrl
+  CheckRole -.-> UserCtrl
+  CheckRole -.-> SvcCtrl
+  CheckRole -.-> StaffCtrl
+  CheckRole -.-> ShiftCtrl
+  CheckRole -.-> AssignCtrl
+  CheckRole -.-> CalCtrl
+  CheckRole -.-> RepCtrl
+  Throttle -.-> AuthCtrl
+  Gates -.-> UserCtrl
+  Gates -.-> AssignCtrl
+  FormReq -.-> UserCtrl
+  FormReq -.-> SvcCtrl
+  FormReq -.-> StaffCtrl
+  FormReq -.-> ShiftCtrl
+  FormReq -.-> AssignCtrl

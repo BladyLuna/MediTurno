@@ -23,10 +23,12 @@ se representa con **5 componentes**:
 ## Archivos de la Figura 4 (Diagrama de Componentes)
 
 ### Fuentes editables (fuente de verdad, filosofía BDS)
-- `../01-general/04-component-plantuml.puml` — fuente PlantUML.
-- `../01-general/04-component-mermaid.mmd` — fuente Mermaid.
+- `../01-general/04-component-plantuml.puml` — fuente PlantUML (vista detallada:
+  frontend, Nginx, controladores, middlewares, modelos y tablas en Docker).
+- `../01-general/04-component-mermaid.mmd` — fuente Mermaid (misma vista).
 - `../01-general/04-component-plantuml.png` — render PNG generado con
   `plantuml.jar`.
+- `../01-general/04-component-plantuml.svg` — render SVG vectorial.
 
 ### Formatos de presentación (versión gráfica detallada)
 - `04-component-MediTurno.html` — versión interactiva estilo dark (para ver en
@@ -56,9 +58,14 @@ flujo del calendario (`GET /calendar/events`) y la regla de no traslapes.
 
 ## Notas
 
-- Las fuentes académicas editables (`puml`/`mmd`) son la versión oficial de
-  5 componentes para la rúbrica; los formatos gráficos de presentación
-  complementan la documentación con la vista detallada de la implementación.
+- Las fuentes editables (`puml`/`mmd`) y los formatos de presentación
+  (`html`/`svg`/`png`/`pdf`) representan la **misma vista detallada** de
+  implementación (frontend Blade+Bootstrap+FullCalendar, Nginx reverse proxy,
+  controladores Laravel, middlewares CheckRole/Throttle, Gates & Policies,
+  Form Requests, modelos Eloquent, DomPDF/Maatwebsite y las 7 tablas de MySQL,
+  todo agrupado en el entorno Docker). A nivel conceptual siguen
+  agrupándose en los componentes lógicos de la consigna (InterfazWeb,
+  GestorAcceso, GestorTurnos, GestorReportes, BaseDatos).
 - La descripción académica corta para el documento de proyecto de grado se
   encuentra en `../01-general/README.md` (Figura 4).
 - **Fuente:** Elaboración propia (2026).
