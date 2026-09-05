@@ -1,6 +1,6 @@
 # Estado de Reconstrucción de la Tesis
 
-Fecha: **2026-07-03**
+Fecha: **2026-09-04**
 
 ## Resumen
 
@@ -76,7 +76,24 @@ Pendiente:
 - ejecutar QA y adjuntar resultados;
 - incorporar capturas verificadas del prototipo.
 
-### Capítulo IV - Fuentes Bibliográficas
+### Capítulo IV - Conclusiones y Recomendaciones
+
+Estado: **redactado con evidencia del repositorio (2026-09-04)**.
+
+Incluye:
+
+- 10 conclusiones alineadas al objetivo general y los objetivos específicos
+  del Capítulo II;
+- 11 recomendaciones técnicas y académicas;
+- marcas `[PENDIENTE]` donde falta evidencia (QA fechado, ERD oficial de
+  MySQL Workbench, despliegue productivo, bibliografía formal).
+
+Pendiente:
+
+- confirmar la numeración contra la plantilla institucional original;
+- incorporar el resultado del QA una vez ejecutado.
+
+### Capítulo V - Fuentes Bibliográficas
 
 Estado: **incompleto**.
 
@@ -140,11 +157,12 @@ No se inventaron datos para estas tablas.
 | Capítulo I | 75 % | Base redactada; falta evidencia de campo y validación institucional |
 | Capítulo II | 90 % | Contenido completo; falta confirmar formato institucional |
 | Capítulo III | 82 % | Desarrollo técnico amplio; faltan artefactos gráficos y resultados QA |
-| Capítulo IV | 15 % | Solo existe inventario de fuentes pendientes |
+| Capítulo IV | 85 % | Conclusiones y recomendaciones redactadas con evidencia del repo; falta confirmación institucional |
+| Capítulo V | 15 % | Solo existe inventario de fuentes pendientes |
 
 ### Porcentaje estimado total
 
-**75 %**
+**78 %**
 
 La estimación pondera el Capítulo III como el componente de mayor volumen. No
 representa una calificación institucional. El porcentaje debe revisarse cuando

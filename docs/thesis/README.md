@@ -12,7 +12,8 @@ Materno Infantil (MediTurno)**
 | [`Capitulo-1.md`](Capitulo-1.md) | Introducción y planteamiento del problema | Incompleto: validación institucional y resultados de entrevista pendientes |
 | [`Capitulo-2.md`](Capitulo-2.md) | Objetivos, alcances y límites | Reconstruido con información validada |
 | [`Capitulo-3.md`](Capitulo-3.md) | Desarrollo técnico del proyecto | Desarrollado con pendientes explícitos |
-| [`Capitulo-4.md`](Capitulo-4.md) | Fuentes bibliográficas | Incompleto |
+| [`Capitulo-4.md`](Capitulo-4.md) | Conclusiones y recomendaciones | Redactado con evidencia del repositorio (actualizado 2026-09-04) |
+| [`Capitulo-5.md`](Capitulo-5.md) | Fuentes bibliográficas | Incompleto |
 | [`STATUS.md`](STATUS.md) | Estado de reconstrucción | Actualizado al 2026-07-03 |
 
 ## Criterio de reconstrucción
@@ -48,7 +49,10 @@ Por estas razones:
 - se conserva la numeración visible del perfil para los capítulos I y II;
 - se utiliza exactamente la estructura 3.1 a 3.10 solicitada para el Capítulo
   III;
-- el Capítulo IV conserva el título bibliográfico visible en el PDF;
+- el Capítulo V conserva el título bibliográfico visible en el PDF (migrado
+  desde el antiguo Capítulo IV);
+- el Capítulo IV corresponde a Conclusiones y Recomendaciones según el avance
+  del autor en Word;
 - toda información no verificable se marca `[PENDIENTE]`;
 - la numeración final debe compararse con la plantilla institucional original
   antes de entregar.
